@@ -1,0 +1,75 @@
+{
+  "project_id": "P01",
+  "lock_version": "1",
+  "scene_id": "P01_S01",
+  "genre": "food / recipe",
+  "platform": "Instagram Reels",
+  "aspect": "9:16",
+  "cost_approval_id": "APR-2026-10-26-01",
+  "lock": {
+    "project_id": "P01",
+    "version": "1",
+    "aspect": "9:16",
+    "style": "Photorealistic cinematic lifestyle footage, natural film look",
+    "colors": [
+      "warm amber",
+      "deep teal",
+      "off-white",
+      "charcoal"
+    ],
+    "camera_personality": "gimbal-smooth",
+    "lighting": "golden hour"
+  },
+  "beat": "A barista finishes a latte and slides it toward the viewer.",
+  "audio_strategy": "native",
+  "narration": "",
+  "plan": "4+6",
+  "planned_cut": 0,
+  "transition_out": "cut",
+  "post_plan": "concat shot 1 and shot 2 with a hard cut, re-encode yuv420p",
+  "rationale": "Main beat in 6s shot (VR rule '10-Second Scene Protocol'); static then push-in for energy rise.",
+  "shots": [
+    {
+      "shot_id": "P01_S01_SH1",
+      "duration": 4,
+      "model": "veo_3_1_fast",
+      "start": "keyframe",
+      "subject": "drink being poured",
+      "subjects": [
+        "drink being poured"
+      ],
+      "framing": "close-up",
+      "move": "static locked-off",
+      "lighting": "soft window light",
+      "refs": [],
+      "image_prompt": "Photorealistic cinematic lifestyle footage, natural film look. Close-up of one white ceramic cup on a charcoal stone counter, a steel milk pitcher tilted above it about to pour, soft natural window light from the left, warm amber and deep teal tones with off-white highlights, shallow depth of field, blank background wall, vertical 9:16 frame.",
+      "video_prompt": "Static locked-off camera. Milk pours in one slow steady stream, a heart pattern forms on the surface, the pitcher lifts away. Ends with the finished heart still and centered.",
+      "audio": "Soft pouring sound and quiet cafe ambience, no music.",
+      "dialogue": [],
+      "end_state": "finished latte heart, pitcher out of frame",
+      "notice_first": "the stream of milk"
+    },
+    {
+      "shot_id": "P01_S01_SH2",
+      "duration": 6,
+      "model": "veo_3_1_fast",
+      "start": "keyframe",
+      "subject": "adult person walking",
+      "subjects": [
+        "adult person walking"
+      ],
+      "framing": "medium",
+      "move": "slow push-in",
+      "lighting": "soft window light",
+      "refs": [
+        "P01_S01_SH1_keyframe.png"
+      ],
+      "image_prompt": "Photorealistic cinematic lifestyle footage, natural film look. Medium shot of one barista in her thirties with a short black bob, a deep teal apron and rolled off-white sleeves, standing behind a charcoal counter holding one latte cup, soft natural window light from the left, warm amber background tones, shallow depth of field, room in front of her for the cup to slide toward camera, vertical 9:16 frame.",
+      "video_prompt": "Slow push-in toward her. She smiles, slides the cup forward toward camera with one hand, then rests both hands on the counter. Ends with her still and looking into the lens.",
+      "audio": "Cup sliding on stone, quiet cafe ambience, no music, no subtitles.",
+      "dialogue": [],
+      "end_state": "barista still, hands on counter, cup in foreground",
+      "notice_first": "her smile"
+    }
+  ]
+}

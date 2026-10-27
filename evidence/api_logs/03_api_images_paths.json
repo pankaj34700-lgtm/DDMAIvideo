@@ -1,0 +1,23 @@
+{
+  "paths": {
+    "keyframes_disk": "D:\\Open Code\\Video production 261026 1st\\self reserch with video\\website\\public\\images\\keyframes",
+    "keyframes_url": "/images/keyframes/",
+    "ingredients_disk": "D:\\Open Code\\Video production 261026 1st\\self reserch with video\\website\\public\\images\\ingredients",
+    "ingredients_url": "/images/ingredients/",
+    "tails_disk": "D:\\Open Code\\Video production 261026 1st\\self reserch with video\\website\\public\\images\\tails",
+    "tails_url": "/images/tails/",
+    "thumbnails_disk": "D:\\Open Code\\Video production 261026 1st\\self reserch with video\\website\\public\\images\\thumbnails",
+    "thumbnails_url": "/images/thumbnails/",
+    "renders_disk": "D:\\Open Code\\Video production 261026 1st\\self reserch with video\\website\\public\\renders",
+    "renders_url": "/renders/"
+  },
+  "files": {
+    "keyframes": [],
+    "ingredients": [],
+    "tails": [],
+    "thumbnails": [
+      "demo_preview.png"
+    ],
+    "renders": []
+  }
+}

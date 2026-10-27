@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "model": "veo_3_1_fast",
+  "shot_id": "P01_S01_SH1",
+  "duration": 4,
+  "prompt_1_keyframe": "Photorealistic cinematic commercial studio footage, crisp 35mm finish. Close-up of one frosted glass perfume bottle with fluted brass cap resting on wet obsidian slate, soft natural side-lighting, warm amber and brushed gold color anchors, shallow depth of field, vertical 9:16 frame.",
+  "prompt_2_motion": "slow push-in. A single water droplet glides down the curve of the bottle, catching golden light, then settles onto the dark stone. Ends with the bottle held still and centered. Audio: Soft water droplet drip, quiet studio silence, no music, no subtitles.",
+  "lint_status": "PASS (0 Errors)",
+  "speech_budget": "Under 2.5 wps"
+}

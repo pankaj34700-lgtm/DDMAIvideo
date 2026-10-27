@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "10-Second Scene Spec",
+  "description": "The only output format a Prompt Writer agent may hand off. Validate with tools/lint_scene.py before any generation.",
+  "type": "object",
+  "required": ["project_id", "lock_version", "scene_id", "genre", "platform", "aspect", "cost_approval_id", "lock", "beat", "audio_strategy", "plan", "planned_cut", "transition_out", "post_plan", "rationale", "shots"],
+  "properties": {
+    "project_id": {"type": "string", "pattern": "^P\\d{2}$"},
+    "lock_version": {"type": "string"},
+    "scene_id": {"type": "string", "pattern": "^P\\d{2}_S\\d{2}$"},
+    "genre": {"type": "string", "description": "one of: python3 tools/lookup.py --list genres"},
+    "platform": {"type": "string", "description": "one of: python3 tools/lookup.py --list platforms"},
+    "aspect": {"enum": ["16:9", "9:16"]},
+    "cost_approval_id": {"type": "string", "description": "ID of the user's approval that covers these generations"},
+    "lock": {
+      "type": "object", "required": ["style", "colors", "aspect"],
+      "properties": {"style": {"type": "string"}, "colors": {"type": "array", "items": {"type": "string"}, "minItems": 3, "maxItems": 5}, "aspect": {"type": "string"}}
+    },
+    "beat": {"type": "string", "description": "ONE sentence: the single story beat of this scene"},
+    "audio_strategy": {"enum": ["native", "tts", "layered"]},
+    "narration": {"type": "string", "description": "<= 25 words; must measure <= 9.5s"},
+    "plan": {"enum": ["4+6", "6+4", "12 cut to 10", "6+6 cut to 10"]},
+    "planned_cut": {"type": "number", "description": "seconds removed editorially so the scene totals exactly 10"},
+    "transition_out": {"enum": ["cut", "dissolve 0.5s", "fade"]},
+    "post_plan": {"type": "string", "description": "ffmpeg steps; never time-stretch"},
+    "rationale": {"type": "string", "description": "rule IDs justifying every non-default choice"},
+    "lock_change_request": {"type": "string"},
+    "risks": {"type": "array", "items": {"type": "string"}},
+    "shots": {
+      "type": "array", "minItems": 1, "maxItems": 2,
+      "items": {
+        "type": "object",
+        "required": ["shot_id", "duration", "model", "start", "subject", "framing", "move", "lighting", "video_prompt", "audio", "end_state", "notice_first"],
+        "properties": {
+          "shot_id": {"type": "string", "pattern": "^P\\d{2}_S\\d{2}_SH\\d$"},
+          "duration": {"enum": [4, 6, 8, 12, 30]},
+          "model": {"enum": ["veo_3_1_fast", "veo_3_1", "seedance_2_0", "seedance_2_5", "minimax_h3"]},
+          "start": {"enum": ["keyframe", "chain", "text"]},
+          "subject": {"type": "string", "description": "primary subject; one of --list subjects"},
+          "subjects": {"type": "array", "items": {"type": "string"}},
+          "framing": {"type": "string"}, "move": {"type": "string"}, "lighting": {"type": "string"},
+          "refs": {"type": "array", "items": {"type": "string"}},
+          "audio_off": {"type": "boolean"},
+          "image_prompt": {"type": "string", "description": "PROMPT 1: still first frame. Required when start=keyframe."},
+          "video_prompt": {"type": "string", "description": "PROMPT 2: motion, camera, change, sound only."},
+          "audio": {"type": "string"},
+          "dialogue": {"type": "array", "items": {"type": "object", "required": ["speaker", "line"], "properties": {"speaker": {"type": "string"}, "line": {"type": "string"}}}},
+          "end_state": {"type": "string"},
+          "notice_first": {"type": "string"}
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+node_modules/
+.firebase/
+.env
+*.log
+temp_*
+temp_guide.zip
+temp_guide2.zip

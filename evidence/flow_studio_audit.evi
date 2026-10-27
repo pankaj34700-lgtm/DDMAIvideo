@@ -1,0 +1,66 @@
+{
+  "bundle_name": "VIPA_STUDIO_GOOGLE_FLOW_EVIDENCE_BUNDLE",
+  "version": "2.5",
+  "generated_at": "2026-10-26T17:44:15.633Z",
+  "total_tests_executed": 31,
+  "passed_tests": 31,
+  "pass_rate": "100.0%",
+  "host": "http://localhost:3000",
+  "evidence_files": [
+    {
+      "relative_path": "api_logs/01_api_status.json",
+      "size_bytes": 101,
+      "sha256": "9a5ea876455afac9e73e3d4ab4cae131fe749bfdc1aa58395a00ba8e5ba74673"
+    },
+    {
+      "relative_path": "api_logs/02_api_options_50.json",
+      "size_bytes": 12092,
+      "sha256": "2b193b37ffa16ae1cb4066e37015438ea929c9b8a753e8bbda77e196002ae9f1"
+    },
+    {
+      "relative_path": "api_logs/03_api_images_paths.json",
+      "size_bytes": 1001,
+      "sha256": "61a0af019a64fde5d564480a029a707a5b12d68cb225d7338490d8a61e9eec0a"
+    },
+    {
+      "relative_path": "api_logs/04_prompt_decomposition.json",
+      "size_bytes": 755,
+      "sha256": "7cc05522c625829b97fa0e63067e8d7cfde44880b395b8fdc13986767c1a256c"
+    },
+    {
+      "relative_path": "reports/TEST_REPORT_EVIDENCE.docx",
+      "size_bytes": 2548,
+      "sha256": "e255e29ee49fcde7eaf8878643dc5efe62fb4f0283efd8f776617de1e3e298cd"
+    },
+    {
+      "relative_path": "reports/TEST_REPORT_EVIDENCE.md",
+      "size_bytes": 2728,
+      "sha256": "6c2bb9369f8e7f681c9f2d4a3803a2752f5c04e1cee8f82b4c562398da57052c"
+    },
+    {
+      "relative_path": "screenshots/01_homepage_initial.png",
+      "size_bytes": 217662,
+      "sha256": "5c05edbd0ee0b0d7cd50ff70ae3ca8e25ee182f8d121cadc5e07d9d04d2db86e"
+    },
+    {
+      "relative_path": "screenshots/02_dual_prompts_generated.png",
+      "size_bytes": 216602,
+      "sha256": "6cd1d9b670555a7b99d396896e68243dcc408823eaf761cfaa38d6054cda2311"
+    },
+    {
+      "relative_path": "screenshots/03_timeline_playback.png",
+      "size_bytes": 217498,
+      "sha256": "cc91980ab76d8ca0795e0c349ed3149a34962e45df1671033c333292ab612e91"
+    },
+    {
+      "relative_path": "screenshots/04_flow_fx_tools_modal.png",
+      "size_bytes": 186296,
+      "sha256": "379cf0f2be6a85598d11b6fdca6c4e6609d0a0dd84a8e0975d9ed7c1b9281c20"
+    },
+    {
+      "relative_path": "screenshots/05_50_options_modal.png",
+      "size_bytes": 218978,
+      "sha256": "86be9b5400614b98e95fc280ab07eff015f36cb66d75acd85cfce0ecca451559"
+    }
+  ]
+}

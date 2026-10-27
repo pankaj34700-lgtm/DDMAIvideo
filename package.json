@@ -1,0 +1,22 @@
+{
+  "name": "ddmai-video-studio",
+  "version": "2.5.0",
+  "description": "DDMAI.VIDEO — Next-Gen AI Video & Image Production Studio",
+  "main": "website/server.js",
+  "scripts": {
+    "start": "node website/server.js",
+    "test": "node test_flow_studio_e2e.js",
+    "deploy": "firebase deploy --only hosting --project vedio-working"
+  },
+  "keywords": [
+    "ai-video",
+    "google-flow-clone",
+    "zero-cost",
+    "flux",
+    "imagen-3",
+    "ltx-video",
+    "ddmai"
+  ],
+  "author": "pankaj34700-lgtm",
+  "license": "MIT"
+}

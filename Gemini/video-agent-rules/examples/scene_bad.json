@@ -1,0 +1,79 @@
+{
+  "project_id": "P01",
+  "lock_version": "1",
+  "scene_id": "scene1",
+  "genre": "food / recipe",
+  "platform": "Instagram Reels",
+  "aspect": "9:16",
+  "lock": {
+    "project_id": "P01",
+    "version": "1",
+    "aspect": "9:16",
+    "style": "Photorealistic cinematic lifestyle footage, natural film look",
+    "colors": [
+      "warm amber",
+      "deep teal",
+      "off-white",
+      "charcoal"
+    ],
+    "camera_personality": "gimbal-smooth",
+    "lighting": "golden hour"
+  },
+  "beat": "A barista finishes a latte and slides it toward the viewer.",
+  "audio_strategy": "native",
+  "narration": "",
+  "plan": "4+6",
+  "planned_cut": 0,
+  "transition_out": "cut",
+  "post_plan": "concat shot 1 and shot 2 with a hard cut, re-encode yuv420p",
+  "rationale": "Main beat in 6s shot (VR rule '10-Second Scene Protocol'); static then push-in for energy rise.",
+  "shots": [
+    {
+      "shot_id": "P01_S01_SH1",
+      "duration": 5,
+      "model": "veo_3_1_fast",
+      "start": "keyframe",
+      "subject": "drink being poured",
+      "subjects": [
+        "drink being poured"
+      ],
+      "framing": "close-up",
+      "move": "static locked-off",
+      "lighting": "soft window light",
+      "refs": [],
+      "image_prompt": "Masterpiece, 8K, best quality. A few baristas in a cafe with a sign that says OPEN.",
+      "video_prompt": "Close-up of a white ceramic cup on a charcoal stone counter, milk pitcher above the cup, soft window light, warm amber and deep teal tones.",
+      "audio": "Soft pouring sound and quiet cafe ambience, no music.",
+      "dialogue": [],
+      "end_state": "finished latte heart, pitcher out of frame",
+      "notice_first": "the stream of milk"
+    },
+    {
+      "shot_id": "P01_S01_SH2",
+      "duration": 6,
+      "model": "seedance_2_0",
+      "start": "chain",
+      "subject": "adult person talking to camera",
+      "subjects": [
+        "adult person walking"
+      ],
+      "framing": "close-up",
+      "move": "whip pan",
+      "lighting": "soft window light",
+      "refs": [
+        "P01_S01_SH1_keyframe.png"
+      ],
+      "image_prompt": "Photorealistic cinematic lifestyle footage, natural film look. Medium shot of one barista in her thirties with a short black bob, a deep teal apron and rolled off-white sleeves, standing behind a charcoal counter holding one latte cup, soft natural window light from the left, warm amber background tones, shallow depth of field, room in front of her for the cup to slide toward camera, vertical 9:16 frame.",
+      "video_prompt": "Whip pan then orbit around her as she writes her name on the cup and says the line, 10 seconds, 1080p.",
+      "audio": "",
+      "dialogue": [
+        {
+          "speaker": "Barista",
+          "line": "Here is your latte made exactly the way you like it every single morning my friend"
+        }
+      ],
+      "end_state": "barista still, hands on counter, cup in foreground",
+      "notice_first": "her smile"
+    }
+  ]
+}

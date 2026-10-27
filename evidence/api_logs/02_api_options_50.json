@@ -1,0 +1,355 @@
+{
+  "total": 50,
+  "options": [
+    {
+      "id": 1,
+      "pillar": "Generation Engines",
+      "title": "Multi-Model Dynamic Router",
+      "desc": "Routes shots to Veo 3.1 Fast, Quality, Gemini Omni Flash, Seedance, or MiniMax H3 based on prompt intent.",
+      "default": true
+    },
+    {
+      "id": 2,
+      "pillar": "Generation Engines",
+      "title": "Dual-Prompt Splitter Engine",
+      "desc": "Decomposes single user brief into Prompt 1 (Keyframe Still) and Prompt 2 (Video Motion).",
+      "default": true
+    },
+    {
+      "id": 3,
+      "pillar": "Generation Engines",
+      "title": "10-Second Scene Assembler",
+      "desc": "Enforces exact 10.0s unit math: 4s+6s, 6s+4s, or 12s cut to 10s. Prohibits time-stretching.",
+      "default": true
+    },
+    {
+      "id": 4,
+      "pillar": "Generation Engines",
+      "title": "Keyframe Chaining Pipeline",
+      "desc": "Extracts tail frame of Shot 1 via ffmpeg (-sseof -0.1) as reference for Shot 2.",
+      "default": true
+    },
+    {
+      "id": 5,
+      "pillar": "Generation Engines",
+      "title": "Start & End Frame Interpolation",
+      "desc": "Accepts opening and terminal keyframes, generating smooth intermediate motion.",
+      "default": false
+    },
+    {
+      "id": 6,
+      "pillar": "Camera Kinematics",
+      "title": "24 Camera Moves Palette",
+      "desc": "Standardized cinematographic move definitions (Static, push-in, dolly, orbit, crane, etc.).",
+      "default": true
+    },
+    {
+      "id": 7,
+      "pillar": "Camera Kinematics",
+      "title": "Motion Energy Slider (1-3)",
+      "desc": "Controls camera and subject velocity, matching vocabulary from subtle to dynamic.",
+      "default": true
+    },
+    {
+      "id": 8,
+      "pillar": "Camera Kinematics",
+      "title": "Speed Word Inserter",
+      "desc": "Injects mandatory camera speed modifier (slow, smooth, rapid) to prevent jerkiness.",
+      "default": true
+    },
+    {
+      "id": 9,
+      "pillar": "Camera Kinematics",
+      "title": "Motion-Parallax Depth Lock",
+      "desc": "Optimizes foreground, midground, and background separation during lateral moves.",
+      "default": true
+    },
+    {
+      "id": 10,
+      "pillar": "Camera Kinematics",
+      "title": "Subject Directional Vector Lock",
+      "desc": "Locks motion vector (left-to-right, approaching camera) to stop mid-clip direction reversal.",
+      "default": true
+    },
+    {
+      "id": 11,
+      "pillar": "Lighting & Aesthetics",
+      "title": "20 Cinematic Lighting Setups",
+      "desc": "Pre-engineered illumination setups (Window light, golden hour, neon practicals, noir).",
+      "default": true
+    },
+    {
+      "id": 12,
+      "pillar": "Lighting & Aesthetics",
+      "title": "Verbatim Style String Lock",
+      "desc": "Appends 15-25 word style signature to every keyframe prompt for zero aesthetic drift.",
+      "default": true
+    },
+    {
+      "id": 13,
+      "pillar": "Lighting & Aesthetics",
+      "title": "Hex / Tone Color Anchor Guard",
+      "desc": "Enforces 3-5 locked color anchors across every shot to keep color grading consistent.",
+      "default": true
+    },
+    {
+      "id": 14,
+      "pillar": "Lighting & Aesthetics",
+      "title": "Depth of Field & Aperture Selector",
+      "desc": "Toggles between f/1.8 shallow portrait bokeh and f/8 deep architectural focus.",
+      "default": true
+    },
+    {
+      "id": 15,
+      "pillar": "Lighting & Aesthetics",
+      "title": "Procedural Shader & Film Grain FX",
+      "desc": "Post-generation shader applying 35mm grain, halation, and chromatic aberration.",
+      "default": false
+    },
+    {
+      "id": 16,
+      "pillar": "Character & Object Continuity",
+      "title": "Persistent Character Sheet Ingestion",
+      "desc": "Stores facial structure, age, wardrobe anchors, repeating them verbatim across shots.",
+      "default": true
+    },
+    {
+      "id": 17,
+      "pillar": "Character & Object Continuity",
+      "title": "Product Geometry Preserver",
+      "desc": "Locks product design to real reference images; masks labels for post-compositing.",
+      "default": true
+    },
+    {
+      "id": 18,
+      "pillar": "Character & Object Continuity",
+      "title": "Multi-Subject Separation & Eyelines",
+      "desc": "Assigns distinct wardrobe to characters and locks 180-degree rule eyelines.",
+      "default": true
+    },
+    {
+      "id": 19,
+      "pillar": "Character & Object Continuity",
+      "title": "Wardrobe Texture Stability Filter",
+      "desc": "Replaces complex houndstooth patterns with solid tones to eliminate cloth shimmering.",
+      "default": true
+    },
+    {
+      "id": 20,
+      "pillar": "Character & Object Continuity",
+      "title": "Facial Micro-Expression Stabilizer",
+      "desc": "Limits facial animation to single micro-expressions, preventing uncanny facial warping.",
+      "default": true
+    },
+    {
+      "id": 21,
+      "pillar": "Audio & Speech",
+      "title": "Native Video Lip-Sync Engine",
+      "desc": "Uses Veo 3.1 and Gemini Omni native audio synthesis for synchronized spoken dialogue.",
+      "default": true
+    },
+    {
+      "id": 22,
+      "pillar": "Audio & Speech",
+      "title": "2.5 Words-per-Second Budget Enforcer",
+      "desc": "Strict counter that trims dialogue exceeding 2.5 words per second of shot length.",
+      "default": true
+    },
+    {
+      "id": 23,
+      "pillar": "Audio & Speech",
+      "title": "Multi-Track Audio Ducking Mix",
+      "desc": "Automates ffmpeg sidechain ducking of background music by -12dB under speech.",
+      "default": true
+    },
+    {
+      "id": 24,
+      "pillar": "Audio & Speech",
+      "title": "Custom Voice Cloner & Stylizer",
+      "desc": "Ingests user vocal samples to apply consistent vocal timbre across all scenes.",
+      "default": false
+    },
+    {
+      "id": 25,
+      "pillar": "Audio & Speech",
+      "title": "Foley & Ambient Acoustic Layering",
+      "desc": "Injects room acoustics and foley sound effects, explicitly blocking unrequested music.",
+      "default": true
+    },
+    {
+      "id": 26,
+      "pillar": "Linter & Validation",
+      "title": "Pre-Gen Zero-Cost Linter (lint_scene)",
+      "desc": "Validates JSON against 10,000 rules before spending credits; requires 0 errors.",
+      "default": true
+    },
+    {
+      "id": 27,
+      "pillar": "Linter & Validation",
+      "title": "Negative Prompt Shield",
+      "desc": "Injects model-calibrated negative prompts to suppress extra limbs and visual noise.",
+      "default": true
+    },
+    {
+      "id": 28,
+      "pillar": "Linter & Validation",
+      "title": "Slogan & Fluff Buzzword Purge",
+      "desc": "Filters out '8K', 'photorealistic', 'masterpiece' tokens to focus latent attention.",
+      "default": true
+    },
+    {
+      "id": 29,
+      "pillar": "Linter & Validation",
+      "title": "Anti-Fine-Motor-Task Filter",
+      "desc": "Blocks requests for typing, tying shoelaces, dealing cards; substitutes macro actions.",
+      "default": true
+    },
+    {
+      "id": 30,
+      "pillar": "Linter & Validation",
+      "title": "Platform Safe Zone Auto-Formatter",
+      "desc": "Calculates 9:16 safe margins for TikTok/Reels (keeping action out of top 14% and bottom 20%).",
+      "default": true
+    },
+    {
+      "id": 31,
+      "pillar": "Video-to-Video & Editing",
+      "title": "3-Turn Conversational Video Editor",
+      "desc": "Uses Gemini Omni Flash conversational V2V to alter existing video via natural prompts.",
+      "default": true
+    },
+    {
+      "id": 32,
+      "pillar": "Video-to-Video & Editing",
+      "title": "Segment Masked Inpainting",
+      "desc": "Enables brush-masking on video frames to insert, remove, or modify elements.",
+      "default": false
+    },
+    {
+      "id": 33,
+      "pillar": "Video-to-Video & Editing",
+      "title": "Clip Expander (Extend Video)",
+      "desc": "Generates continuous footage seamlessly extending from the end of an 8s Veo clip.",
+      "default": true
+    },
+    {
+      "id": 34,
+      "pillar": "Video-to-Video & Editing",
+      "title": "Draft 360p Fast Preview Mode",
+      "desc": "Generates quick 360p drafts at 50% credit cost for rapid creative iterations.",
+      "default": true
+    },
+    {
+      "id": 35,
+      "pillar": "Video-to-Video & Editing",
+      "title": "Zero-Credit 720p/1080p AI Upscaler",
+      "desc": "Upscales verified 360p draft renders to 720p/1080p with zero compute credits.",
+      "default": true
+    },
+    {
+      "id": 36,
+      "pillar": "Timeline & Scenebuilder UX",
+      "title": "Multi-Track Drag & Drop Timeline",
+      "desc": "Non-linear timeline for arranging clips, keyframe images, audio, and graphic overlays.",
+      "default": true
+    },
+    {
+      "id": 37,
+      "pillar": "Timeline & Scenebuilder UX",
+      "title": "Head & Tail Trimming Handles",
+      "desc": "Frame-accurate handles to trim off the first 0.5s or final 1.0s of an AI take.",
+      "default": true
+    },
+    {
+      "id": 38,
+      "pillar": "Timeline & Scenebuilder UX",
+      "title": "Non-Linear Clip Stacking & Reorder",
+      "desc": "Enables dragging, swapping, and duplicating clips with real-time web playback.",
+      "default": true
+    },
+    {
+      "id": 39,
+      "pillar": "Timeline & Scenebuilder UX",
+      "title": "Automated Transition Engine",
+      "desc": "Applies ffmpeg xfade dissolves (0.5s overlap) or fast whip-pan transitions.",
+      "default": true
+    },
+    {
+      "id": 40,
+      "pillar": "Timeline & Scenebuilder UX",
+      "title": "Knob-Automated Bento Box (Pixel Bento)",
+      "desc": "Real-time recording knobs to automate contrast, grain, saturation, and crop zoom.",
+      "default": false
+    },
+    {
+      "id": 41,
+      "pillar": "QA & Compliance",
+      "title": "36-Artifact Computer Vision Scanner",
+      "desc": "Post-generation QA reviewing takes for limb warping, face drift, and object melting.",
+      "default": true
+    },
+    {
+      "id": 42,
+      "pillar": "QA & Compliance",
+      "title": "Photosensitive Strobing Check",
+      "desc": "Detects high-frequency luminance oscillations, rejecting unsafe flashing clips.",
+      "default": true
+    },
+    {
+      "id": 43,
+      "pillar": "QA & Compliance",
+      "title": "Deepfake & IP Rights Shield",
+      "desc": "Blocks prompts with unauthorized logos, living celebrity likenesses, or deceptive content.",
+      "default": true
+    },
+    {
+      "id": 44,
+      "pillar": "QA & Compliance",
+      "title": "Unwanted Subtitle Text Filter",
+      "desc": "OCR scanner discarding takes with burned-in gibberish text in the lower third.",
+      "default": true
+    },
+    {
+      "id": 45,
+      "pillar": "QA & Compliance",
+      "title": "Rigid Object Melt Detector",
+      "desc": "Monitors geometric surfaces (cars, phones, buildings) to prevent warping lines.",
+      "default": true
+    },
+    {
+      "id": 46,
+      "pillar": "Multi-Agent Architecture",
+      "title": "Autonomous 6-Agent Pipeline",
+      "desc": "Coordinates Director, Prompt Writer, Linter, Generator, Reviewer, and Editor.",
+      "default": true
+    },
+    {
+      "id": 47,
+      "pillar": "Multi-Agent Architecture",
+      "title": "Real-Time Quota & Cost Shield",
+      "desc": "Calculates exact credit cost before generation and requires explicit user sign-off.",
+      "default": true
+    },
+    {
+      "id": 48,
+      "pillar": "Multi-Agent Architecture",
+      "title": "Asset Stack & Version History Tree",
+      "desc": "Non-destructive storage for all prompt iterations, intermediate keyframes, and takes.",
+      "default": true
+    },
+    {
+      "id": 49,
+      "pillar": "Multi-Agent Architecture",
+      "title": "One-Click Batch Variations Generator",
+      "desc": "Generates 4 variations of a keyframe or motion take simultaneously for selection.",
+      "default": true
+    },
+    {
+      "id": 50,
+      "pillar": "Multi-Agent Architecture",
+      "title": "Serverless FFmpeg Render Worker",
+      "desc": "Headless pipeline executing concatenation, color LUT, and audio mixing in cloud.",
+      "default": true
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "total": 10000,
+  "generated_before_dedupe": 10219,
+  "duplicates_removed": 0,
+  "low_relevance_trimmed": 219,
+  "by_family": {
+    "core-v1": 303,
+    "core-v2": 164,
+    "subject-move": 1344,
+    "subject-light": 1120,
+    "subject-framing": 448,
+    "subject-artifact": 450,
+    "model-subject": 280,
+    "model-move": 120,
+    "genre-phase": 450,
+    "genre-move": 257,
+    "genre-light": 131,
+    "genre-platform": 240,
+    "move-light": 191,
+    "move-framing": 192,
+    "subject-phase": 560,
+    "subject-platform": 448,
+    "model-genre": 150,
+    "artifact-stage": 144,
+    "scene-recipe": 440,
+    "light-framing": 29,
+    "cut-move": 357,
+    "cut-framing": 64,
+    "cut-light": 400,
+    "subject-pair": 734,
+    "genre-subject": 549,
+    "genre-recipe": 240,
+    "move-artifact": 155,
+    "model-platform": 40
+  },
+  "by_severity": {
+    "major": 3416,
+    "block": 172,
+    "minor": 6412
+  },
+  "by_type": {
+    "LOCK": 20,
+    "RULE": 399,
+    "COND": 8792,
+    "CHECK": 789
+  },
+  "trimmed_by_family": {
+    "cut-move": 219
+  }
+}

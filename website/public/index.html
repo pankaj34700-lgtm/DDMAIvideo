@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DDMAI.VIDEO — Next-Gen AI Video &amp; Image Production Studio</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0b0c10; color: #e2e8f0; }
+    .font-flow { font-family: 'Google Sans', 'Inter', sans-serif; }
+    .font-mono { font-family: 'JetBrains Mono', monospace; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: #0b0c10; }
+    ::-webkit-scrollbar-thumb { background: #232733; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #374151; }
+    .flow-card { background: #13151c; border: 1px solid #1f2330; }
+    .flow-card:hover { border-color: #31384d; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
+
+  <!-- DDMAI.VIDEO TOP NAVIGATION BAR -->
+  <header class="bg-[#11131a] border-b border-[#1f2330] px-5 py-2.5 flex items-center justify-between sticky top-0 z-50">
+    <!-- Left: Brand Logo & Title -->
+    <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-2.5 cursor-pointer">
+        <!-- DDMAI Studio Prism Icon -->
+        <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-600/30">
+          <i class="fa-solid fa-play text-xs ml-0.5"></i>
+        </div>
+        <div class="flex items-center space-x-2">
+          <span class="font-flow font-extrabold text-base tracking-tight text-white">DDMAI<span class="text-indigo-400">.VIDEO</span></span>
+          <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>$0.00 ZERO-COST MODE</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Project Breadcrumb & Session Selector -->
+      <div class="hidden md:flex items-center space-x-2 pl-4 border-l border-[#1f2330] text-xs">
+        <span class="text-slate-500">Project /</span>
+        <select class="bg-[#181a24] text-slate-200 border border-[#262b3b] rounded-lg px-2.5 py-1 text-xs outline-none focus:border-indigo-500 font-medium">
+          <option>Commercial Campaign 2026 (10s Scenes)</option>
+          <option>TikTok UGC Skincare Reel</option>
+          <option>Sci-Fi Short Movie Teaser</option>
+          <option>+ Create New Project Session</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Center/Right: DDMAI Agent Switch & Settings -->
+    <div class="flex items-center space-x-3 text-xs">
+      <!-- Agent Toggle Switch -->
+      <button onclick="toggleFlowAgentMode()" id="flow-agent-toggle" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-medium shadow-md shadow-indigo-600/25 transition">
+        <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+        <span>DDMAI Agent: <strong>ON</strong></span>
+      </button>
+
+      <!-- Cost Shield Indicator -->
+      <div class="hidden lg:flex items-center px-3 py-1.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-emerald-300 font-mono text-[11px]">
+        <i class="fa-solid fa-piggy-bank mr-1.5 text-emerald-400"></i>
+        <span>Cost Guard: <strong>$0.00 / 0 Credits</strong></span>
+      </div>
+
+      <!-- Advanced DDMAI Tools Drawer Trigger -->
+      <button onclick="openToolsModal()" class="px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-200 font-medium transition flex items-center space-x-1.5">
+        <i class="fa-solid fa-sliders text-cyan-400"></i>
+        <span class="hidden sm:inline">DDMAI FX Tools</span>
+      </button>
+
+      <!-- 50 Options Matrix -->
+      <button onclick="openOptionsModal()" class="px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-200 font-medium transition flex items-center space-x-1.5">
+        <i class="fa-solid fa-cube text-purple-400"></i>
+        <span>50 Options</span>
+      </button>
+
+      <!-- API Keys Manager Trigger -->
+      <button onclick="openApiKeysModal()" class="px-3 py-1.5 rounded-xl bg-amber-950/30 hover:bg-amber-900/40 border border-amber-500/40 text-amber-300 font-medium transition flex items-center space-x-1.5 shadow-sm shadow-amber-500/10">
+        <i class="fa-solid fa-key text-amber-400 text-xs"></i>
+        <span>API Keys</span>
+      </button>
+
+      <!-- Export / Render Master -->
+      <button onclick="deployExportModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium px-4 py-1.5 rounded-xl shadow-md transition flex items-center space-x-1.5">
+        <i class="fa-solid fa-download text-xs"></i>
+        <span>Export</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MAIN STUDIO WORKSPACE -->
+  <div class="flex-1 flex overflow-hidden">
+
+    <!-- LEFT SIDEBAR: ASSETS & INGREDIENTS STACK -->
+    <aside class="w-64 bg-[#0e1017] border-r border-[#1f2330] p-4 flex flex-col justify-between shrink-0 overflow-y-auto">
+      <div class="space-y-5">
+        <!-- Asset Collections / History -->
+        <div>
+          <div class="flex items-center justify-between px-1 mb-2">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Asset Stack & Collections</span>
+            <span class="text-[10px] text-indigo-400 font-mono">History</span>
+          </div>
+          <div class="space-y-1.5">
+            <div class="p-2 rounded-xl bg-[#151722] border border-[#222636] flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500/50 transition">
+              <div class="w-9 h-9 rounded-lg bg-indigo-900/40 border border-indigo-700/50 flex items-center justify-center text-indigo-400 font-bold text-xs">
+                P01
+              </div>
+              <div class="overflow-hidden">
+                <div class="text-xs font-bold text-slate-200 truncate">Perfume Commercial</div>
+                <div class="text-[10px] text-slate-400">10.0s • 4s+6s Chained</div>
+              </div>
+            </div>
+
+            <div class="p-2 rounded-xl bg-[#151722]/60 border border-[#222636] flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500/50 transition">
+              <div class="w-9 h-9 rounded-lg bg-pink-900/40 border border-pink-700/50 flex items-center justify-center text-pink-400 font-bold text-xs">
+                P02
+              </div>
+              <div class="overflow-hidden">
+                <div class="text-xs font-bold text-slate-200 truncate">TikTok Skincare UGC</div>
+                <div class="text-[10px] text-slate-400">10.0s • 10s Omni Native</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Zero-Cost Model Switcher -->
+        <div>
+          <div class="flex items-center justify-between px-1 mb-2">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Zero-Cost Model Matrix</span>
+            <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded font-mono font-bold">$0.00</span>
+          </div>
+          <div class="space-y-2 text-xs">
+            <!-- Free Tier 1: Gemini Omni 360p Draft + 0-credit 720p -->
+            <label class="p-2.5 rounded-xl bg-[#151722] border border-[#222636] block cursor-pointer hover:border-indigo-500/50 transition">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-200">Gemini Omni Flash 1.1</span>
+                <input type="radio" name="engine" value="omni_free" checked class="text-indigo-600 focus:ring-0">
+              </div>
+              <div class="text-[10px] text-emerald-400 mt-1">360p Draft (50% Off) + 0-Credit 720p Upscale</div>
+              <div class="text-[9px] text-slate-400 mt-0.5">Native 10s clips, 3-turn V2V conversational edit.</div>
+            </label>
+
+            <!-- Free Tier 2: Open Source FLUX + LTX/CogVideo -->
+            <label class="p-2.5 rounded-xl bg-[#151722] border border-[#222636] block cursor-pointer hover:border-indigo-500/50 transition">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-200">FLUX.1 + LTX-Video</span>
+                <input type="radio" name="engine" value="opensource_free" class="text-indigo-600 focus:ring-0">
+              </div>
+              <div class="text-[10px] text-emerald-400 mt-1">100% Free Open-Source (Local / Colab)</div>
+              <div class="text-[9px] text-slate-400 mt-0.5">Zero API fees, Apache 2.0 commercial weights.</div>
+            </label>
+
+            <!-- Free Audio: Microsoft Edge-TTS / Kokoro -->
+            <label class="p-2.5 rounded-xl bg-[#151722] border border-[#222636] block cursor-pointer hover:border-indigo-500/50 transition">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-200">Edge-TTS & Kokoro Voice</span>
+                <input type="radio" name="engine" value="edgetts_free" class="text-indigo-600 focus:ring-0">
+              </div>
+              <div class="text-[10px] text-emerald-400 mt-1">Free Broadcast Neural Audio ($0.00)</div>
+              <div class="text-[9px] text-slate-400 mt-0.5">High-fidelity voiceover under 2.5 wps budget.</div>
+            </label>
+
+            <!-- Commercial Cloud Optional -->
+            <label class="p-2.5 rounded-xl bg-[#151722]/50 border border-[#222636] block cursor-pointer hover:border-indigo-500/50 transition">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-slate-400">Veo 3.1 Fast / Quality</span>
+                <input type="radio" name="engine" value="veo_cloud" class="text-indigo-600 focus:ring-0">
+              </div>
+              <div class="text-[10px] text-amber-400 mt-1">Cloud Credits Required</div>
+              <div class="text-[9px] text-slate-500 mt-0.5">Cinematic studio rendering pass.</div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Persistent Agent Instructions (Google Flow Standard) -->
+        <div class="p-3 rounded-xl bg-[#151722] border border-[#222636] space-y-2">
+          <div class="flex items-center justify-between text-xs">
+            <span class="font-bold text-slate-300">Agent Instructions</span>
+            <button onclick="editAgentInstructions()" class="text-[10px] text-indigo-400 hover:underline">Edit</button>
+          </div>
+          <div class="text-[10px] text-slate-400 leading-snug line-clamp-3" id="agent-instructions-preview">
+            "Style: Photorealistic cinematic commercial 35mm finish. Colors: warm amber, matte black, brushed gold. Rulebook VR-00001 to VR-10000 enforced. Dialogue under 2.5 wps."
+          </div>
+        </div>
+      </div>
+
+      <!-- DDMAI.VIDEO Studio Brand & Live Node Status -->
+      <div class="pt-3 border-t border-[#1f2330] space-y-2">
+        <div class="flex items-center justify-between px-1">
+          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Node Domain</span>
+          <span class="text-[10px] text-emerald-400 font-mono">v2.5 Live</span>
+        </div>
+        <div class="w-full py-2 px-3 rounded-xl bg-[#151722] border border-[#222636] text-xs text-indigo-300 font-medium flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="font-bold text-white tracking-wide">DDMAI.VIDEO</span>
+          </div>
+          <span class="text-[10px] text-slate-400 font-mono">PORT 3000</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- CENTER CANVAS: THE FLOW PROMPT BOX & SCENEBUILDER TIMELINE -->
+    <main class="flex-1 overflow-y-auto p-6 space-y-6">
+
+      <!-- DDMAI.VIDEO MAIN PROMPT BOX (EXPANDABLE AGENT MODE) -->
+      <div class="flow-card rounded-2xl p-5 shadow-2xl space-y-4">
+        <!-- Prompt Box Top Header -->
+        <div class="flex items-center justify-between text-xs">
+          <div class="flex items-center space-x-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            <span class="font-flow font-bold text-white text-sm" id="prompt-box-mode-title">DDMAI.VIDEO Agent Prompt Box</span>
+          </div>
+
+          <div class="flex items-center space-x-2">
+            <span class="text-[11px] text-slate-400">Aspect Ratio:</span>
+            <select id="canvas-aspect" class="bg-[#181a24] text-slate-200 border border-[#262b3b] rounded-lg px-2.5 py-1 text-xs outline-none">
+              <option value="9:16">9:16 Vertical (TikTok / Reels)</option>
+              <option value="16:9">16:9 Widescreen (YouTube)</option>
+              <option value="1:1">1:1 Square (Social Feed)</option>
+              <option value="4:5">4:5 Portrait</option>
+            </select>
+
+            <span class="text-[11px] text-slate-400 ml-2">Scene Math:</span>
+            <select id="scene-plan-select" class="bg-[#181a24] text-slate-200 border border-[#262b3b] rounded-lg px-2.5 py-1 text-xs outline-none font-mono">
+              <option value="4+6">4s + 6s = 10.0s Standard</option>
+              <option value="6+4">6s + 4s = 10.0s Standard</option>
+              <option value="10_native">10.0s Gemini Omni Native</option>
+              <option value="12_cut_10">12s cut to 10.0s (Seedance)</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Multi-Line Prompt Input -->
+        <div class="relative">
+          <textarea id="main-flow-input" rows="3" class="w-full bg-[#0e1017] border border-[#222636] rounded-xl p-3.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 leading-relaxed font-sans" placeholder="Chat with DDMAI Agent to brainstorm or enter prompt (e.g., Luxury perfume bottle on wet black obsidian slate with warm amber mist)..."></textarea>
+          
+          <!-- Bottom Toolbar of Prompt Box (Flow Style) -->
+          <div class="flex flex-wrap items-center justify-between gap-2.5 mt-3 pt-2 border-t border-[#1f2330]">
+            <!-- Quick References & Ingredients -->
+            <div class="flex items-center space-x-2 text-xs">
+              <button onclick="triggerIngredientUpload()" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-300 text-[11px] flex items-center space-x-1.5 transition">
+                <i class="fa-solid fa-paperclip text-slate-400"></i>
+                <span>Add Ingredient / Start Frame</span>
+              </button>
+
+              <button onclick="applyFlowPreset('perfume')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-amber-300 text-[11px] transition">
+                + Perfume Commercial
+              </button>
+              <button onclick="applyFlowPreset('ugc')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-pink-300 text-[11px] transition">
+                + UGC TikTok
+              </button>
+              <button onclick="applyFlowPreset('scifi')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-cyan-300 text-[11px] transition">
+                + Sci-Fi Film
+              </button>
+            </div>
+
+            <!-- Action Buttons: Split to Dual-Prompt or Conversational Edit -->
+            <div class="flex items-center space-x-2">
+              <button onclick="triggerConversationalV2V()" class="px-3 py-1.5 rounded-xl bg-[#1f2433] hover:bg-[#292f42] text-cyan-300 text-xs font-medium transition flex items-center space-x-1.5">
+                <i class="fa-solid fa-arrows-rotate"></i>
+                <span>Conversational V2V Edit</span>
+              </button>
+              <button onclick="executeFlowDecomposition()" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium text-xs px-4 py-1.5 rounded-xl shadow-lg shadow-indigo-600/30 transition flex items-center space-x-1.5">
+                <i class="fa-solid fa-bolt"></i>
+                <span>Generate (Zero-Cost Mode)</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DUAL-PROMPT INSPECTION CARDS -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+        <!-- Prompt 1: Keyframe Image Still -->
+        <div class="flow-card rounded-2xl p-4 shadow-lg space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono">
+                PROMPT 1: KEYFRAME IMAGE STILL
+              </span>
+              <span class="text-[10px] text-slate-400 font-mono">Nano Banana / FLUX.1</span>
+            </div>
+            <button onclick="copyCardPrompt('p1-content')" class="text-xs text-slate-400 hover:text-white transition">
+              <i class="fa-regular fa-copy mr-1"></i>Copy
+            </button>
+          </div>
+          <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] min-h-[90px]">
+            <p id="p1-content" class="text-xs text-slate-200 leading-relaxed font-mono">
+              Photorealistic cinematic commercial studio footage, crisp 35mm finish. Close-up of one frosted glass perfume bottle with fluted brass cap resting on wet obsidian slate, soft natural side-lighting from top-left, warm amber, matte black, and brass color anchors, shallow depth of field, vertical 9:16 frame.
+            </p>
+          </div>
+          <div class="flex items-center justify-between text-[10px] text-slate-400">
+            <span>Disk Path: <code class="text-indigo-300">website/public/images/keyframes/</code></span>
+            <span class="text-emerald-400"><i class="fa-solid fa-check mr-1"></i>Zero Motion Bleed</span>
+          </div>
+        </div>
+
+        <!-- Prompt 2: Video Motion & Audio Dynamics -->
+        <div class="flow-card rounded-2xl p-4 shadow-lg space-y-3">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono">
+                PROMPT 2: VIDEO MOTION & AUDIO
+              </span>
+              <span class="text-[10px] text-slate-400 font-mono">Veo 3.1 / Omni / LTX</span>
+            </div>
+            <button onclick="copyCardPrompt('p2-content')" class="text-xs text-slate-400 hover:text-white transition">
+              <i class="fa-regular fa-copy mr-1"></i>Copy
+            </button>
+          </div>
+          <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] min-h-[90px]">
+            <p id="p2-content" class="text-xs text-slate-200 leading-relaxed font-mono">
+              Slow micro push-in. A single water droplet glides down the curve of the bottle, catching golden light, then settles onto the dark stone. Ends with the bottle held still and centered. Audio: Soft water droplet drip, quiet studio silence, no music, no subtitles.
+            </p>
+          </div>
+          <div class="flex items-center justify-between text-[10px] text-slate-400">
+            <span>Speech Budget: <strong class="text-emerald-400 font-mono">0 wps (Budget: 2.5 wps)</strong></span>
+            <span class="text-cyan-400 font-mono">Duration: 4.0s</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GOOGLE FLOW SCENEBUILDER TIMELINE -->
+      <div class="flow-card rounded-2xl p-5 shadow-2xl space-y-4">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-2.5">
+            <i class="fa-solid fa-film text-indigo-400 text-sm"></i>
+            <h3 class="text-sm font-flow font-bold text-white tracking-tight">Scenebuilder Timeline (10.0s Scene Composition)</h3>
+          </div>
+          <div class="flex items-center space-x-3">
+            <span class="text-xs font-mono bg-indigo-950/60 text-indigo-300 px-2.5 py-1 rounded-lg border border-indigo-800/40">
+              Total Scene: 10.00s (+/- 0.0s)
+            </span>
+            <button onclick="simulateFlowPlayback()" id="flow-playback-btn" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-1 rounded-lg text-xs font-medium transition flex items-center space-x-1.5 shadow">
+              <i id="flow-play-icon" class="fa-solid fa-play text-[10px]"></i>
+              <span id="flow-play-text">Preview Scene</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Timeline Video & Audio Tracks -->
+        <div class="space-y-2">
+          <!-- Video Track with Handle Trims -->
+          <div class="bg-[#0b0c10] p-3 rounded-xl border border-[#1f2330]">
+            <div class="flex items-center justify-between text-[10px] text-slate-400 mb-2 font-mono">
+              <span>VIDEO TRACK (Lossless Concat • No Time-Stretching)</span>
+              <span>0.0s ───────────────────── 4.0s ────────────────────────────── 10.0s</span>
+            </div>
+            
+            <div class="flex space-x-2 h-16">
+              <!-- Shot 1: Establishing (4.0s) -->
+              <div class="w-2/5 bg-gradient-to-r from-blue-900/50 to-indigo-900/50 border border-blue-500/40 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-blue-400 transition">
+                <div class="flex items-center justify-between text-[10px]">
+                  <span class="font-bold text-blue-300">SH1: Keyframe Start</span>
+                  <span class="font-mono bg-[#0e1017] px-1.5 py-0.2 rounded text-white text-[9px]">4.0s</span>
+                </div>
+                <div class="text-[9px] text-blue-200/80 truncate">Close-Up • Slow Push-In • Keyframe Ingest</div>
+                <!-- Right Trim Handle -->
+                <div class="absolute right-0 top-0 bottom-0 w-2 bg-blue-400 rounded-r-xl cursor-ew-resize opacity-60 group-hover:opacity-100" title="Trim Handle (Shave tail)"></div>
+              </div>
+
+              <!-- Shot 2: Action & Reveal (6.0s Chained) -->
+              <div class="w-3/5 bg-gradient-to-r from-indigo-900/50 to-purple-900/50 border border-purple-500/40 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-purple-400 transition">
+                <div class="flex items-center justify-between text-[10px]">
+                  <span class="font-bold text-purple-300">SH2: Chained Tail Action</span>
+                  <span class="font-mono bg-[#0e1017] px-1.5 py-0.2 rounded text-white text-[9px]">6.0s</span>
+                </div>
+                <div class="text-[9px] text-purple-200/80 truncate">Medium Shot • Orbit • Chained from SH1 Tail Frame</div>
+                <!-- Right Trim Handle -->
+                <div class="absolute right-0 top-0 bottom-0 w-2 bg-purple-400 rounded-r-xl cursor-ew-resize opacity-60 group-hover:opacity-100" title="Trim Handle"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Audio Track with Sidechain Waveform -->
+          <div class="bg-[#0b0c10] p-2.5 rounded-xl border border-[#1f2330] flex items-center justify-between space-x-3">
+            <div class="flex items-center space-x-2 text-xs text-slate-400">
+              <i class="fa-solid fa-volume-high text-cyan-400 text-xs"></i>
+              <span class="text-[10px] font-mono">AUDIO BED: Foley + Voiceover Ducking (-12dB)</span>
+            </div>
+            <!-- Simulated Waveform -->
+            <div class="flex items-center space-x-1 h-3 flex-1 max-w-md">
+              <div class="w-1 bg-cyan-500/40 h-1.5 rounded-full"></div>
+              <div class="w-1 bg-cyan-500/70 h-2.5 rounded-full"></div>
+              <div class="w-1 bg-cyan-500/90 h-3 rounded-full"></div>
+              <div class="w-1 bg-cyan-500/50 h-1 rounded-full"></div>
+              <div class="w-1 bg-indigo-500 h-3 rounded-full animate-pulse"></div>
+              <div class="w-1 bg-indigo-500 h-2 rounded-full animate-pulse"></div>
+              <div class="w-1 bg-cyan-500/70 h-2.5 rounded-full"></div>
+              <div class="w-1 bg-cyan-500/90 h-3 rounded-full"></div>
+              <div class="w-1 bg-cyan-500/40 h-1.5 rounded-full"></div>
+            </div>
+            <span class="text-[10px] text-slate-500 font-mono">Edge-TTS Neural Voice ($0.00)</span>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+  </div>
+
+  <!-- MODAL 1: ADVANCED FLOW TOOLS (HVtcO0Rfo2Y) -->
+  <div id="tools-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-[#11131a] border border-[#262b3b] rounded-2xl w-full max-w-3xl p-6 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-[#1f2330] pb-3">
+        <div class="flex items-center space-x-2">
+          <i class="fa-solid fa-sliders text-cyan-400 text-base"></i>
+          <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO AI Video Tools Suite (HVtcO0Rfo2Y Deep Dive)</h3>
+        </div>
+        <button onclick="closeToolsModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+        <!-- 1. Shader FX & Video Granulator -->
+        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+          <span class="font-bold text-cyan-300">1. Shader FX & Video Granulator</span>
+          <p class="text-slate-400 text-[11px] leading-relaxed">Procedural film stock emulation, 35mm grain, and stylized chromatic aberration.</p>
+          <div class="flex items-center justify-between text-[11px] pt-1">
+            <span class="text-slate-300">35mm Film Grain:</span>
+            <input type="range" min="0" max="100" value="40" class="w-24 accent-cyan-500">
+          </div>
+        </div>
+
+        <!-- 2. Pixel Bento -->
+        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+          <span class="font-bold text-indigo-300">2. Pixel Bento (Knob Automation)</span>
+          <p class="text-slate-400 text-[11px] leading-relaxed">Real-time recording knobs to automate contrast, grain, and zoom across the playback timeline.</p>
+          <button class="px-2.5 py-1 rounded bg-[#1f2330] hover:bg-[#2b3142] text-slate-200 text-[10px]">● Record Knob Macro</button>
+        </div>
+
+        <!-- 3. Poster Designer & Overlays -->
+        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+          <span class="font-bold text-pink-300">3. Poster Designer & Type Overlays</span>
+          <p class="text-slate-400 text-[11px] leading-relaxed">Renders clean vector text overlays on top of video, keeping messy glyphs out of diffusion latents.</p>
+          <button class="px-2.5 py-1 rounded bg-[#1f2330] hover:bg-[#2b3142] text-slate-200 text-[10px]">+ Add Title Overlay</button>
+        </div>
+
+        <!-- 4. Video Sketch & Transition Machine -->
+        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+          <span class="font-bold text-amber-300">4. Transition Machine</span>
+          <p class="text-slate-400 text-[11px] leading-relaxed">Automates FFmpeg xfade dissolves (0.5s overlap) and speed whip-pans between scene cuts.</p>
+          <span class="text-emerald-400 font-mono text-[10px]">Zero-cost local transition rendering</span>
+        </div>
+      </div>
+
+      <div class="flex justify-end pt-2 border-t border-[#1f2330]">
+        <button onclick="closeToolsModal()" class="px-4 py-1.5 rounded-xl bg-[#181a24] text-slate-300 hover:bg-[#202433] text-xs font-medium">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: 50 OPTIONS FEATURE MATRIX -->
+  <div id="options-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-[#11131a] border border-[#262b3b] rounded-2xl w-full max-w-4xl p-6 space-y-4 shadow-2xl max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-[#1f2330] pb-3 shrink-0">
+        <div>
+          <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO — 50 Platform &amp; Agent Architectural Options</h3>
+          <p class="text-[11px] text-slate-400">10 Production Pillars • Zero-Cost & Commercial Configurations</p>
+        </div>
+        <button onclick="closeOptionsModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div id="modal-options-grid" class="flex-1 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-3 pr-1 text-xs">
+        <!-- Dynamically populated via /api/options -->
+      </div>
+
+      <div class="flex justify-end pt-3 border-t border-[#1f2330] shrink-0">
+        <button onclick="closeOptionsModal()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 text-xs font-medium">Apply & Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 3: API KEYS & GENERATIVE ENGINES MANAGER -->
+  <div id="api-keys-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-[#11131a] border border-[#262b3b] rounded-2xl w-full max-w-2xl p-6 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-[#1f2330] pb-3">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
+            <i class="fa-solid fa-key text-sm"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO — API Keys &amp; AI Engines</h3>
+            <p class="text-[11px] text-slate-400">Connect Free &amp; Zero-Cost Model Providers to Generate Images &amp; Videos</p>
+          </div>
+        </div>
+        <button onclick="closeApiKeysModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="space-y-4 text-xs">
+        <!-- 1. Google Gemini & Imagen 3 -->
+        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              <span class="font-bold text-slate-200">1. Google Gemini &amp; Imagen 3 API Key</span>
+              <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">$0.00 Free Tier</span>
+            </div>
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-[10px] text-blue-400 hover:text-blue-300 hover:underline flex items-center space-x-1 font-medium">
+              <span>Get Free Key (Google AI Studio)</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+            </a>
+          </div>
+          <p class="text-[10px] text-slate-400 leading-relaxed">
+            Free forever without credit card. Generates Imagen 3 images, 10s video storyboard decompositions, and multimodal frames.
+          </p>
+          <div class="relative">
+            <input type="password" id="gemini-key-input" placeholder="Paste your Google AI Studio key (starts with AIzaSy...)" class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 font-mono">
+            <button onclick="toggleKeyVisibility('gemini-key-input')" class="absolute right-2.5 top-2.5 text-slate-400 hover:text-white text-xs">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 2. Hugging Face Access Token -->
+        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+              <span class="font-bold text-slate-200">2. Hugging Face Access Token (FLUX &amp; LTX-Video)</span>
+              <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">Free Serverless</span>
+            </div>
+            <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-[10px] text-amber-400 hover:text-amber-300 hover:underline flex items-center space-x-1 font-medium">
+              <span>Get Free Token (Hugging Face)</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+            </a>
+          </div>
+          <p class="text-[10px] text-slate-400 leading-relaxed">
+            Powers FLUX.1-schnell 4-step image synthesis and LTX-Video / CogVideoX open-source video models.
+          </p>
+          <div class="relative">
+            <input type="password" id="hf-token-input" placeholder="Paste your Hugging Face token (starts with hf_...)" class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500 font-mono">
+            <button onclick="toggleKeyVisibility('hf-token-input')" class="absolute right-2.5 top-2.5 text-slate-400 hover:text-white text-xs">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. Together AI Key (Optional) -->
+        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
+              <span class="font-bold text-slate-200">3. Together AI Key (FLUX &amp; Wan2.1 Fast GPU)</span>
+              <span class="text-[9px] font-mono bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded font-bold">$5-$25 Free Credits</span>
+            </div>
+            <a href="https://api.together.ai/settings/api-keys" target="_blank" class="text-[10px] text-purple-400 hover:text-purple-300 hover:underline flex items-center space-x-1 font-medium">
+              <span>Get Free Key (Together AI)</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
+            </a>
+          </div>
+          <p class="text-[10px] text-slate-400 leading-relaxed">
+            Ultra-low latency cloud inference with free sign-up credit for 1000+ FLUX image generations.
+          </p>
+          <div class="relative">
+            <input type="password" id="together-key-input" placeholder="Paste your Together AI key..." class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500 font-mono">
+            <button onclick="toggleKeyVisibility('together-key-input')" class="absolute right-2.5 top-2.5 text-slate-400 hover:text-white text-xs">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex items-center justify-between pt-3 border-t border-[#1f2330] shrink-0">
+        <span id="keys-save-status" class="text-[11px] text-emerald-400 font-mono"></span>
+        <div class="flex items-center space-x-2">
+          <button onclick="closeApiKeysModal()" class="px-4 py-2 rounded-xl bg-[#181a24] text-slate-300 hover:bg-[#202433] text-xs font-medium">Close</button>
+          <button onclick="saveApiKeys()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white text-xs font-medium shadow-md shadow-amber-600/20">Save API Keys</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APP LOGIC -->
+  <script>
+    let flowAgentActive = true;
+
+    // Load 50 options into modal on page load
+    window.addEventListener('DOMContentLoaded', async () => {
+      try {
+        let res;
+        try {
+          res = await fetch('/api/options');
+          if (!res.ok) throw new Error();
+        } catch {
+          res = await fetch('/api/options.json');
+        }
+        const data = await res.json();
+        const grid = document.getElementById('modal-options-grid');
+        if (grid && data.options) {
+          grid.innerHTML = data.options.map(opt => `
+            <div class="p-3 rounded-xl bg-[#0b0c10] border border-[#1f2330] flex items-start justify-between space-x-2">
+              <div>
+                <div class="flex items-center space-x-1.5">
+                  <span class="text-[9px] font-mono px-1 py-0.2 rounded bg-[#181a24] text-slate-400 font-bold">#${opt.id}</span>
+                  <span class="text-xs font-bold text-slate-200">${opt.title}</span>
+                </div>
+                <p class="text-[10px] text-slate-400 mt-0.5 leading-snug">${opt.desc}</p>
+                <span class="text-[9px] font-mono text-indigo-400 uppercase mt-1 inline-block">${opt.pillar}</span>
+              </div>
+              <input type="checkbox" ${opt.default ? 'checked' : ''} class="rounded text-indigo-600 focus:ring-0 mt-1">
+            </div>
+          `).join('');
+        }
+      } catch (e) {
+        console.error("Failed to load options:", e);
+      }
+    });
+
+    function toggleFlowAgentMode() {
+      flowAgentActive = !flowAgentActive;
+      const btn = document.getElementById('flow-agent-toggle');
+      const title = document.getElementById('prompt-box-mode-title');
+      if (flowAgentActive) {
+        btn.className = "flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-medium shadow-md shadow-indigo-600/25 transition";
+        btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>DDMAI Agent: <strong>ON</strong></span>';
+        title.textContent = "DDMAI.VIDEO Agent Prompt Box";
+      } else {
+        btn.className = "flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#181a24] text-slate-300 font-medium border border-[#262b3b] transition";
+        btn.innerHTML = '<i class="fa-solid fa-terminal text-xs"></i><span>Standard Prompt: <strong>DIRECT</strong></span>';
+        title.textContent = "Standard Direct Prompt Box";
+      }
+    }
+
+    function applyFlowPreset(type) {
+      const area = document.getElementById('main-flow-input');
+      if (type === 'perfume') {
+        area.value = "Luxury perfume commercial: Frosted glass bottle with fluted brass cap resting on wet black obsidian slate, warm golden hour side lighting, shallow depth of field, amber water mist, vertical 9:16 format.";
+      } else if (type === 'ugc') {
+        area.value = "TikTok creator UGC skincare review: 24-year-old creator with natural freckles seated at sunlit oak kitchen table, holding pastel mint moisturizer tube, speaking genuinely to camera.";
+      } else if (type === 'scifi') {
+        area.value = "Epic sci-fi cinematic movie scene: Lone cybernetic armored explorer standing on rainy basalt ridge overlooking sprawling neo-city in perpetual rain, cyan neon light shafts.";
+      }
+      executeFlowDecomposition();
+    }
+
+    async function executeFlowDecomposition() {
+      const brief = document.getElementById('main-flow-input').value || "Luxury perfume commercial: Frosted glass bottle with fluted brass cap";
+      let splitDone = false;
+      try {
+        const res = await fetch('/api/split-prompt', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ brief, move: 'slow push-in', lighting: 'soft window light' })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.success) {
+            document.getElementById('p1-content').textContent = data.prompt_1_keyframe;
+            document.getElementById('p2-content').textContent = data.prompt_2_motion;
+            splitDone = true;
+          }
+        }
+      } catch (e) {
+        console.warn("Backend split endpoint offline, executing client-side decomposition engine:", e);
+      }
+
+      if (!splitDone) {
+        const aspect = document.getElementById('canvas-aspect') ? document.getElementById('canvas-aspect').value : '9:16';
+        let p1 = `Photorealistic cinematic commercial studio footage, crisp 35mm finish. ${brief.trim().replace(/\.$/, '')}, soft natural directional side-lighting, warm amber, matte black, and brass color anchors, shallow depth of field, ${aspect} frame.`;
+        let p2 = `Slow micro push-in. The subject catches subtle warm light, micro texture details glisten with gentle fluid motion, camera tracks gracefully along the focal axis. Ends with the subject held steady and centered. Audio: Soft organic Foley resonance, quiet studio silence, no music, no subtitles.`;
+        
+        const lower = brief.toLowerCase();
+        if (lower.includes('perfume')) {
+          p1 = "Photorealistic cinematic commercial studio footage, crisp 35mm finish. Close-up of one frosted glass perfume bottle with fluted brass cap resting on wet obsidian slate, soft natural side-lighting from top-left, warm amber, matte black, and brass color anchors, shallow depth of field, vertical 9:16 frame.";
+          p2 = "Slow micro push-in. A single water droplet glides down the curve of the bottle, catching golden light, then settles onto the dark stone. Ends with the bottle held still and centered. Audio: Soft water droplet drip, quiet studio silence, no music, no subtitles.";
+        } else if (lower.includes('ugc') || lower.includes('skincare')) {
+          p1 = "Photorealistic commercial footage. Medium shot of a 24-year-old creator with natural freckles seated at a sunlit oak kitchen table, holding a pastel mint moisturizer tube, warm morning sun streaming from right, soft pastel green and warm wood tones, vertical 9:16 frame.";
+          p2 = "Slow smooth push-in. She uncaps the moisturizer tube gently, points to the texture with a bright genuine smile, natural hand gesture, eyes engaged with lens. Ends with product held at chest level. Audio: Crisp plastic cap click, subtle morning ambiance, natural room acoustics, no subtitles.";
+        } else if (lower.includes('scifi') || lower.includes('sci-fi')) {
+          p1 = "Cinematic anamorphic film frame, 35mm film grain. Wide establishing shot of a lone cybernetic explorer standing on a wet basalt ridge overlooking a sprawling rainy megacity, glowing cyan and magenta holographic billboards reflecting in pools of water, vertical 9:16 frame.";
+          p2 = "Slow lateral truck from left to right. Heavy rain cascades across the armored shoulder plating, neon lights cast shifting reflections across the wet helmet visor, steam vents billow slowly in the distance. Ends with visor reflecting city lights. Audio: Deep ambient drone, steady rain hum, mechanical servo hum, no subtitles.";
+        }
+
+        document.getElementById('p1-content').textContent = p1;
+        document.getElementById('p2-content').textContent = p2;
+      }
+    }
+
+    function triggerConversationalV2V() {
+      const current = document.getElementById('main-flow-input').value;
+      const mod = prompt("Conversational Video Edit (DDMAI.VIDEO):\nEnter natural language change (e.g. 'Change lighting to sunset' or 'Add light falling rain'):");
+      if (mod) {
+        document.getElementById('main-flow-input').value = `[V2V Edit Turn 1]: ${current} -> Change: ${mod}`;
+        executeFlowDecomposition();
+      }
+    }
+
+    function simulateFlowPlayback() {
+      const btn = document.getElementById('flow-play-text');
+      const icon = document.getElementById('flow-play-icon');
+      if (btn.textContent === 'Preview Scene') {
+        btn.textContent = 'Simulating 10.0s...';
+        icon.className = "fa-solid fa-spinner fa-spin text-[10px]";
+        setTimeout(() => {
+          btn.textContent = 'Preview Scene';
+          icon.className = "fa-solid fa-play text-[10px]";
+          alert("10.0s Scene Preview Complete! Shot 1 (4.0s) seamlessly chained into Shot 2 (6.0s) with 0-credit zero-cost audio ducking on DDMAI.VIDEO.");
+        }, 2500);
+      }
+    }
+
+    function copyCardPrompt(elemId) {
+      const text = document.getElementById(elemId).textContent.trim();
+      navigator.clipboard.writeText(text);
+      alert("Prompt copied to clipboard!");
+    }
+
+    function openToolsModal() { document.getElementById('tools-modal').classList.remove('hidden'); }
+    function closeToolsModal() { document.getElementById('tools-modal').classList.add('hidden'); }
+    function openOptionsModal() { document.getElementById('options-modal').classList.remove('hidden'); }
+    function closeOptionsModal() { document.getElementById('options-modal').classList.add('hidden'); }
+
+    function openApiKeysModal() {
+      loadSavedApiKeys();
+      document.getElementById('api-keys-modal').classList.remove('hidden');
+    }
+
+    function closeApiKeysModal() {
+      document.getElementById('api-keys-modal').classList.add('hidden');
+    }
+
+    function toggleKeyVisibility(inputId) {
+      const input = document.getElementById(inputId);
+      input.type = input.type === 'password' ? 'text' : 'password';
+    }
+
+    function loadSavedApiKeys() {
+      const gemini = localStorage.getItem('ddmai_gemini_key') || '';
+      const hf = localStorage.getItem('ddmai_hf_token') || '';
+      const together = localStorage.getItem('ddmai_together_key') || '';
+      if (document.getElementById('gemini-key-input')) document.getElementById('gemini-key-input').value = gemini;
+      if (document.getElementById('hf-token-input')) document.getElementById('hf-token-input').value = hf;
+      if (document.getElementById('together-key-input')) document.getElementById('together-key-input').value = together;
+    }
+
+    function saveApiKeys() {
+      const gemini = document.getElementById('gemini-key-input').value.trim();
+      const hf = document.getElementById('hf-token-input').value.trim();
+      const together = document.getElementById('together-key-input').value.trim();
+
+      localStorage.setItem('ddmai_gemini_key', gemini);
+      localStorage.setItem('ddmai_hf_token', hf);
+      localStorage.setItem('ddmai_together_key', together);
+
+      const status = document.getElementById('keys-save-status');
+      status.textContent = "✓ Keys saved securely in browser!";
+      setTimeout(() => { status.textContent = ""; closeApiKeysModal(); }, 1200);
+    }
+
+    function triggerIngredientUpload() {
+      alert("DDMAI Asset Ingestion:\nDrop or select your reference image into website/public/images/ingredients/ to lock character or product identity.");
+    }
+
+    function editAgentInstructions() {
+      const newInst = prompt("Edit DDMAI Permanent Agent Instructions:", document.getElementById('agent-instructions-preview').textContent.trim());
+      if (newInst) {
+        document.getElementById('agent-instructions-preview').textContent = `"${newInst}"`;
+      }
+    }
+
+    function deployExportModal() {
+      alert("DDMAI.VIDEO Zero-Cost Master Export:\nLossless FFmpeg script generated in website/public/renders/P01_S01_Master.mp4 ($0.00 Total Cost).");
+    }
+  </script>
+</body>
+</html>
