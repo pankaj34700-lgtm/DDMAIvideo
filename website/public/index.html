@@ -430,6 +430,10 @@
               <i class="fa-solid fa-file-video text-xs"></i>
               <span>Load Rendered Video (MP4)</span>
             </button>
+            <button onclick="loadSampleSceneTake()" class="bg-indigo-900/60 hover:bg-indigo-800/80 text-amber-200 border border-indigo-500/40 px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow">
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i>
+              <span>Play Sample Take (Scene 1)</span>
+            </button>
             <button onclick="simulateFlowPlayback()" id="flow-playback-btn" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-4 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow-lg shadow-emerald-600/30">
               <i id="flow-play-icon" class="fa-solid fa-play text-[10px]"></i>
               <span id="flow-play-text">Preview Scene</span>
@@ -1618,6 +1622,25 @@
 
       badge.textContent = `PLAYING MP4: ${file.name.slice(0, 24)} (${(file.size / (1024*1024)).toFixed(1)}MB)`;
       showToast(`Rendered Video "${file.name}" loaded into Timeline Monitor!`, 'success');
+    }
+
+    function loadSampleSceneTake() {
+      const video = document.getElementById('active-scene-video');
+      const img = document.getElementById('active-scene-image');
+      const placeholder = document.getElementById('active-scene-placeholder');
+      const badge = document.getElementById('viewport-status-badge');
+
+      img.classList.add('hidden');
+      placeholder.classList.add('hidden');
+      video.classList.remove('hidden');
+      video.src = '/renders/scene_01_hook.mp4';
+      video.currentTime = 0;
+      video.play().catch(() => {});
+
+      activeMediaType = 'video';
+      activeMediaBlobUrl = '/renders/scene_01_hook.mp4';
+      badge.textContent = 'MONITOR: PLAYING SCENE 01 RENDER (4.0s)';
+      showToast("Loaded official 4.0s 2D Noir Rendered Take into Monitor!", 'success');
     }
 
     function handleImageFileLoaded(event) {
