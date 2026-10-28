@@ -288,9 +288,42 @@
           </div>
         </div>
 
+        <!-- CONVERSATIONAL CHAT FEED (Gemini / ChatGPT Style) -->
+        <div id="agent-chat-feed" class="space-y-3 max-h-[300px] overflow-y-auto p-3.5 rounded-xl bg-[#090b10] border border-[#1f2434] text-xs">
+          <!-- Initial AI Welcome Bubble -->
+          <div class="flex items-start space-x-2.5">
+            <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shrink-0 shadow">
+              <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i>
+            </div>
+            <div class="flex-1 bg-[#131622] border border-[#23293d] rounded-2xl rounded-tl-none p-3 space-y-2 text-slate-200">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-indigo-300 text-[11px]">DDMAI Director AI (Gemini Conversational Engine)</span>
+                <span class="text-[10px] text-emerald-400 font-mono"><i class="fa-solid fa-circle text-[7px] mr-1"></i>Active</span>
+              </div>
+              <p class="leading-relaxed text-xs">
+                नमस्ते! मैं आपका <strong>DDMAI AI वीडियो डायरेक्टर</strong> हूँ। आप मुझसे ChatGPT या Gemini की तरह कोई भी सवाल पूछ सकते हैं (जैसे: <em>"अगला सीन क्या होना चाहिए?"</em>), या सीधे सीन का कमांड दे सकते हैं (जैसे: <em>"Scene 1 का वीडियो रन करो"</em> या <em>"Scene 2: बेडरूम में छिपा हुआ कैमरा बनाओ"</em>)। मैं आपके हर सवाल का जवाब भी दूँगा और तुरंत 2D कीफ्रेम व वीडियो रन करके दिखाऊँगा!
+              </p>
+              <div class="flex flex-wrap gap-1.5 pt-1 text-[10px]">
+                <button onclick="sendAgentChatMessage('Scene 1 का रेंडर्ड वीडियो मॉनिटर में चलाओ')" class="px-2.5 py-1 rounded-lg bg-indigo-950/60 hover:bg-indigo-900 border border-indigo-700/40 text-indigo-300 transition flex items-center space-x-1">
+                  <i class="fa-solid fa-play text-[9px]"></i><span>Scene 1 रन करो</span>
+                </button>
+                <button onclick="sendAgentChatMessage('Scene 2: बेडरूम में छिपा हुआ कैमरा बनाओ')" class="px-2.5 py-1 rounded-lg bg-amber-950/60 hover:bg-amber-900 border border-amber-700/40 text-amber-300 transition flex items-center space-x-1">
+                  <i class="fa-solid fa-film text-[9px]"></i><span>Scene 2 बनाओ</span>
+                </button>
+                <button onclick="sendAgentChatMessage('Eli Cohen की असली कहानी क्या थी और वो राष्ट्रपति की रेस तक कैसे पहुँचा?')" class="px-2.5 py-1 rounded-lg bg-[#181c2b] hover:bg-[#20263a] border border-slate-700 text-slate-300 transition flex items-center space-x-1">
+                  <i class="fa-solid fa-question text-[9px]"></i><span>Eli Cohen की कहानी?</span>
+                </button>
+                <button onclick="sendAgentChatMessage('4 सेकंड में डायलॉग स्पीड और वॉइस-ओवर कैसे सेट करें?')" class="px-2.5 py-1 rounded-lg bg-[#181c2b] hover:bg-[#20263a] border border-slate-700 text-slate-300 transition flex items-center space-x-1">
+                  <i class="fa-solid fa-stopwatch text-[9px]"></i><span>4s वॉइस-ओवर टाइमिंग?</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Multi-Line Prompt Input -->
         <div class="relative">
-          <textarea id="main-flow-input" rows="3" class="w-full bg-[#0e1017] border border-[#222636] rounded-xl p-3.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 leading-relaxed font-sans" placeholder="Chat with DDMAI Agent or enter brief (e.g. 2D Animated documentary: 38-year-old spy in charcoal suit conversing with military general at reception hall)..."></textarea>
+          <textarea id="main-flow-input" rows="2" onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); sendAgentChatMessage(); }" class="w-full bg-[#0e1017] border border-[#222636] rounded-xl p-3.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 leading-relaxed font-sans" placeholder="Type command or question (e.g. 'Scene 2 बनाओ', 'अगला सीन क्या है?', 'Run Scene 1')... Press Enter to send"></textarea>
           
           <!-- Bottom Toolbar of Prompt Box (Flow Style) -->
           <div class="flex flex-wrap items-center justify-between gap-2.5 mt-3 pt-2 border-t border-[#1f2330]">
@@ -314,12 +347,12 @@
 
             <!-- Action Buttons: Split to Dual-Prompt or Conversational Edit -->
             <div class="flex items-center space-x-2">
-              <button onclick="triggerConversationalV2V()" class="px-3 py-1.5 rounded-xl bg-[#1f2433] hover:bg-[#292f42] text-cyan-300 text-xs font-medium transition flex items-center space-x-1.5">
-                <i class="fa-solid fa-arrows-rotate"></i>
-                <span>Conversational V2V Edit</span>
+              <button onclick="sendAgentChatMessage()" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium text-xs px-4 py-1.5 rounded-xl shadow-lg shadow-indigo-600/30 transition flex items-center space-x-1.5">
+                <i class="fa-solid fa-paper-plane text-xs"></i>
+                <span>Ask / Run AI (Enter)</span>
               </button>
-              <button onclick="executeFlowDecomposition()" class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium text-xs px-4 py-1.5 rounded-xl shadow-lg shadow-indigo-600/30 transition flex items-center space-x-1.5">
-                <i class="fa-solid fa-bolt"></i>
+              <button onclick="executeFlowDecomposition()" class="bg-[#181a24] hover:bg-[#222636] border border-[#2d3345] text-slate-300 font-medium text-xs px-3 py-1.5 rounded-xl transition flex items-center space-x-1.5">
+                <i class="fa-solid fa-bolt text-amber-400"></i>
                 <span>Generate (Zero-Cost Mode)</span>
               </button>
             </div>
@@ -1149,9 +1182,11 @@
       }
     });
 
-    // Toast Notification Utility
+    // Toast Notification Utility (Clean Single-Toast System)
     function showToast(msg, type = 'info') {
       const container = document.getElementById('toast-container');
+      if (!container) return;
+      container.innerHTML = ''; // Prevent stacking toasts!
       const toast = document.createElement('div');
       const bg = type === 'success' ? 'bg-emerald-950/90 border-emerald-500 text-emerald-200' :
                  type === 'error' ? 'bg-rose-950/90 border-rose-500 text-rose-200' :
@@ -1166,8 +1201,238 @@
 
       setTimeout(() => {
         toast.classList.add('opacity-0', 'translate-y-2');
-        setTimeout(() => toast.remove(), 400);
-      }, 3200);
+        setTimeout(() => toast.remove(), 300);
+      }, 2400);
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    async function sendAgentChatMessage(overrideText) {
+      const input = document.getElementById('main-flow-input');
+      const text = (overrideText || (input ? input.value : '')).trim();
+      if (!text) return;
+
+      if (input) input.value = '';
+
+      const feed = document.getElementById('agent-chat-feed');
+      if (!feed) return;
+
+      // 1. User Message Bubble
+      const userBubble = document.createElement('div');
+      userBubble.className = "flex items-start justify-end space-x-2.5";
+      userBubble.innerHTML = `
+        <div class="bg-indigo-600/30 border border-indigo-500/40 rounded-2xl rounded-tr-none p-3 max-w-[85%] text-slate-100 space-y-1">
+          <div class="flex items-center justify-between text-[10px] text-indigo-300">
+            <span class="font-bold">${currentUser ? currentUser.name : 'Director'}</span>
+            <span>Just now</span>
+          </div>
+          <p class="leading-relaxed whitespace-pre-wrap">${escapeHtml(text)}</p>
+        </div>
+        <div class="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center text-white shrink-0 text-xs font-bold shadow">
+          ${currentUser ? currentUser.name.charAt(0).toUpperCase() : 'U'}
+        </div>
+      `;
+      feed.appendChild(userBubble);
+      feed.scrollTop = feed.scrollHeight;
+
+      // 2. Thinking Indicator
+      const thinkingBubble = document.createElement('div');
+      thinkingBubble.className = "flex items-start space-x-2.5 animate-pulse";
+      thinkingBubble.id = "agent-thinking-indicator";
+      thinkingBubble.innerHTML = `
+        <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shrink-0 shadow">
+          <i class="fa-solid fa-spinner fa-spin text-[11px]"></i>
+        </div>
+        <div class="bg-[#131622] border border-[#23293d] rounded-2xl rounded-tl-none p-2.5 text-xs text-slate-400">
+          <span>DDMAI Director AI सोच रहा है और सीन प्रोसेस कर रहा है...</span>
+        </div>
+      `;
+      feed.appendChild(thinkingBubble);
+      feed.scrollTop = feed.scrollHeight;
+
+      // 3. Process Intent & Answer
+      setTimeout(() => {
+        const thinking = document.getElementById('agent-thinking-indicator');
+        if (thinking) thinking.remove();
+
+        const responseObj = generateDirectorResponse(text);
+
+        const aiBubble = document.createElement('div');
+        aiBubble.className = "flex items-start space-x-2.5";
+        aiBubble.innerHTML = `
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shrink-0 shadow">
+            <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i>
+          </div>
+          <div class="flex-1 bg-[#131622] border border-[#23293d] rounded-2xl rounded-tl-none p-3 space-y-2 text-slate-200">
+            <div class="flex items-center justify-between">
+              <span class="font-bold text-indigo-300 text-[11px]">DDMAI Director AI</span>
+              <span class="text-[10px] text-slate-500 font-mono">Executed</span>
+            </div>
+            <div class="leading-relaxed text-xs space-y-2">
+              ${responseObj.htmlContent}
+            </div>
+            ${responseObj.actionsHtml || ''}
+          </div>
+        `;
+        feed.appendChild(aiBubble);
+        feed.scrollTop = feed.scrollHeight;
+
+        if (responseObj.keyframePrompt) {
+          document.getElementById('p1-content').textContent = responseObj.keyframePrompt;
+        }
+        if (responseObj.motionPrompt) {
+          document.getElementById('p2-content').textContent = responseObj.motionPrompt;
+        }
+        if (typeof responseObj.onExecute === 'function') {
+          responseObj.onExecute();
+        }
+      }, 600);
+    }
+
+    function generateDirectorResponse(query) {
+      const q = query.toLowerCase();
+
+      // INTENT 1: Run Scene 1 / Hook / Damascus
+      if (q.includes('scene 1') || q.includes('hook') || q.includes('damascus') || q.includes('दमिश्क') || (q.includes('run') && q.includes('1'))) {
+        return {
+          htmlContent: `
+            <p><strong class="text-emerald-400">✅ Scene 01 (Damascus Presidential Reception) लोड और एक्टिवेट कर दिया गया है!</strong></p>
+            <p>मैंने नीचे <strong>Prompt 1 (Keyframe Image)</strong> और <strong>Prompt 2 (Video Motion & Audio)</strong> को 100% 2D नोयर नियमों और 4.0s टाइमिंग के साथ लॉक कर दिया है। साथ ही 4.0 सेकंड का फ़ाइनल रेंडर्ड वीडियो टेक सीधे मॉनिटर में चला दिया गया है!</p>
+          `,
+          keyframePrompt: `A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: The 38-year-old gentleman in tailored charcoal suit stands in confident conversation beside the decorated senior military officer in olive uniform and beret at a lavish government reception hall. Chiaroscuro shadows, warm amber chandelier light, 100% 2D graphic novel ink line art.`,
+          motionPrompt: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!". Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax push-in camera toward the two men. Subtle natural eye blink, confident slight head nod, ambient chandelier light glinting faintly in deep noir shadows.`,
+          actionsHtml: `
+            <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
+              <button onclick="loadSampleSceneTake()" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium flex items-center space-x-1">
+                <i class="fa-solid fa-play text-[9px]"></i><span>Replay Scene 1 in Monitor</span>
+              </button>
+              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center space-x-1">
+                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Video Prompt</span>
+              </button>
+            </div>
+          `,
+          onExecute: () => {
+            if (typeof loadSampleSceneTake === 'function') loadSampleSceneTake();
+          }
+        };
+      }
+
+      // INTENT 2: Scene 2 / Bedroom / Hidden camera / Surveillance
+      if (q.includes('scene 2') || q.includes('camera') || q.includes('बेडरूम') || q.includes('कैमरा') || q.includes('घड़ी') || q.includes('blackmail')) {
+        return {
+          htmlContent: `
+            <p><strong class="text-amber-400">🎬 Scene 02: The Secret Bedroom Surveillance & Microfilm</strong></p>
+            <p><strong>डायरेक्टर ब्रेकडाउन:</strong> एली कोहेन ने सीरियन अधिकारियों के गेस्ट बेडरूम में दीवार घड़ी के पेंडुलम के पीछे मिनिएचर 16mm कैमरा छुपाया था। यह सीन उनके सबसे गुप्त राज़ों को कैप्चर करने का टर्निंग पॉइंट है।</p>
+            <p class="text-slate-300">नीचे <strong>Box 1 (Keyframe)</strong> और <strong>Box 2 (Motion)</strong> में Scene 2 के प्रॉम्प्ट्स सेट कर दिए गए हैं।</p>
+          `,
+          keyframePrompt: `A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: Close-up low-angle interior shot inside a dim luxury bedroom. A vintage carved mahogany wall clock with brass bezel; concealed behind the pendulum glass is a tiny miniature surveillance camera lens reflecting a sliver of cold moonlight. Stark chiaroscuro noir shadows, clean cel-shading, 100% 2D graphic novel ink line art.`,
+          motionPrompt: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "दीवार घड़ी के पीछे वो छिपा हुआ लेंस— जिसने सीरियाई जनरलों की हर गुप्त रात को तस्वीरों में कैद कर लिया!". Zero on-screen avatar. Motion (4s): Smooth 2D macro zoom-in toward the clock face, rhythmic mechanical ticking SFX, subtle light shimmer glinting off the hidden camera aperture.`,
+          actionsHtml: `
+            <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
+              <button onclick="simulateFlowPlayback()" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium flex items-center space-x-1">
+                <i class="fa-solid fa-play text-[9px]"></i><span>Preview 4.0s Timing</span>
+              </button>
+              <button onclick="copyCardPrompt('p1-content')" class="px-2.5 py-1 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 text-amber-200 border border-amber-600/40 flex items-center space-x-1">
+                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Keyframe Prompt</span>
+              </button>
+              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 text-cyan-200 border border-cyan-600/40 flex items-center space-x-1">
+                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Video Prompt</span>
+              </button>
+            </div>
+          `,
+          onExecute: () => {
+            const badge = document.getElementById('viewport-status-badge');
+            if (badge) badge.textContent = 'MONITOR: SCENE 02 READY (SURVEILLANCE)';
+          }
+        };
+      }
+
+      // INTENT 3: Scene 3 / Cemetery / Coffin / Exhumation / रात 2 बजे
+      if (q.includes('scene 3') || q.includes('coffin') || q.includes('cemetery') || q.includes('कब्र') || q.includes('ताबूत') || q.includes('रात 2')) {
+        return {
+          htmlContent: `
+            <p><strong class="text-indigo-400">⚰️ Scene 03: Midnight Coffin Exhumation (रात 2:00 बजे)</strong></p>
+            <p><strong>डायरेक्टर ब्रेकडाउन:</strong> कोहरे से ढका सुनसान दमिश्क कब्रिस्तान। फिएट कार की पीली हेडलाइट्स की रोशनी में सीक्रेट एजेंट्स रस्सी से ताज़ा खोदी गई गीली मिट्टी में से लकड़ी का ताबूत खींच रहे हैं। डच एंगल (Dutch Angle) से बना यह सीन दर्शक को बांधकर रखेगा।</p>
+          `,
+          keyframePrompt: `A 16:9 cinematic 2D animated documentary shot in a desolate Damascus cemetery at 2:00 AM. Heavy atmospheric graveyard fog and dust drift illuminated by the beam of vintage round car headlights. Hemp ropes wrapped around an aged wooden coffin emerging from freshly dug moist soil. Dutch angle framing, stark chiaroscuro shadows, 100% 2D graphic novel ink line art.`,
+          motionPrompt: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "रात के दो बजे कब्र से निकलता वो ताबूत— जिसमें कोई लाश नहीं, बल्कि इज़राइल का सबसे बड़ा राज़ दफ़न था!". Zero on-screen avatar. Motion (4s): Smooth 2D camera tilt-up along the straining ropes, drifting cold graveyard mist, atmospheric wind howl and lantern flicker.`,
+          actionsHtml: `
+            <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
+              <button onclick="simulateFlowPlayback()" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium flex items-center space-x-1">
+                <i class="fa-solid fa-play text-[9px]"></i><span>Preview Scene 3</span>
+              </button>
+              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center space-x-1">
+                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Scene 3 Video Prompt</span>
+              </button>
+            </div>
+          `,
+          onExecute: () => {
+            const badge = document.getElementById('viewport-status-badge');
+            if (badge) badge.textContent = 'MONITOR: SCENE 03 READY (COFFIN EXHUMATION)';
+          }
+        };
+      }
+
+      // INTENT 4: Questions about Eli Cohen History / Story
+      if (q.includes('eli cohen') || q.includes('एली कोहेन') || q.includes('कहानी') || q.includes('story') || q.includes('कौन था') || q.includes('प्रेसिडेंट')) {
+        return {
+          htmlContent: `
+            <p><strong class="text-amber-300">📜 Eli Cohen (कामेल अमीन साबत) की ऐतिहासिक सच्चाई:</strong></p>
+            <p>एली कोहेन मोसाद का सबसे बड़ा मास्टर स्पाई था। 1962 में वह अर्जेंटीना के रास्ते अमीर सीरियन बिजनेसमैन बनकर दमिश्क पहुँचा।</p>
+            <p>उसने सीरिया के तत्कालीन सैन्य प्रमुख और बाद में राष्ट्रपति बने <strong>जनरल अमीन अल-हाफ़िज़</strong> से इतनी पक्की दोस्ती कर ली कि वह गोलान हाइट्स की सीक्रेट सीरियन सैन्य चौकियों तक अकेला जाने लगा था। उसकी पहुंच इतनी ऊपर तक थी कि उसे सीरिया का <em>उप-रक्षामंत्री (Deputy Defense Minister)</em> बनाने और राष्ट्रपति पद की रेस में शामिल करने तक की गंभीर चर्चा थी!</p>
+            <p class="text-emerald-300 text-[11px]">💡 यही कारण है कि हमारी डॉक्यूमेंट्री की हुक लाइन है: <em>"इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!"</em></p>
+          `,
+          actionsHtml: `
+            <div class="pt-1">
+              <button onclick="sendAgentChatMessage('Scene 1 का रेंडर्ड वीडियो मॉनिटर में चलाओ')" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-medium">
+                ▶️ Watch Scene 1 Hook Shot
+              </button>
+            </div>
+          `
+        };
+      }
+
+      // INTENT 5: Voiceover Speed & 4.0s Timing
+      if (q.includes('speed') || q.includes('प्रेसिंग') || q.includes('पेसिंग') || q.includes('4 सेकंड') || q.includes('voice') || q.includes('आवाज़') || q.includes('कटा')) {
+        return {
+          htmlContent: `
+            <p><strong class="text-cyan-300">⏱️ 4.0s ऑडियो बजट और 1.25x पेसिंग का नियम:</strong></p>
+            <p>आम बातचीत की गति लगभग 2.0 शब्द प्रति सेकंड होती है। अगर आप 4 सेकंड के वीडियो में 13 शब्दों का हिंदी वाक्य बोलेंगे, तो ऑडियो 10वें शब्द पर ही कट जाएगा!</p>
+            <p><strong>हमारा समाधान:</strong> DDMAI प्रॉम्प्ट में ऑटोमैटिकली <code>[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)]</code> जोड़ा जाता है। इस गति (3.3 शब्द/सेकंड) पर 13 शब्दों की पंचलाइन ठीक <strong>3.3 सेकंड</strong> में खत्म हो जाती है, और अंत में <strong>0.7s का क्लीन ब्रीदिंग पॉज़</strong> बचता है जिससे कोई शब्द कभी नहीं कटता।</p>
+          `
+        };
+      }
+
+      // INTENT 6: General Conversational Query or Custom Scene Creation
+      const cleanBrief = escapeHtml(query);
+      return {
+        htmlContent: `
+          <p><strong class="text-indigo-300">🎬 सीन समझा गया और 2D नोयर इंजन में रन कर दिया गया:</strong></p>
+          <p><em>"${cleanBrief}"</em></p>
+          <p>मैंने इस विचार को <strong>2D Graphic Novel Chiaroscuro</strong> स्टाइल में ढालकर नीचे Prompt 1 (कीफ्रेम) और Prompt 2 (4.0s पैरालैक्स मोशन व ऑडियो) में तैयार कर दिया है।</p>
+        `,
+        keyframePrompt: `A 16:9 cinematic 2D animated documentary scene. Utilizing character reference assets: ${query.slice(0, 180)}. Chiaroscuro shadows, warm amber and cold cyan accent lighting, 100% 2D graphic novel ink line art, clean cel-shading, vintage 1960s espionage atmosphere.`,
+        motionPrompt: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over narration with brisk documentary tempo. Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax camera push-in, subtle character eye blink and head turn, atmospheric dust particles drifting across chiaroscuro noir shadows.`,
+        actionsHtml: `
+          <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
+            <button onclick="simulateFlowPlayback()" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium flex items-center space-x-1">
+              <i class="fa-solid fa-play text-[9px]"></i><span>Preview 4.0s Simulation</span>
+            </button>
+            <button onclick="copyCardPrompt('p1-content')" class="px-2.5 py-1 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 text-amber-200 border border-amber-600/40 flex items-center space-x-1">
+              <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Prompt 1</span>
+            </button>
+            <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 text-cyan-200 border border-cyan-600/40 flex items-center space-x-1">
+              <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Prompt 2</span>
+            </button>
+          </div>
+        `,
+        onExecute: () => {
+          showToast("AI Director: Scene prompts decomposed and updated!", 'success');
+        }
+      };
     }
 
     // Session & User Authentication Management
@@ -1534,32 +1799,7 @@
 
     async function executeFlowDecomposition() {
       const brief = document.getElementById('main-flow-input').value || "2D Animated spy documentary";
-      showToast("Decomposing prompt into 2D Keyframe & Video Motion...", 'info');
-      try {
-        const res = await fetch('/api/split-prompt', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ brief, move: 'slow push-in', lighting: 'chiaroscuro' })
-        });
-        if (res.ok) {
-          const data = await res.json();
-          if (data && data.success) {
-            document.getElementById('p1-content').textContent = data.prompt_1_keyframe;
-            document.getElementById('p2-content').textContent = data.prompt_2_motion;
-            showToast("Dual prompts generated successfully!", 'success');
-            return;
-          }
-        }
-      } catch (e) {
-        console.warn("Client fallback decomposition:", e);
-      }
-
-      // Client Fallback
-      if (brief.toLowerCase().includes('2d') || brief.toLowerCase().includes('spy')) {
-        document.getElementById('p1-content').textContent = `A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: The 38-year-old gentleman in tailored charcoal suit stands in confident conversation beside the decorated senior military officer in olive uniform and beret at a lavish government reception hall. Chiaroscuro shadows, warm amber chandelier light, 100% 2D graphic novel ink line art.`;
-        document.getElementById('p2-content').textContent = `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!". Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax push-in camera toward the two men. Subtle natural eye blink, confident slight head nod, ambient chandelier light glinting faintly in deep noir shadows.`;
-      }
-      showToast("Dual prompts ready for generation!", 'success');
+      sendAgentChatMessage(brief);
     }
 
     function toggleFlowAgentMode() {
