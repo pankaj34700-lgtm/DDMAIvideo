@@ -1,0 +1,25 @@
+{
+  "total": 2,
+  "certificates": [
+    {
+      "id": "DDMAI-CERT-2026-8942A",
+      "recipientName": "Pankaj Sharma",
+      "recipientEmail": "admin@ddmai.video",
+      "courseName": "Master AI Film Director & 2D Animated Documentary Specialist",
+      "issueDate": "October 26, 2026",
+      "issuedBy": "DDMAI.VIDEO Global Production Academy",
+      "grade": "Distinction (100% Zero-Cost Mastery)",
+      "verificationUrl": "https://vedio-working.web.app?verify=DDMAI-CERT-2026-8942A"
+    },
+    {
+      "id": "DDMAI-CERT-2026-7714K",
+      "recipientName": "Kunal Verma",
+      "recipientEmail": "director@ddmai.video",
+      "courseName": "1-Minute Video Production Master Blueprint & Prompt Architecture",
+      "issueDate": "October 27, 2026",
+      "issuedBy": "DDMAI.VIDEO Global Production Academy",
+      "grade": "Honors",
+      "verificationUrl": "https://vedio-working.web.app?verify=DDMAI-CERT-2026-7714K"
+    }
+  ]
+}

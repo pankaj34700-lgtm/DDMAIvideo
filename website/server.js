@@ -13,8 +13,85 @@ const MIME_TYPES = {
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
   '.svg': 'image/svg+xml',
-  '.ico': 'image/x-icon'
+  '.ico': 'image/x-icon',
+  '.pdf': 'application/pdf'
 };
+
+// Seed Users Database
+let USERS = [
+  {
+    id: 'usr_001',
+    name: 'Pankaj Sharma',
+    email: 'admin@ddmai.video',
+    role: 'SuperAdmin',
+    status: 'Active',
+    joined: '2026-10-15',
+    credits: 'Unlimited ($0.00 Mode)',
+    videosCreated: 42,
+    certified: true,
+    certId: 'DDMAI-CERT-2026-8942A'
+  },
+  {
+    id: 'usr_002',
+    name: 'Kunal Verma',
+    email: 'director@ddmai.video',
+    role: 'Director',
+    status: 'Active',
+    joined: '2026-10-18',
+    credits: 'Unlimited ($0.00 Mode)',
+    videosCreated: 28,
+    certified: true,
+    certId: 'DDMAI-CERT-2026-7714K'
+  },
+  {
+    id: 'usr_003',
+    name: 'Aarav Patel',
+    email: 'creator@ddmai.video',
+    role: 'Creator',
+    status: 'Active',
+    joined: '2026-10-22',
+    credits: 'Unlimited ($0.00 Mode)',
+    videosCreated: 15,
+    certified: false,
+    certId: null
+  },
+  {
+    id: 'usr_004',
+    name: 'Sarah Jenkins',
+    email: 'student@ddmai.video',
+    role: 'Student',
+    status: 'Active',
+    joined: '2026-10-25',
+    credits: 'Unlimited ($0.00 Mode)',
+    videosCreated: 6,
+    certified: false,
+    certId: null
+  }
+];
+
+// Seed Certificates Database
+let CERTIFICATES = [
+  {
+    id: 'DDMAI-CERT-2026-8942A',
+    recipientName: 'Pankaj Sharma',
+    recipientEmail: 'admin@ddmai.video',
+    courseName: 'Master AI Film Director & 2D Animated Documentary Specialist',
+    issueDate: 'October 26, 2026',
+    issuedBy: 'DDMAI.VIDEO Global Production Academy',
+    grade: 'Distinction (100% Zero-Cost Mastery)',
+    verificationUrl: 'https://vedio-working.web.app?verify=DDMAI-CERT-2026-8942A'
+  },
+  {
+    id: 'DDMAI-CERT-2026-7714K',
+    recipientName: 'Kunal Verma',
+    recipientEmail: 'director@ddmai.video',
+    courseName: '1-Minute Video Production Master Blueprint & Prompt Architecture',
+    issueDate: 'October 27, 2026',
+    issuedBy: 'DDMAI.VIDEO Global Production Academy',
+    grade: 'Honors',
+    verificationUrl: 'https://vedio-working.web.app?verify=DDMAI-CERT-2026-7714K'
+  }
+];
 
 const OPTIONS_50 = [
   // Pillar I
@@ -88,11 +165,25 @@ const OPTIONS_50 = [
   { id: 50, pillar: "Multi-Agent Architecture", title: "Serverless FFmpeg Render Worker", desc: "Headless pipeline executing concatenation, color LUT, and audio mixing in cloud.", default: true }
 ];
 
-const server = http.createServer((req, res) => {
+const parseJsonBody = (req) => {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        resolve(JSON.parse(body || '{}'));
+      } catch (e) {
+        reject(e);
+      }
+    });
+  });
+};
+
+const server = http.createServer(async (req, res) => {
   // Enable CORS
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
@@ -102,13 +193,149 @@ const server = http.createServer((req, res) => {
 
   const url = new URL(req.url, `http://${req.headers.host}`);
 
-  // API Endpoints
+  // 1. API: System Status
   if (url.pathname === '/api/status') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ status: 'online', app: 'DDMAI.VIDEO Production Studio', brand: 'DDMAI.VIDEO', version: '2.5', port: PORT }));
+    res.end(JSON.stringify({ 
+      status: 'online', 
+      app: 'DDMAI.VIDEO Production Studio v3.0', 
+      brand: 'DDMAI.VIDEO', 
+      version: '3.0.0', 
+      port: PORT,
+      features: ['Admin Dashboard', 'User Login System', 'Certification System', 'Welcome Tour', 'Zero-Cost Engines'],
+      stats: {
+        totalUsers: USERS.length,
+        totalCertificates: CERTIFICATES.length,
+        activeProjects: 4,
+        costSavedUSD: 142500
+      }
+    }));
     return;
   }
 
+  // 2. API: Auth - Login
+  if (url.pathname === '/api/auth/login' && req.method === 'POST') {
+    try {
+      const { email, password } = await parseJsonBody(req);
+      const user = USERS.find(u => u.email.toLowerCase() === (email || '').toLowerCase());
+      if (user) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          success: true,
+          message: `Welcome back, ${user.name}!`,
+          user: user,
+          token: `ddmai_jwt_${Buffer.from(user.email).toString('base64')}`
+        }));
+      } else {
+        // Auto-register friendly demo if not found
+        const newUser = {
+          id: `usr_${Date.now().toString().slice(-4)}`,
+          name: email.split('@')[0].toUpperCase(),
+          email: email,
+          role: email.includes('admin') ? 'SuperAdmin' : 'Director',
+          status: 'Active',
+          joined: new Date().toISOString().split('T')[0],
+          credits: 'Unlimited ($0.00 Mode)',
+          videosCreated: 1,
+          certified: true,
+          certId: `DDMAI-CERT-2026-${Math.floor(1000 + Math.random() * 9000)}`
+        };
+        USERS.push(newUser);
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({
+          success: true,
+          message: `Account activated for ${newUser.name}!`,
+          user: newUser,
+          token: `ddmai_jwt_${Buffer.from(newUser.email).toString('base64')}`
+        }));
+      }
+    } catch (e) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: e.message }));
+    }
+    return;
+  }
+
+  // 3. API: Auth - Register
+  if (url.pathname === '/api/auth/register' && req.method === 'POST') {
+    try {
+      const { name, email, role } = await parseJsonBody(req);
+      if (!email) throw new Error('Email is required');
+      let existing = USERS.find(u => u.email.toLowerCase() === email.toLowerCase());
+      if (existing) {
+        res.writeHead(200, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ success: true, user: existing, message: 'User logged in.' }));
+        return;
+      }
+      const newUser = {
+        id: `usr_${Date.now().toString().slice(-4)}`,
+        name: name || email.split('@')[0],
+        email: email,
+        role: role || 'Director',
+        status: 'Active',
+        joined: new Date().toISOString().split('T')[0],
+        credits: 'Unlimited ($0.00 Mode)',
+        videosCreated: 0,
+        certified: true,
+        certId: `DDMAI-CERT-2026-${Math.floor(1000 + Math.random() * 9000)}`
+      };
+      USERS.push(newUser);
+      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, user: newUser, message: 'Registration successful!' }));
+    } catch (e) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: e.message }));
+    }
+    return;
+  }
+
+  // 4. API: Users List (Admin)
+  if (url.pathname === '/api/auth/users' && req.method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ total: USERS.length, users: USERS }));
+    return;
+  }
+
+  // 5. API: Certificates List
+  if (url.pathname === '/api/certificates' && req.method === 'GET') {
+    res.writeHead(200, { 'Content-Type': 'application/json' });
+    res.end(JSON.stringify({ total: CERTIFICATES.length, certificates: CERTIFICATES }));
+    return;
+  }
+
+  // 6. API: Issue Certificate
+  if (url.pathname === '/api/certificates/issue' && req.method === 'POST') {
+    try {
+      const { recipientName, recipientEmail, courseName } = await parseJsonBody(req);
+      const newCert = {
+        id: `DDMAI-CERT-2026-${Math.floor(10000 + Math.random() * 90000)}`,
+        recipientName: recipientName || 'Certified AI Filmmaker',
+        recipientEmail: recipientEmail || 'creator@ddmai.video',
+        courseName: courseName || 'Master AI Film Director & 2D Animated Documentary Specialist',
+        issueDate: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
+        issuedBy: 'DDMAI.VIDEO Global Production Academy',
+        grade: 'Distinction (100% Zero-Cost Mastery)',
+        verificationUrl: `https://vedio-working.web.app?verify=DDMAI-CERT-2026`
+      };
+      CERTIFICATES.unshift(newCert);
+
+      // Update user certified status if email matches
+      const user = USERS.find(u => u.email.toLowerCase() === newCert.recipientEmail.toLowerCase());
+      if (user) {
+        user.certified = true;
+        user.certId = newCert.id;
+      }
+
+      res.writeHead(201, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: true, certificate: newCert }));
+    } catch (e) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ success: false, error: e.message }));
+    }
+    return;
+  }
+
+  // 7. API: Images & Media Paths
   if (url.pathname === '/api/images') {
     const keyframesDir = path.join(PUBLIC_DIR, 'images', 'keyframes');
     const ingredientsDir = path.join(PUBLIC_DIR, 'images', 'ingredients');
@@ -143,56 +370,57 @@ const server = http.createServer((req, res) => {
     return;
   }
 
+  // 8. API: 50 Options
   if (url.pathname === '/api/options') {
     res.writeHead(200, { 'Content-Type': 'application/json' });
     res.end(JSON.stringify({ total: OPTIONS_50.length, options: OPTIONS_50 }));
     return;
   }
 
+  // 9. API: Prompt Decomposition
   if (url.pathname === '/api/split-prompt' && req.method === 'POST') {
-    let body = '';
-    req.on('data', chunk => { body += chunk; });
-    req.on('end', () => {
-      try {
-        const data = JSON.parse(body || '{}');
-        const brief = (data.brief || '').toLowerCase();
-        let p1 = '';
-        let p2 = '';
-        let framing = data.framing || 'medium shot';
-        let move = data.move || 'slow push-in';
-        let lighting = data.lighting || 'soft window light';
-        let model = data.model || 'veo_3_1_fast';
+    try {
+      const data = await parseJsonBody(req);
+      const brief = (data.brief || '').toLowerCase();
+      let p1 = '';
+      let p2 = '';
+      let framing = data.framing || 'medium shot';
+      let move = data.move || 'slow push-in';
+      let lighting = data.lighting || 'soft window light';
+      let model = data.model || 'veo_3_1_fast';
 
-        if (brief.includes('perfume') || brief.includes('luxury') || brief.includes('product')) {
-          p1 = `Photorealistic cinematic commercial studio footage, crisp 35mm finish. Close-up of one frosted glass perfume bottle with fluted brass cap resting on wet obsidian slate, soft natural side-lighting, warm amber and brushed gold color anchors, shallow depth of field, vertical 9:16 frame.`;
-          p2 = `${move}. A single water droplet glides down the curve of the bottle, catching golden light, then settles onto the dark stone. Ends with the bottle held still and centered. Audio: Soft water droplet drip, quiet studio silence, no music, no subtitles.`;
-        } else if (brief.includes('ugc') || brief.includes('tiktok') || brief.includes('skincare')) {
-          p1 = `Authentic smartphone 4K creator aesthetic. Medium shot of a 24-year-old woman with natural freckles, honey-brown hair in a claw clip, wearing an oversized beige waffle-knit sweater, holding a pastel mint skincare tube at a sunny oak table, natural morning daylight, vertical 9:16 frame.`;
-          p2 = `Subtle handheld movement. She lifts the tube toward the camera smiling, twists the cap off, points to her cheek with index finger, and speaks with natural facial animation. Ends with her holding the tube steady. Audio: Woman says: "If your morning skin feels dry, you need to see this." natural room acoustics, no music, no subtitles.`;
-        } else if (brief.includes('scifi') || brief.includes('cyber') || brief.includes('film')) {
-          p1 = `Anamorphic 65mm Panavision widescreen cinematic film still. Extreme wide shot of a lone cybernetic explorer in distressed matte-charcoal armor on wet basalt ridge overlooking neo-city in rain fog, cyan neon practicals, horizontal 16:9 frame.`;
-          p2 = `Slow crane down. Explorer stands resolute against wind, activates holographic wrist terminal glowing orange, visor glints in torrential rain. Ends with visor gaze fixed forward. Audio: Torrential rain on rocks, mechanical suit servo hum, explorer says: "Beacon located. Moving in." no subtitles.`;
-        } else {
-          p1 = `Photorealistic cinematic lifestyle footage, natural film look. ${framing} of one subject in setting, ${lighting}, warm amber, teal, and slate color anchors, shallow depth of field, vertical 9:16 frame.`;
-          p2 = `${move}. Subject performs main action beat smoothly, pauses, and holds pose. Ends with subject still and looking into lens. Audio: Ambient environment sound, soft foley sound effects, no music, no subtitles.`;
-        }
-
-        res.writeHead(200, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({
-          success: true,
-          model: model,
-          shot_id: "P01_S01_SH1",
-          duration: 4,
-          prompt_1_keyframe: p1,
-          prompt_2_motion: p2,
-          lint_status: "PASS (0 Errors)",
-          speech_budget: "Under 2.5 wps"
-        }));
-      } catch (e) {
-        res.writeHead(400, { 'Content-Type': 'application/json' });
-        res.end(JSON.stringify({ error: e.message }));
+      if (brief.includes('perfume') || brief.includes('luxury') || brief.includes('product')) {
+        p1 = `Photorealistic cinematic commercial studio footage, crisp 35mm finish. Close-up of one frosted glass perfume bottle with fluted brass cap resting on wet obsidian slate, soft natural side-lighting, warm amber and brushed gold color anchors, shallow depth of field, vertical 9:16 frame.`;
+        p2 = `${move}. A single water droplet glides down the curve of the bottle, catching golden light, then settles onto the dark stone. Ends with the bottle held still and centered. Audio: Soft water droplet drip, quiet studio silence, no music, no subtitles.`;
+      } else if (brief.includes('ugc') || brief.includes('tiktok') || brief.includes('skincare')) {
+        p1 = `Authentic smartphone 4K creator aesthetic. Medium shot of a 24-year-old woman with natural freckles, honey-brown hair in a claw clip, wearing an oversized beige waffle-knit sweater, holding a pastel mint skincare tube at a sunny oak table, natural morning daylight, vertical 9:16 frame.`;
+        p2 = `Subtle handheld movement. She lifts the tube toward the camera smiling, twists the cap off, points to her cheek with index finger, and speaks with natural facial animation. Ends with her holding the tube steady. Audio: Woman says: "If your morning skin feels dry, you need to see this." natural room acoustics, no music, no subtitles.`;
+      } else if (brief.includes('scifi') || brief.includes('cyber') || brief.includes('film')) {
+        p1 = `Anamorphic 65mm Panavision widescreen cinematic film still. Extreme wide shot of a lone cybernetic explorer in distressed matte-charcoal armor on wet basalt ridge overlooking neo-city in rain fog, cyan neon practicals, horizontal 16:9 frame.`;
+        p2 = `Slow crane down. Explorer stands resolute against wind, activates holographic wrist terminal glowing orange, visor glints in torrential rain. Ends with visor gaze fixed forward. Audio: Torrential rain on rocks, mechanical suit servo hum, explorer says: "Beacon located. Moving in." no subtitles.`;
+      } else if (brief.includes('2d') || brief.includes('documentary') || brief.includes('spy') || brief.includes('noir')) {
+        p1 = `Stylized 2D animated documentary style, dark noir graphic novel aesthetic, hand-drawn ink line art, clean cel-shading. 38-year-old gentleman in tailored charcoal three-piece suit in confident conversation with military general in olive uniform at a lavish reception hall, chiaroscuro shadows, warm amber chandelier light, 16:9 frame.`;
+        p2 = `Slow 2D layered parallax camera push-in. Subtle 2D micro-movements: natural eye blink, slight confident head nod, ambient light glints on crystal glass, flat graphic novel plane. Audio: Voice-over says: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!", clean studio voiceover, no BGM, no subtitles.`;
+      } else {
+        p1 = `Photorealistic cinematic lifestyle footage, natural film look. ${framing} of one subject in setting, ${lighting}, warm amber, teal, and slate color anchors, shallow depth of field, vertical 9:16 frame.`;
+        p2 = `${move}. Subject performs main action beat smoothly, pauses, and holds pose. Ends with subject still and looking into lens. Audio: Ambient environment sound, soft foley sound effects, no music, no subtitles.`;
       }
-    });
+
+      res.writeHead(200, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({
+        success: true,
+        model: model,
+        shot_id: "P01_S01_SH1",
+        duration: 4,
+        prompt_1_keyframe: p1,
+        prompt_2_motion: p2,
+        lint_status: "PASS (0 Errors)",
+        speech_budget: "Under 2.5 wps"
+      }));
+    } catch (e) {
+      res.writeHead(400, { 'Content-Type': 'application/json' });
+      res.end(JSON.stringify({ error: e.message }));
+    }
     return;
   }
 
@@ -209,6 +437,12 @@ const server = http.createServer((req, res) => {
 
   fs.stat(filePath, (err, stats) => {
     if (err || !stats.isFile()) {
+      // Fallback for API JSON requests if missing
+      if (reqPath.startsWith('/api/')) {
+        res.writeHead(404, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ error: 'Endpoint not found' }));
+        return;
+      }
       res.writeHead(404, { 'Content-Type': 'text/plain' });
       res.end('404 Not Found');
       return;
@@ -227,5 +461,10 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.log(`=== DDMAI.VIDEO Production Studio Server running on http://localhost:${PORT} ===`);
+  console.log(`================================================================`);
+  console.log(`  DDMAI.VIDEO Production Studio v3.0 running at:`);
+  console.log(`  Local URL:   http://localhost:${PORT}`);
+  console.log(`  Cloud URL:   https://vedio-working.web.app`);
+  console.log(`  Features:    Admin Panel | User Login | Certificates | 2D AI Engine`);
+  console.log(`================================================================`);
 });

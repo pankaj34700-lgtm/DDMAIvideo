@@ -7,27 +7,49 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Google+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
+    
     body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0b0c10; color: #e2e8f0; }
     .font-flow { font-family: 'Google Sans', 'Inter', sans-serif; }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
+    .font-cert { font-family: 'Cinzel', serif; }
+    
     ::-webkit-scrollbar { width: 5px; height: 5px; }
     ::-webkit-scrollbar-track { background: #0b0c10; }
     ::-webkit-scrollbar-thumb { background: #232733; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #374151; }
+    
     .flow-card { background: #13151c; border: 1px solid #1f2330; }
     .flow-card:hover { border-color: #31384d; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
+    
+    /* Certificate Print Styling */
+    @media print {
+      body * { visibility: hidden; }
+      #printable-certificate, #printable-certificate * { visibility: visible; }
+      #printable-certificate {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        padding: 20px;
+        background: #ffffff !important;
+        color: #0f172a !important;
+        box-shadow: none !important;
+        border: 8px double #b45309 !important;
+      }
+      .no-print { display: none !important; }
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
 
-  <!-- DDMAI.VIDEO TOP NAVIGATION BAR -->
-  <header class="bg-[#11131a] border-b border-[#1f2330] px-5 py-2.5 flex items-center justify-between sticky top-0 z-50">
+  <!-- ==================== TOP NAVIGATION BAR ==================== -->
+  <header class="bg-[#11131a] border-b border-[#1f2330] px-4 lg:px-6 py-2.5 flex items-center justify-between sticky top-0 z-50">
     <!-- Left: Brand Logo & Title -->
     <div class="flex items-center space-x-4">
-      <div class="flex items-center space-x-2.5 cursor-pointer">
+      <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showWelcomeModal()">
         <!-- DDMAI Studio Prism Icon -->
         <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-600/30">
           <i class="fa-solid fa-play text-xs ml-0.5"></i>
@@ -42,9 +64,10 @@
       </div>
 
       <!-- Project Breadcrumb & Session Selector -->
-      <div class="hidden md:flex items-center space-x-2 pl-4 border-l border-[#1f2330] text-xs">
+      <div class="hidden xl:flex items-center space-x-2 pl-4 border-l border-[#1f2330] text-xs">
         <span class="text-slate-500">Project /</span>
         <select class="bg-[#181a24] text-slate-200 border border-[#262b3b] rounded-lg px-2.5 py-1 text-xs outline-none focus:border-indigo-500 font-medium">
+          <option>2D Animated Spy Documentary (Eli Cohen)</option>
           <option>Commercial Campaign 2026 (10s Scenes)</option>
           <option>TikTok UGC Skincare Reel</option>
           <option>Sci-Fi Short Movie Teaser</option>
@@ -53,51 +76,65 @@
       </div>
     </div>
 
-    <!-- Center/Right: DDMAI Agent Switch & Settings -->
-    <div class="flex items-center space-x-3 text-xs">
+    <!-- Center/Right: Studio Tools & Control Buttons -->
+    <div class="flex items-center space-x-2.5 text-xs">
       <!-- Agent Toggle Switch -->
-      <button onclick="toggleFlowAgentMode()" id="flow-agent-toggle" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-medium shadow-md shadow-indigo-600/25 transition">
+      <button onclick="toggleFlowAgentMode()" id="flow-agent-toggle" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-medium shadow-md shadow-indigo-600/25 transition">
         <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
         <span>DDMAI Agent: <strong>ON</strong></span>
       </button>
 
-      <!-- Cost Shield Indicator -->
-      <div class="hidden lg:flex items-center px-3 py-1.5 rounded-xl bg-emerald-950/40 border border-emerald-800/40 text-emerald-300 font-mono text-[11px]">
-        <i class="fa-solid fa-piggy-bank mr-1.5 text-emerald-400"></i>
-        <span>Cost Guard: <strong>$0.00 / 0 Credits</strong></span>
-      </div>
-
       <!-- Advanced DDMAI Tools Drawer Trigger -->
-      <button onclick="openToolsModal()" class="px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-200 font-medium transition flex items-center space-x-1.5">
+      <button onclick="openToolsModal()" class="hidden md:flex px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-200 font-medium transition items-center space-x-1.5">
         <i class="fa-solid fa-sliders text-cyan-400"></i>
-        <span class="hidden sm:inline">DDMAI FX Tools</span>
+        <span>FX Tools</span>
       </button>
 
       <!-- 50 Options Matrix -->
-      <button onclick="openOptionsModal()" class="px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-200 font-medium transition flex items-center space-x-1.5">
+      <button onclick="openOptionsModal()" class="hidden sm:flex px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-200 font-medium transition items-center space-x-1.5">
         <i class="fa-solid fa-cube text-purple-400"></i>
         <span>50 Options</span>
       </button>
 
       <!-- API Keys Manager Trigger -->
-      <button onclick="openApiKeysModal()" class="px-3 py-1.5 rounded-xl bg-amber-950/30 hover:bg-amber-900/40 border border-amber-500/40 text-amber-300 font-medium transition flex items-center space-x-1.5 shadow-sm shadow-amber-500/10">
+      <button onclick="openApiKeysModal()" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-amber-950/30 hover:bg-amber-900/40 border border-amber-500/40 text-amber-300 font-medium transition flex items-center space-x-1.5 shadow-sm shadow-amber-500/10">
         <i class="fa-solid fa-key text-amber-400 text-xs"></i>
-        <span>API Keys</span>
+        <span class="hidden sm:inline">API Keys</span>
       </button>
 
-      <!-- Export / Render Master -->
-      <button onclick="deployExportModal()" class="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium px-4 py-1.5 rounded-xl shadow-md transition flex items-center space-x-1.5">
-        <i class="fa-solid fa-download text-xs"></i>
-        <span>Export</span>
+      <!-- Certificate System Button -->
+      <button onclick="openCertificateModal()" class="px-3 py-1.5 rounded-xl bg-yellow-950/40 hover:bg-yellow-900/50 border border-yellow-500/40 text-yellow-300 font-medium transition flex items-center space-x-1.5 shadow-sm">
+        <i class="fa-solid fa-award text-yellow-400 text-xs"></i>
+        <span class="hidden md:inline">Certificates</span>
+      </button>
+
+      <!-- ADMIN PANEL BUTTON (HIGHLIGHTED) -->
+      <button onclick="openAdminModal()" id="admin-panel-btn" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-indigo-600 hover:from-red-500 hover:to-indigo-500 text-white font-bold transition flex items-center space-x-1.5 shadow-md shadow-rose-600/25 border border-rose-400/30">
+        <i class="fa-solid fa-shield-halved text-xs"></i>
+        <span>Admin Panel</span>
+      </button>
+
+      <!-- USER LOGIN / DASHBOARD BUTTON -->
+      <div id="user-nav-container">
+        <!-- Dynamically rendered based on login status -->
+        <button onclick="openAuthModal()" id="login-nav-btn" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-3.5 py-1.5 rounded-xl shadow-md transition flex items-center space-x-1.5">
+          <i class="fa-regular fa-user text-xs"></i>
+          <span>Sign In</span>
+        </button>
+      </div>
+
+      <!-- Welcome Tour Quick Trigger -->
+      <button onclick="showWelcomeModal()" title="Welcome Tour & Info" class="w-8 h-8 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-400 hover:text-white flex items-center justify-center transition">
+        <i class="fa-solid fa-circle-question text-xs"></i>
       </button>
     </div>
   </header>
 
-  <!-- MAIN STUDIO WORKSPACE -->
+  <!-- ==================== MAIN STUDIO WORKSPACE ==================== -->
   <div class="flex-1 flex overflow-hidden">
 
     <!-- LEFT SIDEBAR: ASSETS & INGREDIENTS STACK -->
-    <aside class="w-64 bg-[#0e1017] border-r border-[#1f2330] p-4 flex flex-col justify-between shrink-0 overflow-y-auto">
+    <aside class="w-64 bg-[#0e1017] border-r border-[#1f2330] p-4 flex flex-col justify-between shrink-0 overflow-y-auto hidden md:flex">
       <div class="space-y-5">
         <!-- Asset Collections / History -->
         <div>
@@ -108,11 +145,11 @@
           <div class="space-y-1.5">
             <div class="p-2 rounded-xl bg-[#151722] border border-[#222636] flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500/50 transition">
               <div class="w-9 h-9 rounded-lg bg-indigo-900/40 border border-indigo-700/50 flex items-center justify-center text-indigo-400 font-bold text-xs">
-                P01
+                S01
               </div>
               <div class="overflow-hidden">
-                <div class="text-xs font-bold text-slate-200 truncate">Perfume Commercial</div>
-                <div class="text-[10px] text-slate-400">10.0s • 4s+6s Chained</div>
+                <div class="text-xs font-bold text-slate-200 truncate">2D Spy Documentary</div>
+                <div class="text-[10px] text-slate-400">4.0s • Eli Cohen Reception</div>
               </div>
             </div>
 
@@ -121,8 +158,8 @@
                 P02
               </div>
               <div class="overflow-hidden">
-                <div class="text-xs font-bold text-slate-200 truncate">TikTok Skincare UGC</div>
-                <div class="text-[10px] text-slate-400">10.0s • 10s Omni Native</div>
+                <div class="text-xs font-bold text-slate-200 truncate">Perfume Commercial</div>
+                <div class="text-[10px] text-slate-400">10.0s • 4s+6s Chained</div>
               </div>
             </div>
           </div>
@@ -158,21 +195,11 @@
             <!-- Free Audio: Microsoft Edge-TTS / Kokoro -->
             <label class="p-2.5 rounded-xl bg-[#151722] border border-[#222636] block cursor-pointer hover:border-indigo-500/50 transition">
               <div class="flex items-center justify-between">
-                <span class="font-bold text-slate-200">Edge-TTS & Kokoro Voice</span>
+                <span class="font-bold text-slate-200">Edge-TTS &amp; Kokoro Voice</span>
                 <input type="radio" name="engine" value="edgetts_free" class="text-indigo-600 focus:ring-0">
               </div>
               <div class="text-[10px] text-emerald-400 mt-1">Free Broadcast Neural Audio ($0.00)</div>
               <div class="text-[9px] text-slate-400 mt-0.5">High-fidelity voiceover under 2.5 wps budget.</div>
-            </label>
-
-            <!-- Commercial Cloud Optional -->
-            <label class="p-2.5 rounded-xl bg-[#151722]/50 border border-[#222636] block cursor-pointer hover:border-indigo-500/50 transition">
-              <div class="flex items-center justify-between">
-                <span class="font-bold text-slate-400">Veo 3.1 Fast / Quality</span>
-                <input type="radio" name="engine" value="veo_cloud" class="text-indigo-600 focus:ring-0">
-              </div>
-              <div class="text-[10px] text-amber-400 mt-1">Cloud Credits Required</div>
-              <div class="text-[9px] text-slate-500 mt-0.5">Cinematic studio rendering pass.</div>
             </label>
           </div>
         </div>
@@ -184,16 +211,16 @@
             <button onclick="editAgentInstructions()" class="text-[10px] text-indigo-400 hover:underline">Edit</button>
           </div>
           <div class="text-[10px] text-slate-400 leading-snug line-clamp-3" id="agent-instructions-preview">
-            "Style: Photorealistic cinematic commercial 35mm finish. Colors: warm amber, matte black, brushed gold. Rulebook VR-00001 to VR-10000 enforced. Dialogue under 2.5 wps."
+            "2D Animated Documentary Mode: Noir graphic novel, ink line art, cel-shading, chiaroscuro lighting. Zero photorealism, zero 3D CGI."
           </div>
         </div>
       </div>
 
-      <!-- DDMAI.VIDEO Studio Brand & Live Node Status -->
+      <!-- Studio Node Status & Certification Status -->
       <div class="pt-3 border-t border-[#1f2330] space-y-2">
         <div class="flex items-center justify-between px-1">
           <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Node Domain</span>
-          <span class="text-[10px] text-emerald-400 font-mono">v2.5 Live</span>
+          <span class="text-[10px] text-emerald-400 font-mono">v3.0 Live</span>
         </div>
         <div class="w-full py-2 px-3 rounded-xl bg-[#151722] border border-[#222636] text-xs text-indigo-300 font-medium flex items-center justify-between">
           <div class="flex items-center space-x-2">
@@ -206,9 +233,34 @@
     </aside>
 
     <!-- CENTER CANVAS: THE FLOW PROMPT BOX & SCENEBUILDER TIMELINE -->
-    <main class="flex-1 overflow-y-auto p-6 space-y-6">
+    <main class="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6">
 
-      <!-- DDMAI.VIDEO MAIN PROMPT BOX (EXPANDABLE AGENT MODE) -->
+      <!-- WELCOME HERO BANNER (Dismissible) -->
+      <div id="welcome-banner" class="rounded-2xl p-4 sm:p-5 bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-slate-900 border border-indigo-500/30 flex items-center justify-between relative shadow-xl">
+        <div class="flex items-center space-x-4">
+          <div class="w-11 h-11 rounded-2xl bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-indigo-300 text-lg shadow-inner">
+            <i class="fa-solid fa-clapperboard"></i>
+          </div>
+          <div>
+            <h2 class="text-sm sm:text-base font-flow font-extrabold text-white flex items-center space-x-2">
+              <span>Welcome to DDMAI.VIDEO Studio v3.0!</span>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-mono">Academy Edition</span>
+            </h2>
+            <p class="text-xs text-slate-300 mt-0.5">
+              Zero-cost AI video generation studio with built-in <strong>2D Noir Documentary Rules</strong>, <strong>User Login Dashboard</strong>, and <strong>Director Certification System</strong>.
+            </p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="openCertificateModal()" class="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 border border-yellow-500/40 text-xs font-semibold items-center space-x-1.5 transition">
+            <i class="fa-solid fa-graduation-cap"></i>
+            <span>Earn Certificate</span>
+          </button>
+          <button onclick="dismissWelcomeBanner()" class="text-slate-400 hover:text-white p-1.5"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+
+      <!-- MAIN PROMPT BOX (EXPANDABLE AGENT MODE) -->
       <div class="flow-card rounded-2xl p-5 shadow-2xl space-y-4">
         <!-- Prompt Box Top Header -->
         <div class="flex items-center justify-between text-xs">
@@ -220,43 +272,43 @@
           <div class="flex items-center space-x-2">
             <span class="text-[11px] text-slate-400">Aspect Ratio:</span>
             <select id="canvas-aspect" class="bg-[#181a24] text-slate-200 border border-[#262b3b] rounded-lg px-2.5 py-1 text-xs outline-none">
+              <option value="16:9">16:9 Widescreen (YouTube / Doc)</option>
               <option value="9:16">9:16 Vertical (TikTok / Reels)</option>
-              <option value="16:9">16:9 Widescreen (YouTube)</option>
               <option value="1:1">1:1 Square (Social Feed)</option>
               <option value="4:5">4:5 Portrait</option>
             </select>
 
             <span class="text-[11px] text-slate-400 ml-2">Scene Math:</span>
             <select id="scene-plan-select" class="bg-[#181a24] text-slate-200 border border-[#262b3b] rounded-lg px-2.5 py-1 text-xs outline-none font-mono">
+              <option value="4.0s">4.0s Fast Punchy Hook</option>
+              <option value="6.0s">6.0s Narrative Beat</option>
               <option value="4+6">4s + 6s = 10.0s Standard</option>
-              <option value="6+4">6s + 4s = 10.0s Standard</option>
-              <option value="10_native">10.0s Gemini Omni Native</option>
-              <option value="12_cut_10">12s cut to 10.0s (Seedance)</option>
+              <option value="10_native">10.0s Omni Native</option>
             </select>
           </div>
         </div>
 
         <!-- Multi-Line Prompt Input -->
         <div class="relative">
-          <textarea id="main-flow-input" rows="3" class="w-full bg-[#0e1017] border border-[#222636] rounded-xl p-3.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 leading-relaxed font-sans" placeholder="Chat with DDMAI Agent to brainstorm or enter prompt (e.g., Luxury perfume bottle on wet black obsidian slate with warm amber mist)..."></textarea>
+          <textarea id="main-flow-input" rows="3" class="w-full bg-[#0e1017] border border-[#222636] rounded-xl p-3.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 leading-relaxed font-sans" placeholder="Chat with DDMAI Agent or enter brief (e.g. 2D Animated documentary: 38-year-old spy in charcoal suit conversing with military general at reception hall)..."></textarea>
           
           <!-- Bottom Toolbar of Prompt Box (Flow Style) -->
           <div class="flex flex-wrap items-center justify-between gap-2.5 mt-3 pt-2 border-t border-[#1f2330]">
-            <!-- Quick References & Ingredients -->
+            <!-- Quick References & Presets -->
             <div class="flex items-center space-x-2 text-xs">
               <button onclick="triggerIngredientUpload()" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-300 text-[11px] flex items-center space-x-1.5 transition">
                 <i class="fa-solid fa-paperclip text-slate-400"></i>
-                <span>Add Ingredient / Start Frame</span>
+                <span>Attach Reference / Avatar</span>
               </button>
 
-              <button onclick="applyFlowPreset('perfume')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-amber-300 text-[11px] transition">
+              <button onclick="applyFlowPreset('2d_spy')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-amber-500/40 text-amber-300 text-[11px] font-semibold transition">
+                + 2D Spy Documentary
+              </button>
+              <button onclick="applyFlowPreset('perfume')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-300 text-[11px] transition">
                 + Perfume Commercial
               </button>
               <button onclick="applyFlowPreset('ugc')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-pink-300 text-[11px] transition">
                 + UGC TikTok
-              </button>
-              <button onclick="applyFlowPreset('scifi')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-cyan-300 text-[11px] transition">
-                + Sci-Fi Film
               </button>
             </div>
 
@@ -284,7 +336,7 @@
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono">
                 PROMPT 1: KEYFRAME IMAGE STILL
               </span>
-              <span class="text-[10px] text-slate-400 font-mono">Nano Banana / FLUX.1</span>
+              <span class="text-[10px] text-slate-400 font-mono">2D Graphic Novel / 16:9</span>
             </div>
             <button onclick="copyCardPrompt('p1-content')" class="text-xs text-slate-400 hover:text-white transition">
               <i class="fa-regular fa-copy mr-1"></i>Copy
@@ -292,12 +344,25 @@
           </div>
           <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] min-h-[90px]">
             <p id="p1-content" class="text-xs text-slate-200 leading-relaxed font-mono">
-              Photorealistic cinematic commercial studio footage, crisp 35mm finish. Close-up of one frosted glass perfume bottle with fluted brass cap resting on wet obsidian slate, soft natural side-lighting from top-left, warm amber, matte black, and brass color anchors, shallow depth of field, vertical 9:16 frame.
+              A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: The 38-year-old gentleman in tailored charcoal suit stands in confident conversation beside the decorated senior military officer in olive uniform and beret at a lavish government reception hall. Chiaroscuro shadows, warm amber chandelier light, 100% 2D graphic novel ink line art.
             </p>
           </div>
           <div class="flex items-center justify-between text-[10px] text-slate-400">
             <span>Disk Path: <code class="text-indigo-300">website/public/images/keyframes/</code></span>
-            <span class="text-emerald-400"><i class="fa-solid fa-check mr-1"></i>Zero Motion Bleed</span>
+            <span class="text-emerald-400"><i class="fa-solid fa-check mr-1"></i>2D Rules Enforced</span>
+          </div>
+          <!-- Quick Launch AI Image Generators -->
+          <div class="pt-2 border-t border-[#1f2330] flex flex-wrap items-center gap-1.5 text-[10px]">
+            <span class="text-slate-400 mr-1">Generate in:</span>
+            <a href="https://aitestkitchen.withgoogle.com/tools/image-fx" target="_blank" class="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition flex items-center space-x-1">
+              <i class="fa-solid fa-bolt text-[9px]"></i><span>Google Flow / ImageFX ↗</span>
+            </a>
+            <a href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+              <span>FLUX ↗</span>
+            </a>
+            <a href="https://www.midjourney.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+              <span>Midjourney ↗</span>
+            </a>
           </div>
         </div>
 
@@ -308,7 +373,7 @@
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono">
                 PROMPT 2: VIDEO MOTION & AUDIO
               </span>
-              <span class="text-[10px] text-slate-400 font-mono">Veo 3.1 / Omni / LTX</span>
+              <span class="text-[10px] text-slate-400 font-mono">Veo / Kling / Omni</span>
             </div>
             <button onclick="copyCardPrompt('p2-content')" class="text-xs text-slate-400 hover:text-white transition">
               <i class="fa-regular fa-copy mr-1"></i>Copy
@@ -316,87 +381,137 @@
           </div>
           <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] min-h-[90px]">
             <p id="p2-content" class="text-xs text-slate-200 leading-relaxed font-mono">
-              Slow micro push-in. A single water droplet glides down the curve of the bottle, catching golden light, then settles onto the dark stone. Ends with the bottle held still and centered. Audio: Soft water droplet drip, quiet studio silence, no music, no subtitles.
+              [AVATAR &amp; AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!". Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax push-in camera toward the two men. Subtle natural eye blink, confident slight head nod, ambient chandelier light glinting faintly in deep noir shadows.
             </p>
           </div>
           <div class="flex items-center justify-between text-[10px] text-slate-400">
-            <span>Speech Budget: <strong class="text-emerald-400 font-mono">0 wps (Budget: 2.5 wps)</strong></span>
+            <span>Speech Budget: <strong class="text-emerald-400 font-mono">3.3s Spoken (4.0s Budget)</strong></span>
             <span class="text-cyan-400 font-mono">Duration: 4.0s</span>
+          </div>
+          <!-- Quick Launch AI Video Engines -->
+          <div class="pt-2 border-t border-[#1f2330] flex flex-wrap items-center gap-1.5 text-[10px]">
+            <span class="text-slate-400 mr-1">Generate in:</span>
+            <a href="https://aitestkitchen.withgoogle.com/tools/video-fx" target="_blank" class="px-2 py-0.5 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition flex items-center space-x-1">
+              <i class="fa-solid fa-video text-[9px]"></i><span>Google Veo / Flow ↗</span>
+            </a>
+            <a href="https://klingai.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+              <span>Kling AI ↗</span>
+            </a>
+            <a href="https://runwayml.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+              <span>Runway Gen-3 ↗</span>
+            </a>
+            <a href="https://hailuoai.video" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+              <span>Hailuo ↗</span>
+            </a>
           </div>
         </div>
       </div>
 
-      <!-- GOOGLE FLOW SCENEBUILDER TIMELINE -->
+      <!-- SCENEBUILDER TIMELINE & LIVE MEDIA VIEWPORT -->
       <div class="flow-card rounded-2xl p-5 shadow-2xl space-y-4">
-        <div class="flex items-center justify-between">
+        <div class="flex flex-wrap items-center justify-between gap-3">
           <div class="flex items-center space-x-2.5">
             <i class="fa-solid fa-film text-indigo-400 text-sm"></i>
-            <h3 class="text-sm font-flow font-bold text-white tracking-tight">Scenebuilder Timeline (10.0s Scene Composition)</h3>
+            <div>
+              <h3 class="text-sm font-flow font-bold text-white tracking-tight">Active Scene Viewport &amp; Timeline (4.0s Hook Take • Scene 01)</h3>
+              <p class="text-[11px] text-slate-400">Play, preview, and inspect your rendered 2D animated shots &amp; keyframes</p>
+            </div>
           </div>
-          <div class="flex items-center space-x-3">
-            <span class="text-xs font-mono bg-indigo-950/60 text-indigo-300 px-2.5 py-1 rounded-lg border border-indigo-800/40">
-              Total Scene: 10.00s (+/- 0.0s)
-            </span>
-            <button onclick="simulateFlowPlayback()" id="flow-playback-btn" class="bg-emerald-600 hover:bg-emerald-500 text-white px-3.5 py-1 rounded-lg text-xs font-medium transition flex items-center space-x-1.5 shadow">
+          <div class="flex items-center space-x-2">
+            <!-- Hidden File Pickers -->
+            <input type="file" id="media-video-picker" accept="video/mp4,video/webm" class="hidden" onchange="handleVideoFileLoaded(event)">
+            <input type="file" id="media-image-picker" accept="image/png,image/jpeg,image/webp" class="hidden" onchange="handleImageFileLoaded(event)">
+
+            <button onclick="document.getElementById('media-image-picker').click()" class="bg-[#181a24] hover:bg-[#222636] text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5">
+              <i class="fa-regular fa-image text-xs"></i>
+              <span>Load Keyframe (PNG)</span>
+            </button>
+            <button onclick="document.getElementById('media-video-picker').click()" class="bg-[#181a24] hover:bg-[#222636] text-cyan-300 border border-cyan-500/30 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5">
+              <i class="fa-solid fa-file-video text-xs"></i>
+              <span>Load Rendered Video (MP4)</span>
+            </button>
+            <button onclick="simulateFlowPlayback()" id="flow-playback-btn" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-4 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow-lg shadow-emerald-600/30">
               <i id="flow-play-icon" class="fa-solid fa-play text-[10px]"></i>
               <span id="flow-play-text">Preview Scene</span>
             </button>
           </div>
         </div>
 
+        <!-- LIVE MEDIA SCREEN / MONITOR -->
+        <div id="media-monitor-viewport" class="relative w-full aspect-video max-h-[360px] bg-[#07080c] border border-[#23283a] rounded-2xl overflow-hidden flex items-center justify-center group shadow-inner">
+          <!-- Real HTML5 Video Player -->
+          <video id="active-scene-video" class="hidden w-full h-full object-contain" controls></video>
+
+          <!-- Keyframe Image Display -->
+          <img id="active-scene-image" class="hidden w-full h-full object-contain" alt="2D Keyframe Preview">
+
+          <!-- Fallback Interactive 2D Noir Canvas Visualizer -->
+          <div id="active-scene-placeholder" class="text-center p-6 space-y-3">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/50 border border-indigo-700/40 flex items-center justify-center text-indigo-400 text-2xl shadow-lg">
+              <i class="fa-solid fa-clapperboard"></i>
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-slate-200">Scene 01 Monitor: Damascus Presidential Reception</h4>
+              <p class="text-xs text-slate-400 max-w-md mx-auto mt-1">100% 2D Animated Noir Graphic Novel • Chiaroscuro Chandelier Lighting • Adult Spy &amp; General</p>
+            </div>
+            <div class="inline-flex items-center space-x-2 text-[11px] font-mono text-amber-300 bg-amber-950/40 border border-amber-600/30 px-3 py-1 rounded-lg">
+              <i class="fa-solid fa-camera"></i>
+              <span>Ready for Render: 4.0s Fast Punchy Hook • 16:9 Widescreen</span>
+            </div>
+          </div>
+
+          <!-- Overlay Badge -->
+          <div class="absolute top-3 left-3 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700/50 text-[10px] text-slate-300 font-mono flex items-center space-x-1.5">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span id="viewport-status-badge">MONITOR: READY (16:9)</span>
+          </div>
+
+          <!-- Quick Action Floating Buttons -->
+          <div class="absolute bottom-3 right-3 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition duration-200">
+            <button onclick="downloadActiveMedia()" class="bg-black/80 hover:bg-black text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 text-xs flex items-center space-x-1.5 backdrop-blur-sm">
+              <i class="fa-solid fa-download text-[11px]"></i>
+              <span>Download Media</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Timeline Video & Audio Tracks -->
         <div class="space-y-2">
-          <!-- Video Track with Handle Trims -->
+          <!-- Video Track -->
           <div class="bg-[#0b0c10] p-3 rounded-xl border border-[#1f2330]">
             <div class="flex items-center justify-between text-[10px] text-slate-400 mb-2 font-mono">
-              <span>VIDEO TRACK (Lossless Concat • No Time-Stretching)</span>
-              <span>0.0s ───────────────────── 4.0s ────────────────────────────── 10.0s</span>
+              <span>VIDEO TRACK (2D Animation Engine • Parallax Push-in)</span>
+              <span>0.0s ───────────────────────────────────────────────────────────── 4.0s</span>
             </div>
             
             <div class="flex space-x-2 h-16">
-              <!-- Shot 1: Establishing (4.0s) -->
-              <div class="w-2/5 bg-gradient-to-r from-blue-900/50 to-indigo-900/50 border border-blue-500/40 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-blue-400 transition">
+              <!-- Shot 1: 4.0s Hook -->
+              <div class="w-full bg-gradient-to-r from-amber-900/40 via-indigo-900/50 to-purple-900/50 border border-amber-500/40 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-amber-400 transition">
                 <div class="flex items-center justify-between text-[10px]">
-                  <span class="font-bold text-blue-300">SH1: Keyframe Start</span>
+                  <span class="font-bold text-amber-300">SH01: Damascus Presidential Reception (Two Figures)</span>
                   <span class="font-mono bg-[#0e1017] px-1.5 py-0.2 rounded text-white text-[9px]">4.0s</span>
                 </div>
-                <div class="text-[9px] text-blue-200/80 truncate">Close-Up • Slow Push-In • Keyframe Ingest</div>
-                <!-- Right Trim Handle -->
-                <div class="absolute right-0 top-0 bottom-0 w-2 bg-blue-400 rounded-r-xl cursor-ew-resize opacity-60 group-hover:opacity-100" title="Trim Handle (Shave tail)"></div>
-              </div>
-
-              <!-- Shot 2: Action & Reveal (6.0s Chained) -->
-              <div class="w-3/5 bg-gradient-to-r from-indigo-900/50 to-purple-900/50 border border-purple-500/40 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-purple-400 transition">
-                <div class="flex items-center justify-between text-[10px]">
-                  <span class="font-bold text-purple-300">SH2: Chained Tail Action</span>
-                  <span class="font-mono bg-[#0e1017] px-1.5 py-0.2 rounded text-white text-[9px]">6.0s</span>
-                </div>
-                <div class="text-[9px] text-purple-200/80 truncate">Medium Shot • Orbit • Chained from SH1 Tail Frame</div>
-                <!-- Right Trim Handle -->
-                <div class="absolute right-0 top-0 bottom-0 w-2 bg-purple-400 rounded-r-xl cursor-ew-resize opacity-60 group-hover:opacity-100" title="Trim Handle"></div>
+                <div class="text-[9px] text-slate-300 truncate">2D Noir Chiaroscuro • Adult Spy &amp; General • Ghost Avatar Voice</div>
+                <div class="absolute right-0 top-0 bottom-0 w-2 bg-amber-400 rounded-r-xl cursor-ew-resize opacity-60 group-hover:opacity-100" title="Trim Handle"></div>
               </div>
             </div>
           </div>
 
-          <!-- Audio Track with Sidechain Waveform -->
+          <!-- Audio Track with Voiceover Waveform -->
           <div class="bg-[#0b0c10] p-2.5 rounded-xl border border-[#1f2330] flex items-center justify-between space-x-3">
             <div class="flex items-center space-x-2 text-xs text-slate-400">
-              <i class="fa-solid fa-volume-high text-cyan-400 text-xs"></i>
-              <span class="text-[10px] font-mono">AUDIO BED: Foley + Voiceover Ducking (-12dB)</span>
+              <i class="fa-solid fa-microphone text-indigo-400 text-xs"></i>
+              <span class="text-[10px] font-mono">VOICE-OVER BED: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!"</span>
             </div>
             <!-- Simulated Waveform -->
-            <div class="flex items-center space-x-1 h-3 flex-1 max-w-md">
-              <div class="w-1 bg-cyan-500/40 h-1.5 rounded-full"></div>
-              <div class="w-1 bg-cyan-500/70 h-2.5 rounded-full"></div>
-              <div class="w-1 bg-cyan-500/90 h-3 rounded-full"></div>
-              <div class="w-1 bg-cyan-500/50 h-1 rounded-full"></div>
+            <div class="flex items-center space-x-1 h-3 flex-1 max-w-xs">
+              <div class="w-1 bg-indigo-500/40 h-1 rounded-full"></div>
               <div class="w-1 bg-indigo-500 h-3 rounded-full animate-pulse"></div>
-              <div class="w-1 bg-indigo-500 h-2 rounded-full animate-pulse"></div>
-              <div class="w-1 bg-cyan-500/70 h-2.5 rounded-full"></div>
-              <div class="w-1 bg-cyan-500/90 h-3 rounded-full"></div>
-              <div class="w-1 bg-cyan-500/40 h-1.5 rounded-full"></div>
+              <div class="w-1 bg-indigo-400 h-2.5 rounded-full animate-pulse"></div>
+              <div class="w-1 bg-indigo-500 h-3 rounded-full animate-pulse"></div>
+              <div class="w-1 bg-indigo-300 h-1.5 rounded-full"></div>
             </div>
-            <span class="text-[10px] text-slate-500 font-mono">Edge-TTS Neural Voice ($0.00)</span>
+            <span class="text-[10px] text-emerald-400 font-mono">Brisk 1.25x Tempo</span>
           </div>
         </div>
       </div>
@@ -405,78 +520,571 @@
 
   </div>
 
-  <!-- MODAL 1: ADVANCED FLOW TOOLS (HVtcO0Rfo2Y) -->
+  <!-- ==================== MODAL 1: WELCOME & ONBOARDING ==================== -->
+  <div id="welcome-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#11131a] border border-[#262b3b] rounded-3xl w-full max-w-2xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden">
+      <!-- Decorative Glow -->
+      <div class="absolute -top-24 -right-24 w-60 h-60 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -bottom-24 -left-24 w-60 h-60 bg-pink-600/15 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="flex items-start justify-between relative">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-pink-500 flex items-center justify-center text-white text-xl shadow-lg shadow-indigo-600/30">
+            <i class="fa-solid fa-film"></i>
+          </div>
+          <div>
+            <h2 class="text-lg sm:text-xl font-flow font-extrabold text-white">Welcome to DDMAI.VIDEO!</h2>
+            <p class="text-xs text-indigo-300 font-medium">World's #1 Zero-Cost AI Video Studio &amp; Certification Academy</p>
+          </div>
+        </div>
+        <button onclick="closeWelcomeModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-[#1f2330] transition"><i class="fa-solid fa-xmark text-base"></i></button>
+      </div>
+
+      <!-- 4 Pillars of DDMAI Studio -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs relative">
+        <div class="p-3.5 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-1.5">
+          <div class="flex items-center space-x-2 text-indigo-400 font-bold">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            <span>Agile Scene-by-Scene Studio</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Eliminates prompt book panic! Lock Scene 1 (4s/6s) with voice and character before advancing.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-1.5">
+          <div class="flex items-center space-x-2 text-amber-400 font-bold">
+            <i class="fa-solid fa-palette"></i>
+            <span>100% 2D Documentary Engine</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Strict Noir Graphic Novel DNA locked via GEMINI.md. Zero photorealism or 3D distortions.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-1.5">
+          <div class="flex items-center space-x-2 text-emerald-400 font-bold">
+            <i class="fa-solid fa-piggy-bank"></i>
+            <span>$0.00 Zero-Cost Production</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Combines Google Gemini Omni, FLUX.1, and Edge-TTS for infinite free video creation.
+          </p>
+        </div>
+
+        <div class="p-3.5 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-1.5">
+          <div class="flex items-center space-x-2 text-yellow-400 font-bold">
+            <i class="fa-solid fa-award"></i>
+            <span>Certified AI Director Academy</span>
+          </div>
+          <p class="text-[11px] text-slate-400 leading-relaxed">
+            Earn your official verifiable Certificate of Completion with your name and credential ID.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quick Action Buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-[#1f2330]">
+        <label class="flex items-center space-x-2 text-xs text-slate-400 cursor-pointer">
+          <input type="checkbox" id="dont-show-welcome" class="rounded text-indigo-600 focus:ring-0">
+          <span>Don't show automatically on startup</span>
+        </label>
+        <div class="flex items-center space-x-2.5 w-full sm:w-auto">
+          <button onclick="openAuthModal()" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-[#181a24] hover:bg-[#202433] text-slate-200 text-xs font-semibold border border-[#262b3b] transition">
+            Sign In / Register
+          </button>
+          <button onclick="closeWelcomeModal()" class="flex-1 sm:flex-initial px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition">
+            Launch Studio 🚀
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: USER AUTH (LOGIN / REGISTER) ==================== -->
+  <div id="auth-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#11131a] border border-[#262b3b] rounded-3xl w-full max-w-md p-6 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-[#1f2330] pb-3">
+        <div class="flex items-center space-x-2.5">
+          <div class="w-8 h-8 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
+            <i class="fa-solid fa-user-lock text-sm"></i>
+          </div>
+          <div>
+            <h3 class="text-sm font-flow font-bold text-white" id="auth-modal-title">Creator &amp; Director Portal</h3>
+            <p class="text-[11px] text-slate-400">Access your dashboard, projects, and certificates</p>
+          </div>
+        </div>
+        <button onclick="closeAuthModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <!-- Auth Tabs: Sign In / Sign Up -->
+      <div class="flex p-1 rounded-xl bg-[#0e1017] border border-[#1f2330] text-xs">
+        <button onclick="switchAuthTab('signin')" id="tab-signin-btn" class="flex-1 py-1.5 rounded-lg bg-indigo-600 text-white font-bold transition">Sign In</button>
+        <button onclick="switchAuthTab('signup')" id="tab-signup-btn" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium transition">Register</button>
+      </div>
+
+      <!-- Quick 1-Click Demo Accounts -->
+      <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+        <div class="flex items-center justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+          <span>⚡ Quick 1-Click Demo Logins</span>
+          <span class="text-emerald-400">Instant Access</span>
+        </div>
+        <div class="grid grid-cols-2 gap-2 text-xs">
+          <button onclick="quickLogin('admin@ddmai.video', 'Pankaj Sharma', 'SuperAdmin')" class="p-2 rounded-xl bg-[#151722] hover:bg-rose-950/40 border border-[#222636] hover:border-rose-500/50 text-left transition">
+            <div class="font-bold text-rose-300 flex items-center space-x-1.5">
+              <i class="fa-solid fa-crown text-[10px]"></i>
+              <span>Pankaj Sharma</span>
+            </div>
+            <div class="text-[10px] text-slate-400">SuperAdmin (Full Access)</div>
+          </button>
+          <button onclick="quickLogin('director@ddmai.video', 'Kunal Verma', 'Director')" class="p-2 rounded-xl bg-[#151722] hover:bg-indigo-950/40 border border-[#222636] hover:border-indigo-500/50 text-left transition">
+            <div class="font-bold text-indigo-300 flex items-center space-x-1.5">
+              <i class="fa-solid fa-clapperboard text-[10px]"></i>
+              <span>Kunal Verma</span>
+            </div>
+            <div class="text-[10px] text-slate-400">AI Film Director</div>
+          </button>
+        </div>
+      </div>
+
+      <!-- Auth Form -->
+      <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-3 text-xs">
+        <div id="signup-name-field" class="hidden space-y-1">
+          <label class="text-[11px] text-slate-300 font-medium">Full Name (For Certificate)</label>
+          <input type="text" id="auth-name" placeholder="e.g. Pankaj Sharma" class="w-full bg-[#151722] border border-[#222636] rounded-xl px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-[11px] text-slate-300 font-medium">Email Address</label>
+          <input type="email" id="auth-email" required placeholder="your.name@ddmai.video" class="w-full bg-[#151722] border border-[#222636] rounded-xl px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-mono text-xs">
+        </div>
+
+        <div class="space-y-1">
+          <label class="text-[11px] text-slate-300 font-medium">Password</label>
+          <input type="password" id="auth-pass" required placeholder="••••••••" value="demo123" class="w-full bg-[#151722] border border-[#222636] rounded-xl px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+        </div>
+
+        <button type="submit" id="auth-submit-btn" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition mt-2">
+          Sign In to DDMAI Studio
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: USER LOGIN DASHBOARD ==================== -->
+  <div id="user-dashboard-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#11131a] border border-[#262b3b] rounded-3xl w-full max-w-3xl p-6 sm:p-7 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <!-- Dashboard Header -->
+      <div class="flex items-center justify-between border-b border-[#1f2330] pb-4">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-white text-xl font-bold font-flow" id="dash-avatar">
+            P
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h3 class="text-base font-flow font-extrabold text-white" id="dash-user-name">Pankaj Sharma</h3>
+              <span id="dash-user-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">SuperAdmin</span>
+            </div>
+            <p class="text-xs text-slate-400" id="dash-user-email">admin@ddmai.video</p>
+          </div>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="handleUserLogout()" class="px-3 py-1.5 rounded-xl bg-red-950/40 hover:bg-red-900/50 border border-red-500/40 text-red-300 text-xs font-semibold transition">
+            <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i>Logout
+          </button>
+          <button onclick="closeUserDashboard()" class="text-slate-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </div>
+      </div>
+
+      <!-- Quick Metrics Bar -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
+          <span class="text-[10px] text-slate-400 uppercase font-mono">Cost Guard Mode</span>
+          <div class="text-sm font-bold text-emerald-400 mt-0.5">$0.00 Unlimited</div>
+        </div>
+        <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
+          <span class="text-[10px] text-slate-400 uppercase font-mono">Videos Rendered</span>
+          <div class="text-sm font-bold text-white mt-0.5" id="dash-stat-videos">42 Takes</div>
+        </div>
+        <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
+          <span class="text-[10px] text-slate-400 uppercase font-mono">Certification</span>
+          <div class="text-sm font-bold text-yellow-400 mt-0.5" id="dash-stat-cert">Certified Director</div>
+        </div>
+        <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
+          <span class="text-[10px] text-slate-400 uppercase font-mono">Production Engine</span>
+          <div class="text-sm font-bold text-indigo-400 mt-0.5">2D Noir Multi-Model</div>
+        </div>
+      </div>
+
+      <!-- Certificate & Academy Card -->
+      <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-950/40 via-yellow-950/30 to-[#13151c] border border-amber-500/40 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-12 h-12 rounded-2xl bg-yellow-500/20 border border-yellow-500/40 flex items-center justify-center text-yellow-400 text-xl">
+            <i class="fa-solid fa-award"></i>
+          </div>
+          <div>
+            <div class="text-sm font-bold text-white">Official DDMAI AI Film Director Certificate</div>
+            <p class="text-xs text-amber-200/80">Accredited by DDMAI.VIDEO Global Production Academy</p>
+            <div class="text-[10px] text-slate-400 font-mono mt-0.5">Credential: <span id="dash-cert-id" class="text-yellow-400">DDMAI-CERT-2026-8942A</span></div>
+          </div>
+        </div>
+        <button onclick="viewMyCertificate()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-500 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-md transition whitespace-nowrap">
+          <i class="fa-solid fa-print mr-1.5"></i>View &amp; Print Certificate
+        </button>
+      </div>
+
+      <!-- User Projects / Recents -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-300">
+          <span>My Video Projects &amp; Prompts</span>
+          <span class="text-indigo-400 font-mono text-[11px]">Auto-Synced</span>
+        </div>
+        <div class="space-y-2 text-xs">
+          <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+              <div>
+                <div class="font-bold text-slate-200">2D Spy Documentary — Scene 01 (Damascus Hook)</div>
+                <div class="text-[11px] text-slate-400">4.0s • Fast Cadence (1.25x) • Ghost Avatar Voice</div>
+              </div>
+            </div>
+            <button onclick="alert('Project loaded into Studio!'); closeUserDashboard();" class="px-3 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] text-indigo-300 border border-[#262b3b]">Load</button>
+          </div>
+          <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
+              <div>
+                <div class="font-bold text-slate-200">Perfume Commercial 2026 — 10s Lossless Chain</div>
+                <div class="text-[11px] text-slate-400">4.0s SH1 + 6.0s SH2 • Obsidian Glass Studio</div>
+              </div>
+            </div>
+            <button onclick="alert('Project loaded into Studio!'); closeUserDashboard();" class="px-3 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] text-indigo-300 border border-[#262b3b]">Load</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 4: ADMIN PANEL DASHBOARD ==================== -->
+  <div id="admin-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="bg-[#11131a] border border-[#262b3b] rounded-3xl w-full max-w-4xl p-6 sm:p-7 space-y-6 shadow-2xl max-h-[90vh] flex flex-col">
+      <!-- Admin Header -->
+      <div class="flex items-center justify-between border-b border-[#1f2330] pb-4 shrink-0">
+        <div class="flex items-center space-x-3.5">
+          <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-red-600 via-rose-600 to-indigo-600 flex items-center justify-center text-white text-lg shadow-lg shadow-rose-600/30">
+            <i class="fa-solid fa-shield-halved"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <h3 class="text-base font-flow font-extrabold text-white">DDMAI SuperAdmin Command Center</h3>
+              <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">Node Healthy</span>
+            </div>
+            <p class="text-xs text-slate-400">Platform Analytics, User Roles, Certification Authority &amp; System Rules</p>
+          </div>
+        </div>
+        <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+      </div>
+
+      <!-- Admin Navigation Tabs -->
+      <div class="flex space-x-2 border-b border-[#1f2330] pb-2 text-xs shrink-0">
+        <button onclick="switchAdminTab('overview')" id="adm-tab-overview" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition">
+          <i class="fa-solid fa-chart-pie mr-1.5"></i>Overview &amp; Stats
+        </button>
+        <button onclick="switchAdminTab('users')" id="adm-tab-users" class="px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white font-semibold transition">
+          <i class="fa-solid fa-users mr-1.5"></i>User Management (<span id="admin-user-count">4</span>)
+        </button>
+        <button onclick="switchAdminTab('certs')" id="adm-tab-certs" class="px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white font-semibold transition">
+          <i class="fa-solid fa-certificate mr-1.5"></i>Certification Authority
+        </button>
+        <button onclick="switchAdminTab('rules')" id="adm-tab-rules" class="px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white font-semibold transition">
+          <i class="fa-solid fa-sliders mr-1.5"></i>System Rules (10,000)
+        </button>
+      </div>
+
+      <!-- Tab 1: Overview & Stats -->
+      <div id="admin-sec-overview" class="space-y-5 overflow-y-auto flex-1 pr-1 text-xs">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+          <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
+            <span class="text-[10px] text-slate-400 uppercase font-mono">Total Creators</span>
+            <div class="text-xl font-bold text-white mt-1">1,842</div>
+            <span class="text-[10px] text-emerald-400 font-mono">↑ +14% this week</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
+            <span class="text-[10px] text-slate-400 uppercase font-mono">Videos Rendered</span>
+            <div class="text-xl font-bold text-white mt-1">24,510</div>
+            <span class="text-[10px] text-indigo-400 font-mono">100% Chained Takes</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
+            <span class="text-[10px] text-slate-400 uppercase font-mono">Compute Saved</span>
+            <div class="text-xl font-bold text-emerald-400 mt-1">$142,500</div>
+            <span class="text-[10px] text-slate-400 font-mono">Zero-Cost Pipeline</span>
+          </div>
+          <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
+            <span class="text-[10px] text-slate-400 uppercase font-mono">Certificates Issued</span>
+            <div class="text-xl font-bold text-yellow-400 mt-1" id="admin-cert-count">2</div>
+            <span class="text-[10px] text-yellow-300/80 font-mono">Verified Directors</span>
+          </div>
+        </div>
+
+        <!-- Engines Live Status Matrix -->
+        <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-3">
+          <div class="font-bold text-slate-200">AI Generative Engine Health</div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div class="p-3 rounded-xl bg-[#151722] border border-[#222636] flex items-center justify-between">
+              <div>
+                <div class="font-bold text-blue-300">Google Gemini &amp; Imagen 3</div>
+                <div class="text-[10px] text-slate-400">Prompt Decomposition</div>
+              </div>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            </div>
+            <div class="p-3 rounded-xl bg-[#151722] border border-[#222636] flex items-center justify-between">
+              <div>
+                <div class="font-bold text-amber-300">FLUX.1 Schnell &amp; LTX</div>
+                <div class="text-[10px] text-slate-400">Open-Source Latent Engine</div>
+              </div>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            </div>
+            <div class="p-3 rounded-xl bg-[#151722] border border-[#222636] flex items-center justify-between">
+              <div>
+                <div class="font-bold text-purple-300">Edge-TTS &amp; Kokoro Neural</div>
+                <div class="text-[10px] text-slate-400">Voiceover &amp; Pacing Engine</div>
+              </div>
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 2: User Management -->
+      <div id="admin-sec-users" class="hidden space-y-4 overflow-y-auto flex-1 pr-1 text-xs">
+        <div class="flex items-center justify-between">
+          <input type="text" id="admin-user-search" oninput="filterAdminUsers()" placeholder="Search users by name or email..." class="bg-[#0e1017] border border-[#222636] rounded-xl px-3 py-1.5 text-xs text-slate-200 w-64 focus:outline-none focus:border-indigo-500">
+          <button onclick="promptCreateUser()" class="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center space-x-1">
+            <i class="fa-solid fa-plus text-[10px]"></i>
+            <span>Add New User</span>
+          </button>
+        </div>
+
+        <div class="overflow-x-auto rounded-2xl border border-[#1f2330]">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="bg-[#0e1017] text-[10px] text-slate-400 font-mono uppercase border-b border-[#1f2330]">
+                <th class="p-3">User</th>
+                <th class="p-3">Role</th>
+                <th class="p-3">Status</th>
+                <th class="p-3">Certification</th>
+                <th class="p-3">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="admin-users-tbody" class="divide-y divide-[#1f2330] bg-[#11131a]">
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Tab 3: Certification Authority -->
+      <div id="admin-sec-certs" class="hidden space-y-4 overflow-y-auto flex-1 pr-1 text-xs">
+        <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330] flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div>
+            <div class="font-bold text-white text-sm">Issue Verified Director Certificate</div>
+            <p class="text-slate-400 text-[11px]">Generate accredited certificate with official serial ID and print layout</p>
+          </div>
+          <button onclick="promptIssueCertificate()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-500 text-slate-950 font-bold transition">
+            <i class="fa-solid fa-stamp mr-1"></i>Issue New Certificate
+          </button>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="font-bold text-slate-300">Registry of Issued Credentials</div>
+          <div id="admin-certs-list" class="space-y-2">
+            <!-- Populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab 4: System Rules -->
+      <div id="admin-sec-rules" class="hidden space-y-4 overflow-y-auto flex-1 pr-1 text-xs">
+        <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-3">
+          <div class="font-bold text-white">Rulebook VR-00001 to VR-10000 Enforcement</div>
+          <div class="space-y-2.5">
+            <label class="flex items-center justify-between p-2.5 rounded-xl bg-[#151722] border border-[#222636] cursor-pointer">
+              <div>
+                <div class="font-bold text-slate-200">100% 2D Documentary Style (GEMINI.md)</div>
+                <div class="text-[10px] text-slate-400">Strictly prohibits photorealism and 3D CGI in prompt output.</div>
+              </div>
+              <input type="checkbox" checked class="text-indigo-600 rounded">
+            </label>
+            <label class="flex items-center justify-between p-2.5 rounded-xl bg-[#151722] border border-[#222636] cursor-pointer">
+              <div>
+                <div class="font-bold text-slate-200">Prominent People Name Shield</div>
+                <div class="text-[10px] text-slate-400">Substitutes real political/celebrity names with anatomical archetypes.</div>
+              </div>
+              <input type="checkbox" checked class="text-indigo-600 rounded">
+            </label>
+            <label class="flex items-center justify-between p-2.5 rounded-xl bg-[#151722] border border-[#222636] cursor-pointer">
+              <div>
+                <div class="font-bold text-slate-200">Voice-Over Pacing Enforcer (1.25x Dynamic Tempo)</div>
+                <div class="text-[10px] text-slate-400">Prevents audio truncation by ensuring complete speech within 4.0s.</div>
+              </div>
+              <input type="checkbox" checked class="text-indigo-600 rounded">
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 5: LUXURY INTERACTIVE CERTIFICATE ==================== -->
+  <div id="certificate-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div class="bg-[#0f172a] border-2 border-amber-500/60 rounded-3xl w-full max-w-4xl p-6 sm:p-8 space-y-6 shadow-2xl relative my-auto">
+      
+      <!-- Top Action Bar (No-Print) -->
+      <div class="flex items-center justify-between border-b border-amber-500/30 pb-4 no-print">
+        <div class="flex items-center space-x-2 text-amber-400">
+          <i class="fa-solid fa-graduation-cap text-lg"></i>
+          <span class="font-flow font-bold text-white text-sm">DDMAI Official Credential Verification System</span>
+        </div>
+        <div class="flex items-center space-x-2">
+          <button onclick="customizeCertificateName()" class="px-3 py-1.5 rounded-xl bg-[#1e293b] hover:bg-[#334155] text-amber-300 text-xs font-semibold border border-amber-500/30 transition">
+            <i class="fa-solid fa-pen-to-square mr-1"></i>Edit Name
+          </button>
+          <button onclick="window.print()" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition flex items-center space-x-1.5">
+            <i class="fa-solid fa-print"></i>
+            <span>Print / Save as PDF</span>
+          </button>
+          <button onclick="closeCertificateModal()" class="text-slate-400 hover:text-white p-1 ml-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+        </div>
+      </div>
+
+      <!-- THE PRINTABLE LUXURY CERTIFICATE CONTAINER -->
+      <div id="printable-certificate" class="relative bg-gradient-to-b from-[#fefce8] via-[#fffbeb] to-[#fef3c7] text-[#0f172a] rounded-2xl p-8 sm:p-12 border-8 border-double border-[#b45309] shadow-2xl overflow-hidden font-cert">
+        
+        <!-- Corner Ornaments (CSS/SVG) -->
+        <div class="absolute top-2 left-2 w-10 h-10 border-t-4 border-l-4 border-amber-700 pointer-events-none"></div>
+        <div class="absolute top-2 right-2 w-10 h-10 border-t-4 border-r-4 border-amber-700 pointer-events-none"></div>
+        <div class="absolute bottom-2 left-2 w-10 h-10 border-b-4 border-l-4 border-amber-700 pointer-events-none"></div>
+        <div class="absolute bottom-2 right-2 w-10 h-10 border-b-4 border-r-4 border-amber-700 pointer-events-none"></div>
+
+        <!-- Watermark -->
+        <div class="absolute inset-0 flex items-center justify-center opacity-[0.03] pointer-events-none select-none">
+          <i class="fa-solid fa-award text-[300px] text-amber-900"></i>
+        </div>
+
+        <div class="relative text-center space-y-5">
+          <!-- Header -->
+          <div class="space-y-1">
+            <div class="text-xs sm:text-sm font-bold tracking-[0.25em] text-[#92400e] uppercase">DDMAI.VIDEO Global Production Academy</div>
+            <h1 class="text-2xl sm:text-4xl font-extrabold text-[#78350f] tracking-wide uppercase font-cert">
+              Certificate of Excellence
+            </h1>
+            <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#b45309] to-transparent mx-auto"></div>
+          </div>
+
+          <!-- Body -->
+          <p class="text-xs sm:text-sm text-[#475569] italic">
+            This is to proudly certify that
+          </p>
+
+          <!-- Recipient Name -->
+          <div class="text-2xl sm:text-4xl font-black text-[#1e293b] border-b-2 border-[#b45309] inline-block px-8 pb-1 tracking-normal font-sans" id="cert-display-name">
+            Pankaj Sharma
+          </div>
+
+          <!-- Description -->
+          <p class="max-w-xl mx-auto text-xs sm:text-sm text-[#334155] leading-relaxed font-sans font-medium">
+            has demonstrated distinguished mastery in the <strong>1-Minute Video Production Master Blueprint</strong>, 
+            <strong>2D Animated Documentary Cinematography</strong>, character consistency prompt engineering, 
+            and zero-cost multi-model studio pipelines.
+          </p>
+
+          <!-- Specialization Badge -->
+          <div class="inline-block px-4 py-1.5 rounded-full bg-[#fef3c7] border border-[#d97706] text-[#92400e] font-sans font-bold text-xs uppercase tracking-wider">
+            Specialization: Master AI Film Director &amp; 2D Noir Specialist
+          </div>
+
+          <!-- Footer: Signatures, Seal & Serial ID -->
+          <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-[#d97706]/40 text-left font-sans">
+            <!-- Left Signature -->
+            <div class="text-center sm:text-left">
+              <div class="font-cert italic font-bold text-base text-[#1e293b]">Pankaj S.</div>
+              <div class="text-[10px] text-[#64748b] uppercase tracking-wider border-t border-[#94a3b8] pt-0.5">Head of AI Cinema Studio</div>
+            </div>
+
+            <!-- Center Golden Seal -->
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-yellow-500 via-amber-400 to-yellow-600 border-4 border-[#fffbeb] shadow-xl flex flex-col items-center justify-center text-center text-[#78350f] font-cert">
+              <i class="fa-solid fa-crown text-base text-[#78350f]"></i>
+              <span class="text-[7px] font-black uppercase tracking-tighter mt-0.5">DDMAI VERIFIED</span>
+              <span class="text-[6px] font-mono">2026</span>
+            </div>
+
+            <!-- Right Details -->
+            <div class="text-center sm:text-right text-[10px] text-[#475569] space-y-0.5">
+              <div>Issue Date: <span class="font-bold text-[#0f172a]" id="cert-display-date">October 28, 2026</span></div>
+              <div>Credential ID: <span class="font-mono font-bold text-[#b45309]" id="cert-display-id">DDMAI-CERT-2026-8942A</span></div>
+              <div class="text-[9px] text-[#64748b]">Status: <span class="text-emerald-700 font-bold">100% Accredited</span></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== EXISTING MODALS (TOOLS & OPTIONS & API KEYS) ==================== -->
+  <!-- MODAL: ADVANCED FLOW TOOLS -->
   <div id="tools-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-[#11131a] border border-[#262b3b] rounded-2xl w-full max-w-3xl p-6 space-y-5 shadow-2xl">
       <div class="flex items-center justify-between border-b border-[#1f2330] pb-3">
         <div class="flex items-center space-x-2">
           <i class="fa-solid fa-sliders text-cyan-400 text-base"></i>
-          <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO AI Video Tools Suite (HVtcO0Rfo2Y Deep Dive)</h3>
+          <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO AI Video Tools Suite</h3>
         </div>
         <button onclick="closeToolsModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-        <!-- 1. Shader FX & Video Granulator -->
         <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
-          <span class="font-bold text-cyan-300">1. Shader FX & Video Granulator</span>
-          <p class="text-slate-400 text-[11px] leading-relaxed">Procedural film stock emulation, 35mm grain, and stylized chromatic aberration.</p>
-          <div class="flex items-center justify-between text-[11px] pt-1">
-            <span class="text-slate-300">35mm Film Grain:</span>
-            <input type="range" min="0" max="100" value="40" class="w-24 accent-cyan-500">
-          </div>
+          <span class="font-bold text-cyan-300">1. Shader FX &amp; 2D Film Grain</span>
+          <p class="text-slate-400 text-[11px]">Procedural vintage paper grain, halftone ink outlines, and chiaroscuro contrast.</p>
         </div>
-
-        <!-- 2. Pixel Bento -->
         <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
           <span class="font-bold text-indigo-300">2. Pixel Bento (Knob Automation)</span>
-          <p class="text-slate-400 text-[11px] leading-relaxed">Real-time recording knobs to automate contrast, grain, and zoom across the playback timeline.</p>
-          <button class="px-2.5 py-1 rounded bg-[#1f2330] hover:bg-[#2b3142] text-slate-200 text-[10px]">● Record Knob Macro</button>
+          <p class="text-slate-400 text-[11px]">Real-time recording knobs to automate contrast, grain, and zoom across timeline.</p>
         </div>
-
-        <!-- 3. Poster Designer & Overlays -->
         <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
-          <span class="font-bold text-pink-300">3. Poster Designer & Type Overlays</span>
-          <p class="text-slate-400 text-[11px] leading-relaxed">Renders clean vector text overlays on top of video, keeping messy glyphs out of diffusion latents.</p>
-          <button class="px-2.5 py-1 rounded bg-[#1f2330] hover:bg-[#2b3142] text-slate-200 text-[10px]">+ Add Title Overlay</button>
+          <span class="font-bold text-pink-300">3. Poster Designer &amp; Title Overlays</span>
+          <p class="text-slate-400 text-[11px]">Renders clean vector text overlays on top of video, keeping messy glyphs out of diffusion.</p>
         </div>
-
-        <!-- 4. Video Sketch & Transition Machine -->
         <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
           <span class="font-bold text-amber-300">4. Transition Machine</span>
-          <p class="text-slate-400 text-[11px] leading-relaxed">Automates FFmpeg xfade dissolves (0.5s overlap) and speed whip-pans between scene cuts.</p>
-          <span class="text-emerald-400 font-mono text-[10px]">Zero-cost local transition rendering</span>
+          <p class="text-slate-400 text-[11px]">Automates FFmpeg xfade dissolves (0.5s overlap) and speed whip-pans between scene cuts.</p>
         </div>
       </div>
-
       <div class="flex justify-end pt-2 border-t border-[#1f2330]">
         <button onclick="closeToolsModal()" class="px-4 py-1.5 rounded-xl bg-[#181a24] text-slate-300 hover:bg-[#202433] text-xs font-medium">Close</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 2: 50 OPTIONS FEATURE MATRIX -->
+  <!-- MODAL: 50 OPTIONS -->
   <div id="options-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-[#11131a] border border-[#262b3b] rounded-2xl w-full max-w-4xl p-6 space-y-4 shadow-2xl max-h-[85vh] flex flex-col">
       <div class="flex items-center justify-between border-b border-[#1f2330] pb-3 shrink-0">
         <div>
           <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO — 50 Platform &amp; Agent Architectural Options</h3>
-          <p class="text-[11px] text-slate-400">10 Production Pillars • Zero-Cost & Commercial Configurations</p>
+          <p class="text-[11px] text-slate-400">10 Production Pillars • Zero-Cost &amp; Commercial Configurations</p>
         </div>
         <button onclick="closeOptionsModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
-      <div id="modal-options-grid" class="flex-1 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-3 pr-1 text-xs">
-        <!-- Dynamically populated via /api/options -->
-      </div>
-
+      <div id="modal-options-grid" class="flex-1 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-3 pr-1 text-xs"></div>
       <div class="flex justify-end pt-3 border-t border-[#1f2330] shrink-0">
-        <button onclick="closeOptionsModal()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 text-xs font-medium">Apply & Close</button>
+        <button onclick="closeOptionsModal()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 text-xs font-medium">Apply &amp; Close</button>
       </div>
     </div>
   </div>
 
-  <!-- MODAL 3: API KEYS & GENERATIVE ENGINES MANAGER -->
+  <!-- MODAL: API KEYS -->
   <div id="api-keys-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-[#11131a] border border-[#262b3b] rounded-2xl w-full max-w-2xl p-6 space-y-5 shadow-2xl">
       <div class="flex items-center justify-between border-b border-[#1f2330] pb-3">
@@ -491,281 +1099,598 @@
         </div>
         <button onclick="closeApiKeysModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
-
       <div class="space-y-4 text-xs">
-        <!-- 1. Google Gemini & Imagen 3 -->
-        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2.5">
+        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
           <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-blue-400"></span>
-              <span class="font-bold text-slate-200">1. Google Gemini &amp; Imagen 3 API Key</span>
-              <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">$0.00 Free Tier</span>
-            </div>
-            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-[10px] text-blue-400 hover:text-blue-300 hover:underline flex items-center space-x-1 font-medium">
-              <span>Get Free Key (Google AI Studio)</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-            </a>
+            <span class="font-bold text-slate-200">1. Google Gemini &amp; Imagen 3 API Key</span>
+            <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-[10px] text-blue-400 hover:underline">Get Free Key</a>
           </div>
-          <p class="text-[10px] text-slate-400 leading-relaxed">
-            Free forever without credit card. Generates Imagen 3 images, 10s video storyboard decompositions, and multimodal frames.
-          </p>
-          <div class="relative">
-            <input type="password" id="gemini-key-input" placeholder="Paste your Google AI Studio key (starts with AIzaSy...)" class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 font-mono">
-            <button onclick="toggleKeyVisibility('gemini-key-input')" class="absolute right-2.5 top-2.5 text-slate-400 hover:text-white text-xs">
-              <i class="fa-regular fa-eye"></i>
-            </button>
-          </div>
+          <input type="password" id="gemini-key-input" placeholder="AIzaSy..." class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 font-mono">
         </div>
-
-        <!-- 2. Hugging Face Access Token -->
-        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2.5">
+        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
           <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
-              <span class="font-bold text-slate-200">2. Hugging Face Access Token (FLUX &amp; LTX-Video)</span>
-              <span class="text-[9px] font-mono bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded font-bold">Free Serverless</span>
-            </div>
-            <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-[10px] text-amber-400 hover:text-amber-300 hover:underline flex items-center space-x-1 font-medium">
-              <span>Get Free Token (Hugging Face)</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-            </a>
+            <span class="font-bold text-slate-200">2. Hugging Face Access Token (FLUX &amp; LTX)</span>
+            <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-[10px] text-amber-400 hover:underline">Get Free Token</a>
           </div>
-          <p class="text-[10px] text-slate-400 leading-relaxed">
-            Powers FLUX.1-schnell 4-step image synthesis and LTX-Video / CogVideoX open-source video models.
-          </p>
-          <div class="relative">
-            <input type="password" id="hf-token-input" placeholder="Paste your Hugging Face token (starts with hf_...)" class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-amber-500 font-mono">
-            <button onclick="toggleKeyVisibility('hf-token-input')" class="absolute right-2.5 top-2.5 text-slate-400 hover:text-white text-xs">
-              <i class="fa-regular fa-eye"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- 3. Together AI Key (Optional) -->
-        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2.5">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center space-x-2">
-              <span class="w-2 h-2 rounded-full bg-purple-400"></span>
-              <span class="font-bold text-slate-200">3. Together AI Key (FLUX &amp; Wan2.1 Fast GPU)</span>
-              <span class="text-[9px] font-mono bg-purple-500/20 text-purple-300 px-1.5 py-0.5 rounded font-bold">$5-$25 Free Credits</span>
-            </div>
-            <a href="https://api.together.ai/settings/api-keys" target="_blank" class="text-[10px] text-purple-400 hover:text-purple-300 hover:underline flex items-center space-x-1 font-medium">
-              <span>Get Free Key (Together AI)</span>
-              <i class="fa-solid fa-arrow-up-right-from-square text-[9px]"></i>
-            </a>
-          </div>
-          <p class="text-[10px] text-slate-400 leading-relaxed">
-            Ultra-low latency cloud inference with free sign-up credit for 1000+ FLUX image generations.
-          </p>
-          <div class="relative">
-            <input type="password" id="together-key-input" placeholder="Paste your Together AI key..." class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-purple-500 font-mono">
-            <button onclick="toggleKeyVisibility('together-key-input')" class="absolute right-2.5 top-2.5 text-slate-400 hover:text-white text-xs">
-              <i class="fa-regular fa-eye"></i>
-            </button>
-          </div>
+          <input type="password" id="hf-token-input" placeholder="hf_..." class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 font-mono">
         </div>
       </div>
-
-      <div class="flex items-center justify-between pt-3 border-t border-[#1f2330] shrink-0">
+      <div class="flex items-center justify-between pt-3 border-t border-[#1f2330]">
         <span id="keys-save-status" class="text-[11px] text-emerald-400 font-mono"></span>
-        <div class="flex items-center space-x-2">
-          <button onclick="closeApiKeysModal()" class="px-4 py-2 rounded-xl bg-[#181a24] text-slate-300 hover:bg-[#202433] text-xs font-medium">Close</button>
-          <button onclick="saveApiKeys()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-indigo-600 hover:from-amber-500 hover:to-indigo-500 text-white text-xs font-medium shadow-md shadow-amber-600/20">Save API Keys</button>
-        </div>
+        <button onclick="saveApiKeys()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-indigo-600 text-white text-xs font-medium">Save API Keys</button>
       </div>
     </div>
   </div>
 
-  <!-- JAVASCRIPT APP LOGIC -->
-  <script>
-    let flowAgentActive = true;
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col space-y-2 pointer-events-none"></div>
 
-    // Load 50 options into modal on page load
+  <!-- ==================== CORE JAVASCRIPT APPLICATION LOGIC ==================== -->
+  <script>
+    // Global State
+    let currentUser = null;
+    let flowAgentActive = true;
+    let usersList = [];
+    let certsList = [];
+
+    // Initialize App on DOM Ready
     window.addEventListener('DOMContentLoaded', async () => {
-      try {
-        let res;
-        try {
-          res = await fetch('/api/options');
-          if (!res.ok) throw new Error();
-        } catch {
-          res = await fetch('/api/options.json');
-        }
-        const data = await res.json();
-        const grid = document.getElementById('modal-options-grid');
-        if (grid && data.options) {
-          grid.innerHTML = data.options.map(opt => `
-            <div class="p-3 rounded-xl bg-[#0b0c10] border border-[#1f2330] flex items-start justify-between space-x-2">
-              <div>
-                <div class="flex items-center space-x-1.5">
-                  <span class="text-[9px] font-mono px-1 py-0.2 rounded bg-[#181a24] text-slate-400 font-bold">#${opt.id}</span>
-                  <span class="text-xs font-bold text-slate-200">${opt.title}</span>
-                </div>
-                <p class="text-[10px] text-slate-400 mt-0.5 leading-snug">${opt.desc}</p>
-                <span class="text-[9px] font-mono text-indigo-400 uppercase mt-1 inline-block">${opt.pillar}</span>
-              </div>
-              <input type="checkbox" ${opt.default ? 'checked' : ''} class="rounded text-indigo-600 focus:ring-0 mt-1">
-            </div>
-          `).join('');
-        }
-      } catch (e) {
-        console.error("Failed to load options:", e);
+      initSession();
+      loadOptions();
+      loadAdminData();
+
+      // Check if welcome modal was dismissed previously
+      if (!localStorage.getItem('ddmai_welcome_dismissed')) {
+        setTimeout(showWelcomeModal, 800);
       }
     });
 
-    function toggleFlowAgentMode() {
-      flowAgentActive = !flowAgentActive;
-      const btn = document.getElementById('flow-agent-toggle');
-      const title = document.getElementById('prompt-box-mode-title');
-      if (flowAgentActive) {
-        btn.className = "flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-medium shadow-md shadow-indigo-600/25 transition";
-        btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>DDMAI Agent: <strong>ON</strong></span>';
-        title.textContent = "DDMAI.VIDEO Agent Prompt Box";
+    // Toast Notification Utility
+    function showToast(msg, type = 'info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const bg = type === 'success' ? 'bg-emerald-950/90 border-emerald-500 text-emerald-200' :
+                 type === 'error' ? 'bg-rose-950/90 border-rose-500 text-rose-200' :
+                 'bg-indigo-950/90 border-indigo-500 text-indigo-200';
+      toast.className = `p-3 rounded-2xl border ${bg} shadow-2xl backdrop-blur-md text-xs font-semibold flex items-center space-x-2 transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto`;
+      toast.innerHTML = `<i class="fa-solid fa-circle-info"></i><span>${msg}</span>`;
+      container.appendChild(toast);
+
+      requestAnimationFrame(() => {
+        toast.classList.remove('translate-y-2', 'opacity-0');
+      });
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-2');
+        setTimeout(() => toast.remove(), 400);
+      }, 3200);
+    }
+
+    // Session & User Authentication Management
+    function initSession() {
+      const savedUser = localStorage.getItem('ddmai_user_session');
+      if (savedUser) {
+        try {
+          currentUser = JSON.parse(savedUser);
+          renderUserNav();
+        } catch {
+          currentUser = null;
+        }
       } else {
-        btn.className = "flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#181a24] text-slate-300 font-medium border border-[#262b3b] transition";
-        btn.innerHTML = '<i class="fa-solid fa-terminal text-xs"></i><span>Standard Prompt: <strong>DIRECT</strong></span>';
-        title.textContent = "Standard Direct Prompt Box";
+        // Default seed user
+        currentUser = {
+          name: 'Pankaj Sharma',
+          email: 'admin@ddmai.video',
+          role: 'SuperAdmin',
+          certId: 'DDMAI-CERT-2026-8942A'
+        };
+        localStorage.setItem('ddmai_user_session', JSON.stringify(currentUser));
+        renderUserNav();
       }
     }
 
+    function renderUserNav() {
+      const container = document.getElementById('user-nav-container');
+      if (currentUser) {
+        const initial = currentUser.name.charAt(0).toUpperCase();
+        const roleColor = currentUser.role === 'SuperAdmin' ? 'bg-rose-600' : 'bg-indigo-600';
+        container.innerHTML = `
+          <button onclick="openUserDashboard()" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] transition">
+            <div class="w-6 h-6 rounded-lg ${roleColor} text-white font-bold text-xs flex items-center justify-center">${initial}</div>
+            <span class="text-xs font-bold text-slate-200 hidden sm:inline">${currentUser.name.split(' ')[0]}</span>
+            <i class="fa-solid fa-chevron-down text-[9px] text-slate-400"></i>
+          </button>
+        `;
+      } else {
+        container.innerHTML = `
+          <button onclick="openAuthModal()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-medium px-3.5 py-1.5 rounded-xl shadow-md transition flex items-center space-x-1.5">
+            <i class="fa-regular fa-user text-xs"></i>
+            <span>Sign In</span>
+          </button>
+        `;
+      }
+    }
+
+    // Modal Triggers
+    function showWelcomeModal() { document.getElementById('welcome-modal').classList.remove('hidden'); }
+    function closeWelcomeModal() {
+      if (document.getElementById('dont-show-welcome').checked) {
+        localStorage.setItem('ddmai_welcome_dismissed', 'true');
+      }
+      document.getElementById('welcome-modal').classList.add('hidden');
+    }
+    function dismissWelcomeBanner() {
+      document.getElementById('welcome-banner').style.display = 'none';
+    }
+
+    function openAuthModal() { document.getElementById('auth-modal').classList.remove('hidden'); }
+    function closeAuthModal() { document.getElementById('auth-modal').classList.add('hidden'); }
+
+    function switchAuthTab(tab) {
+      const btnIn = document.getElementById('tab-signin-btn');
+      const btnUp = document.getElementById('tab-signup-btn');
+      const nameField = document.getElementById('signup-name-field');
+      const submitBtn = document.getElementById('auth-submit-btn');
+
+      if (tab === 'signin') {
+        btnIn.className = "flex-1 py-1.5 rounded-lg bg-indigo-600 text-white font-bold transition";
+        btnUp.className = "flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium transition";
+        nameField.classList.add('hidden');
+        submitBtn.textContent = "Sign In to DDMAI Studio";
+      } else {
+        btnUp.className = "flex-1 py-1.5 rounded-lg bg-indigo-600 text-white font-bold transition";
+        btnIn.className = "flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium transition";
+        nameField.classList.remove('hidden');
+        submitBtn.textContent = "Create Account & Activate $0.00 Mode";
+      }
+    }
+
+    function quickLogin(email, name, role) {
+      currentUser = {
+        name,
+        email,
+        role,
+        certId: `DDMAI-CERT-2026-${Math.floor(1000 + Math.random() * 9000)}`
+      };
+      localStorage.setItem('ddmai_user_session', JSON.stringify(currentUser));
+      renderUserNav();
+      closeAuthModal();
+      showToast(`Logged in as ${currentUser.name} (${currentUser.role})`, 'success');
+    }
+
+    function handleAuthSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('auth-email').value.trim();
+      const name = document.getElementById('auth-name').value.trim() || email.split('@')[0];
+      const role = email.includes('admin') ? 'SuperAdmin' : 'Director';
+      quickLogin(email, name, role);
+    }
+
+    function openUserDashboard() {
+      if (!currentUser) { openAuthModal(); return; }
+      document.getElementById('dash-user-name').textContent = currentUser.name;
+      document.getElementById('dash-user-email').textContent = currentUser.email;
+      document.getElementById('dash-avatar').textContent = currentUser.name.charAt(0).toUpperCase();
+      document.getElementById('dash-user-badge').textContent = currentUser.role;
+      document.getElementById('dash-cert-id').textContent = currentUser.certId || 'DDMAI-CERT-2026-8942A';
+      document.getElementById('user-dashboard-modal').classList.remove('hidden');
+    }
+    function closeUserDashboard() { document.getElementById('user-dashboard-modal').classList.add('hidden'); }
+
+    function handleUserLogout() {
+      currentUser = null;
+      localStorage.removeItem('ddmai_user_session');
+      renderUserNav();
+      closeUserDashboard();
+      showToast("Logged out successfully");
+    }
+
+    // Admin Panel Management
+    function openAdminModal() {
+      loadAdminData();
+      document.getElementById('admin-modal').classList.remove('hidden');
+    }
+    function closeAdminModal() { document.getElementById('admin-modal').classList.add('hidden'); }
+
+    function switchAdminTab(tab) {
+      ['overview', 'users', 'certs', 'rules'].forEach(t => {
+        document.getElementById(`adm-tab-${t}`).className = "px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white font-semibold transition";
+        document.getElementById(`admin-sec-${t}`).classList.add('hidden');
+      });
+      document.getElementById(`adm-tab-${tab}`).className = "px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition";
+      document.getElementById(`admin-sec-${tab}`).classList.remove('hidden');
+    }
+
+    async function loadAdminData() {
+      try {
+        let usersRes = await fetch('/api/auth/users').catch(() => fetch('/api/users.json'));
+        if (usersRes && usersRes.ok) {
+          const udata = await usersRes.json();
+          usersList = udata.users || [];
+          renderAdminUsers(usersList);
+          document.getElementById('admin-user-count').textContent = usersList.length;
+        }
+
+        let certsRes = await fetch('/api/certificates').catch(() => fetch('/api/certificates.json'));
+        if (certsRes && certsRes.ok) {
+          const cdata = await certsRes.json();
+          certsList = cdata.certificates || [];
+          renderAdminCerts(certsList);
+          document.getElementById('admin-cert-count').textContent = certsList.length;
+        }
+      } catch (e) {
+        console.warn("Using local admin seed cache:", e);
+      }
+    }
+
+    function renderAdminUsers(list) {
+      const tbody = document.getElementById('admin-users-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = list.map(u => `
+        <tr class="hover:bg-[#181a24] transition">
+          <td class="p-3">
+            <div class="font-bold text-slate-200">${u.name}</div>
+            <div class="text-[10px] text-slate-400 font-mono">${u.email}</div>
+          </td>
+          <td class="p-3">
+            <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${u.role === 'SuperAdmin' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' : 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30'}">${u.role}</span>
+          </td>
+          <td class="p-3">
+            <span class="text-emerald-400 font-bold flex items-center space-x-1"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>${u.status}</span></span>
+          </td>
+          <td class="p-3">
+            <span class="${u.certified ? 'text-yellow-400' : 'text-slate-500'} font-semibold font-mono text-[11px]">${u.certId || 'Uncertified'}</span>
+          </td>
+          <td class="p-3 space-x-1.5">
+            <button onclick="issueCertToUser('${u.name}', '${u.email}')" class="px-2 py-1 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 font-semibold text-[10px]">Issue Cert</button>
+            <button onclick="toggleUserRole('${u.id}')" class="px-2 py-1 rounded bg-[#202433] text-slate-300 hover:text-white text-[10px]">Role</button>
+          </td>
+        </tr>
+      `).join('');
+    }
+
+    function renderAdminCerts(list) {
+      const container = document.getElementById('admin-certs-list');
+      if (!container) return;
+      container.innerHTML = list.map(c => `
+        <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] flex items-center justify-between">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="font-bold text-white">${c.recipientName}</span>
+              <span class="font-mono text-[10px] text-yellow-400 bg-yellow-500/10 px-1.5 py-0.5 rounded border border-yellow-500/30">${c.id}</span>
+            </div>
+            <div class="text-[11px] text-slate-400">${c.courseName}</div>
+          </div>
+          <button onclick="viewSpecificCertificate('${c.recipientName}', '${c.id}', '${c.issueDate}')" class="px-3 py-1 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 border border-indigo-500/40 font-semibold">View</button>
+        </div>
+      `).join('');
+    }
+
+    function filterAdminUsers() {
+      const q = document.getElementById('admin-user-search').value.toLowerCase();
+      const filtered = usersList.filter(u => u.name.toLowerCase().includes(q) || u.email.toLowerCase().includes(q));
+      renderAdminUsers(filtered);
+    }
+
+    function promptCreateUser() {
+      const name = prompt("Enter New User's Full Name:");
+      if (!name) return;
+      const email = prompt("Enter User Email:", `${name.toLowerCase().replace(/\s+/g, '')}@ddmai.video`);
+      if (!email) return;
+      const role = prompt("Enter Role (Creator / Director / SuperAdmin):", "Director") || "Director";
+      const newUser = {
+        id: `usr_${Date.now()}`,
+        name,
+        email,
+        role,
+        status: "Active",
+        certified: true,
+        certId: `DDMAI-CERT-2026-${Math.floor(1000 + Math.random() * 9000)}`
+      };
+      usersList.unshift(newUser);
+      renderAdminUsers(usersList);
+      showToast(`User ${name} added successfully!`, 'success');
+    }
+
+    function toggleUserRole(userId) {
+      const u = usersList.find(x => x.id === userId);
+      if (u) {
+        u.role = u.role === 'SuperAdmin' ? 'Director' : 'SuperAdmin';
+        renderAdminUsers(usersList);
+        showToast(`Updated ${u.name}'s role to ${u.role}`, 'success');
+      }
+    }
+
+    function issueCertToUser(name, email) {
+      const certId = `DDMAI-CERT-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+      const newCert = {
+        id: certId,
+        recipientName: name,
+        recipientEmail: email,
+        courseName: "Master AI Film Director & 2D Animated Documentary Specialist",
+        issueDate: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+      };
+      certsList.unshift(newCert);
+      renderAdminCerts(certsList);
+
+      const u = usersList.find(x => x.email === email);
+      if (u) { u.certified = true; u.certId = certId; renderAdminUsers(usersList); }
+
+      showToast(`Certificate issued to ${name}!`, 'success');
+      viewSpecificCertificate(name, certId, newCert.issueDate);
+    }
+
+    function promptIssueCertificate() {
+      const name = prompt("Recipient Full Name:", currentUser ? currentUser.name : "Pankaj Sharma");
+      if (name) issueCertToUser(name, "director@ddmai.video");
+    }
+
+    // Certificate Display & Print Engine
+    function openCertificateModal() {
+      const name = currentUser ? currentUser.name : "Pankaj Sharma";
+      const id = currentUser && currentUser.certId ? currentUser.certId : "DDMAI-CERT-2026-8942A";
+      viewSpecificCertificate(name, id, "October 28, 2026");
+    }
+    function closeCertificateModal() { document.getElementById('certificate-modal').classList.add('hidden'); }
+
+    function viewMyCertificate() {
+      closeUserDashboard();
+      openCertificateModal();
+    }
+
+    function viewSpecificCertificate(name, id, date) {
+      document.getElementById('cert-display-name').textContent = name;
+      document.getElementById('cert-display-id').textContent = id;
+      document.getElementById('cert-display-date').textContent = date;
+      document.getElementById('certificate-modal').classList.remove('hidden');
+    }
+
+    function customizeCertificateName() {
+      const newName = prompt("Enter Certificate Recipient Name:", document.getElementById('cert-display-name').textContent);
+      if (newName) {
+        document.getElementById('cert-display-name').textContent = newName;
+        if (currentUser) {
+          currentUser.name = newName;
+          localStorage.setItem('ddmai_user_session', JSON.stringify(currentUser));
+          renderUserNav();
+        }
+        showToast("Certificate recipient name updated!", 'success');
+      }
+    }
+
+    // Tools & Options Modals
+    function openToolsModal() { document.getElementById('tools-modal').classList.remove('hidden'); }
+    function closeToolsModal() { document.getElementById('tools-modal').classList.add('hidden'); }
+    function openOptionsModal() { document.getElementById('options-modal').classList.remove('hidden'); }
+    function closeOptionsModal() { document.getElementById('options-modal').classList.add('hidden'); }
+
+    async function loadOptions() {
+      try {
+        let res = await fetch('/api/options').catch(() => fetch('/api/options.json'));
+        if (res && res.ok) {
+          const data = await res.json();
+          const grid = document.getElementById('modal-options-grid');
+          if (grid && data.options) {
+            grid.innerHTML = data.options.map(opt => `
+              <div class="p-3 rounded-xl bg-[#0b0c10] border border-[#1f2330] flex items-start justify-between space-x-2">
+                <div>
+                  <div class="flex items-center space-x-1.5">
+                    <span class="text-[9px] font-mono px-1 py-0.2 rounded bg-[#181a24] text-slate-400 font-bold">#${opt.id}</span>
+                    <span class="text-xs font-bold text-slate-200">${opt.title}</span>
+                  </div>
+                  <p class="text-[10px] text-slate-400 mt-0.5 leading-snug">${opt.desc}</p>
+                  <span class="text-[9px] font-mono text-indigo-400 uppercase mt-1 inline-block">${opt.pillar}</span>
+                </div>
+                <input type="checkbox" ${opt.default ? 'checked' : ''} class="rounded text-indigo-600 focus:ring-0 mt-1">
+              </div>
+            `).join('');
+          }
+        }
+      } catch (e) {
+        console.warn("Options offline:", e);
+      }
+    }
+
+    function openApiKeysModal() {
+      loadSavedApiKeys();
+      document.getElementById('api-keys-modal').classList.remove('hidden');
+    }
+    function closeApiKeysModal() { document.getElementById('api-keys-modal').classList.add('hidden'); }
+
+    function loadSavedApiKeys() {
+      const gemini = localStorage.getItem('ddmai_gemini_key') || '';
+      const hf = localStorage.getItem('ddmai_hf_token') || '';
+      if (document.getElementById('gemini-key-input')) document.getElementById('gemini-key-input').value = gemini;
+      if (document.getElementById('hf-token-input')) document.getElementById('hf-token-input').value = hf;
+    }
+
+    function saveApiKeys() {
+      const gemini = document.getElementById('gemini-key-input').value.trim();
+      const hf = document.getElementById('hf-token-input').value.trim();
+      localStorage.setItem('ddmai_gemini_key', gemini);
+      localStorage.setItem('ddmai_hf_token', hf);
+      const status = document.getElementById('keys-save-status');
+      status.textContent = "✓ Keys saved securely in browser!";
+      showToast("API Keys saved securely!", 'success');
+      setTimeout(() => { status.textContent = ""; closeApiKeysModal(); }, 1000);
+    }
+
+    // Preset & Prompt Logic
     function applyFlowPreset(type) {
       const area = document.getElementById('main-flow-input');
-      if (type === 'perfume') {
+      if (type === '2d_spy') {
+        area.value = "2D Animated documentary: 38-year-old gentleman in tailored charcoal suit in confident conversation with military general in olive uniform at a lavish reception hall, chiaroscuro shadows, warm amber chandelier light, 16:9 widescreen.";
+      } else if (type === 'perfume') {
         area.value = "Luxury perfume commercial: Frosted glass bottle with fluted brass cap resting on wet black obsidian slate, warm golden hour side lighting, shallow depth of field, amber water mist, vertical 9:16 format.";
       } else if (type === 'ugc') {
         area.value = "TikTok creator UGC skincare review: 24-year-old creator with natural freckles seated at sunlit oak kitchen table, holding pastel mint moisturizer tube, speaking genuinely to camera.";
-      } else if (type === 'scifi') {
-        area.value = "Epic sci-fi cinematic movie scene: Lone cybernetic armored explorer standing on rainy basalt ridge overlooking sprawling neo-city in perpetual rain, cyan neon light shafts.";
       }
       executeFlowDecomposition();
     }
 
     async function executeFlowDecomposition() {
-      const brief = document.getElementById('main-flow-input').value || "Luxury perfume commercial: Frosted glass bottle with fluted brass cap";
-      let splitDone = false;
+      const brief = document.getElementById('main-flow-input').value || "2D Animated spy documentary";
+      showToast("Decomposing prompt into 2D Keyframe & Video Motion...", 'info');
       try {
         const res = await fetch('/api/split-prompt', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ brief, move: 'slow push-in', lighting: 'soft window light' })
+          body: JSON.stringify({ brief, move: 'slow push-in', lighting: 'chiaroscuro' })
         });
         if (res.ok) {
           const data = await res.json();
           if (data && data.success) {
             document.getElementById('p1-content').textContent = data.prompt_1_keyframe;
             document.getElementById('p2-content').textContent = data.prompt_2_motion;
-            splitDone = true;
+            showToast("Dual prompts generated successfully!", 'success');
+            return;
           }
         }
       } catch (e) {
-        console.warn("Backend split endpoint offline, executing client-side decomposition engine:", e);
+        console.warn("Client fallback decomposition:", e);
       }
 
-      if (!splitDone) {
-        const aspect = document.getElementById('canvas-aspect') ? document.getElementById('canvas-aspect').value : '9:16';
-        let p1 = `Photorealistic cinematic commercial studio footage, crisp 35mm finish. ${brief.trim().replace(/\.$/, '')}, soft natural directional side-lighting, warm amber, matte black, and brass color anchors, shallow depth of field, ${aspect} frame.`;
-        let p2 = `Slow micro push-in. The subject catches subtle warm light, micro texture details glisten with gentle fluid motion, camera tracks gracefully along the focal axis. Ends with the subject held steady and centered. Audio: Soft organic Foley resonance, quiet studio silence, no music, no subtitles.`;
-        
-        const lower = brief.toLowerCase();
-        if (lower.includes('perfume')) {
-          p1 = "Photorealistic cinematic commercial studio footage, crisp 35mm finish. Close-up of one frosted glass perfume bottle with fluted brass cap resting on wet obsidian slate, soft natural side-lighting from top-left, warm amber, matte black, and brass color anchors, shallow depth of field, vertical 9:16 frame.";
-          p2 = "Slow micro push-in. A single water droplet glides down the curve of the bottle, catching golden light, then settles onto the dark stone. Ends with the bottle held still and centered. Audio: Soft water droplet drip, quiet studio silence, no music, no subtitles.";
-        } else if (lower.includes('ugc') || lower.includes('skincare')) {
-          p1 = "Photorealistic commercial footage. Medium shot of a 24-year-old creator with natural freckles seated at a sunlit oak kitchen table, holding a pastel mint moisturizer tube, warm morning sun streaming from right, soft pastel green and warm wood tones, vertical 9:16 frame.";
-          p2 = "Slow smooth push-in. She uncaps the moisturizer tube gently, points to the texture with a bright genuine smile, natural hand gesture, eyes engaged with lens. Ends with product held at chest level. Audio: Crisp plastic cap click, subtle morning ambiance, natural room acoustics, no subtitles.";
-        } else if (lower.includes('scifi') || lower.includes('sci-fi')) {
-          p1 = "Cinematic anamorphic film frame, 35mm film grain. Wide establishing shot of a lone cybernetic explorer standing on a wet basalt ridge overlooking a sprawling rainy megacity, glowing cyan and magenta holographic billboards reflecting in pools of water, vertical 9:16 frame.";
-          p2 = "Slow lateral truck from left to right. Heavy rain cascades across the armored shoulder plating, neon lights cast shifting reflections across the wet helmet visor, steam vents billow slowly in the distance. Ends with visor reflecting city lights. Audio: Deep ambient drone, steady rain hum, mechanical servo hum, no subtitles.";
-        }
-
-        document.getElementById('p1-content').textContent = p1;
-        document.getElementById('p2-content').textContent = p2;
+      // Client Fallback
+      if (brief.toLowerCase().includes('2d') || brief.toLowerCase().includes('spy')) {
+        document.getElementById('p1-content').textContent = `A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: The 38-year-old gentleman in tailored charcoal suit stands in confident conversation beside the decorated senior military officer in olive uniform and beret at a lavish government reception hall. Chiaroscuro shadows, warm amber chandelier light, 100% 2D graphic novel ink line art.`;
+        document.getElementById('p2-content').textContent = `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!". Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax push-in camera toward the two men. Subtle natural eye blink, confident slight head nod, ambient chandelier light glinting faintly in deep noir shadows.`;
       }
+      showToast("Dual prompts ready for generation!", 'success');
     }
 
-    function triggerConversationalV2V() {
-      const current = document.getElementById('main-flow-input').value;
-      const mod = prompt("Conversational Video Edit (DDMAI.VIDEO):\nEnter natural language change (e.g. 'Change lighting to sunset' or 'Add light falling rain'):");
-      if (mod) {
-        document.getElementById('main-flow-input').value = `[V2V Edit Turn 1]: ${current} -> Change: ${mod}`;
-        executeFlowDecomposition();
-      }
-    }
-
-    function simulateFlowPlayback() {
-      const btn = document.getElementById('flow-play-text');
-      const icon = document.getElementById('flow-play-icon');
-      if (btn.textContent === 'Preview Scene') {
-        btn.textContent = 'Simulating 10.0s...';
-        icon.className = "fa-solid fa-spinner fa-spin text-[10px]";
-        setTimeout(() => {
-          btn.textContent = 'Preview Scene';
-          icon.className = "fa-solid fa-play text-[10px]";
-          alert("10.0s Scene Preview Complete! Shot 1 (4.0s) seamlessly chained into Shot 2 (6.0s) with 0-credit zero-cost audio ducking on DDMAI.VIDEO.");
-        }, 2500);
+    function toggleFlowAgentMode() {
+      flowAgentActive = !flowAgentActive;
+      const btn = document.getElementById('flow-agent-toggle');
+      const title = document.getElementById('prompt-box-mode-title');
+      if (flowAgentActive) {
+        btn.className = "flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 text-white font-medium shadow-md shadow-indigo-600/25 transition";
+        btn.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles text-xs"></i><span>DDMAI Agent: <strong>ON</strong></span>';
+        title.textContent = "DDMAI.VIDEO Agent Prompt Box";
+        showToast("DDMAI Autonomous Agent Activated");
+      } else {
+        btn.className = "flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#181a24] text-slate-300 font-medium border border-[#262b3b] transition";
+        btn.innerHTML = '<i class="fa-solid fa-terminal text-xs"></i><span>Standard Prompt: <strong>DIRECT</strong></span>';
+        title.textContent = "Standard Direct Prompt Box";
+        showToast("Standard Prompt Mode Active");
       }
     }
 
     function copyCardPrompt(elemId) {
       const text = document.getElementById(elemId).textContent.trim();
       navigator.clipboard.writeText(text);
-      alert("Prompt copied to clipboard!");
-    }
-
-    function openToolsModal() { document.getElementById('tools-modal').classList.remove('hidden'); }
-    function closeToolsModal() { document.getElementById('tools-modal').classList.add('hidden'); }
-    function openOptionsModal() { document.getElementById('options-modal').classList.remove('hidden'); }
-    function closeOptionsModal() { document.getElementById('options-modal').classList.add('hidden'); }
-
-    function openApiKeysModal() {
-      loadSavedApiKeys();
-      document.getElementById('api-keys-modal').classList.remove('hidden');
-    }
-
-    function closeApiKeysModal() {
-      document.getElementById('api-keys-modal').classList.add('hidden');
-    }
-
-    function toggleKeyVisibility(inputId) {
-      const input = document.getElementById(inputId);
-      input.type = input.type === 'password' ? 'text' : 'password';
-    }
-
-    function loadSavedApiKeys() {
-      const gemini = localStorage.getItem('ddmai_gemini_key') || '';
-      const hf = localStorage.getItem('ddmai_hf_token') || '';
-      const together = localStorage.getItem('ddmai_together_key') || '';
-      if (document.getElementById('gemini-key-input')) document.getElementById('gemini-key-input').value = gemini;
-      if (document.getElementById('hf-token-input')) document.getElementById('hf-token-input').value = hf;
-      if (document.getElementById('together-key-input')) document.getElementById('together-key-input').value = together;
-    }
-
-    function saveApiKeys() {
-      const gemini = document.getElementById('gemini-key-input').value.trim();
-      const hf = document.getElementById('hf-token-input').value.trim();
-      const together = document.getElementById('together-key-input').value.trim();
-
-      localStorage.setItem('ddmai_gemini_key', gemini);
-      localStorage.setItem('ddmai_hf_token', hf);
-      localStorage.setItem('ddmai_together_key', together);
-
-      const status = document.getElementById('keys-save-status');
-      status.textContent = "✓ Keys saved securely in browser!";
-      setTimeout(() => { status.textContent = ""; closeApiKeysModal(); }, 1200);
+      showToast("Prompt copied to clipboard!", 'success');
     }
 
     function triggerIngredientUpload() {
-      alert("DDMAI Asset Ingestion:\nDrop or select your reference image into website/public/images/ingredients/ to lock character or product identity.");
+      alert("DDMAI Character & Avatar Ingestion:\nDrop or select your reference image to lock character visual consistency.");
+    }
+
+    function triggerConversationalV2V() {
+      const current = document.getElementById('main-flow-input').value;
+      const mod = prompt("Conversational Video Edit (DDMAI.VIDEO):\nEnter natural language change (e.g. 'Add rain on the window' or 'Increase chiaroscuro contrast'):");
+      if (mod) {
+        document.getElementById('main-flow-input').value = `[V2V Edit Turn 1]: ${current} -> Change: ${mod}`;
+        executeFlowDecomposition();
+      }
+    }
+
+    let activeMediaBlobUrl = null;
+    let activeMediaType = null;
+
+    function handleVideoFileLoaded(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      
+      if (activeMediaBlobUrl) URL.revokeObjectURL(activeMediaBlobUrl);
+      activeMediaBlobUrl = URL.createObjectURL(file);
+      activeMediaType = 'video';
+
+      const video = document.getElementById('active-scene-video');
+      const img = document.getElementById('active-scene-image');
+      const placeholder = document.getElementById('active-scene-placeholder');
+      const badge = document.getElementById('viewport-status-badge');
+
+      img.classList.add('hidden');
+      placeholder.classList.add('hidden');
+      video.classList.remove('hidden');
+      video.src = activeMediaBlobUrl;
+      video.play().catch(() => {});
+
+      badge.textContent = `PLAYING MP4: ${file.name.slice(0, 24)} (${(file.size / (1024*1024)).toFixed(1)}MB)`;
+      showToast(`Rendered Video "${file.name}" loaded into Timeline Monitor!`, 'success');
+    }
+
+    function handleImageFileLoaded(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      if (activeMediaBlobUrl) URL.revokeObjectURL(activeMediaBlobUrl);
+      activeMediaBlobUrl = URL.createObjectURL(file);
+      activeMediaType = 'image';
+
+      const video = document.getElementById('active-scene-video');
+      const img = document.getElementById('active-scene-image');
+      const placeholder = document.getElementById('active-scene-placeholder');
+      const badge = document.getElementById('viewport-status-badge');
+
+      if (video) {
+        video.pause();
+        video.classList.add('hidden');
+      }
+      placeholder.classList.add('hidden');
+      img.classList.remove('hidden');
+      img.src = activeMediaBlobUrl;
+
+      badge.textContent = `2D KEYFRAME: ${file.name.slice(0, 24)}`;
+      showToast(`Keyframe "${file.name}" loaded into Timeline Monitor!`, 'success');
+    }
+
+    function downloadActiveMedia() {
+      if (activeMediaBlobUrl) {
+        const a = document.createElement('a');
+        a.href = activeMediaBlobUrl;
+        a.download = activeMediaType === 'video' ? 'ddmai_scene_01.mp4' : 'ddmai_scene_01_keyframe.png';
+        a.click();
+        showToast("Downloading active media...", 'info');
+      } else {
+        showToast("No active custom media loaded. Load an MP4 or PNG first!", 'warning');
+      }
+    }
+
+    function simulateFlowPlayback() {
+      const video = document.getElementById('active-scene-video');
+      if (activeMediaType === 'video' && video && !video.classList.contains('hidden')) {
+        if (video.paused) {
+          video.play();
+          showToast("Playing rendered video...", 'info');
+        } else {
+          video.pause();
+          showToast("Video paused", 'info');
+        }
+        return;
+      }
+
+      const btn = document.getElementById('flow-play-text');
+      const icon = document.getElementById('flow-play-icon');
+      const badge = document.getElementById('viewport-status-badge');
+      btn.textContent = 'Simulating 4.0s...';
+      icon.className = "fa-solid fa-spinner fa-spin text-[10px]";
+      badge.textContent = 'MONITOR: PLAYING 4.0s HOOK';
+
+      setTimeout(() => {
+        btn.textContent = 'Preview Scene';
+        icon.className = "fa-solid fa-play text-[10px]";
+        badge.textContent = 'MONITOR: SCENE 01 VERIFIED';
+        showToast("Scene 1 (4.0s) Preview Complete! Parallax 2D motion with fast 1.25x VO.", 'success');
+      }, 4000);
     }
 
     function editAgentInstructions() {
       const newInst = prompt("Edit DDMAI Permanent Agent Instructions:", document.getElementById('agent-instructions-preview').textContent.trim());
       if (newInst) {
         document.getElementById('agent-instructions-preview').textContent = `"${newInst}"`;
+        showToast("Agent Instructions Updated!", 'success');
       }
-    }
-
-    function deployExportModal() {
-      alert("DDMAI.VIDEO Zero-Cost Master Export:\nLossless FFmpeg script generated in website/public/renders/P01_S01_Master.mp4 ($0.00 Total Cost).");
     }
   </script>
 </body>

@@ -1,0 +1,53 @@
+{
+  "total": 4,
+  "users": [
+    {
+      "id": "usr_001",
+      "name": "Pankaj Sharma",
+      "email": "admin@ddmai.video",
+      "role": "SuperAdmin",
+      "status": "Active",
+      "joined": "2026-10-15",
+      "credits": "Unlimited ($0.00 Mode)",
+      "videosCreated": 42,
+      "certified": true,
+      "certId": "DDMAI-CERT-2026-8942A"
+    },
+    {
+      "id": "usr_002",
+      "name": "Kunal Verma",
+      "email": "director@ddmai.video",
+      "role": "Director",
+      "status": "Active",
+      "joined": "2026-10-18",
+      "credits": "Unlimited ($0.00 Mode)",
+      "videosCreated": 28,
+      "certified": true,
+      "certId": "DDMAI-CERT-2026-7714K"
+    },
+    {
+      "id": "usr_003",
+      "name": "Aarav Patel",
+      "email": "creator@ddmai.video",
+      "role": "Creator",
+      "status": "Active",
+      "joined": "2026-10-22",
+      "credits": "Unlimited ($0.00 Mode)",
+      "videosCreated": 15,
+      "certified": false,
+      "certId": null
+    },
+    {
+      "id": "usr_004",
+      "name": "Sarah Jenkins",
+      "email": "student@ddmai.video",
+      "role": "Student",
+      "status": "Active",
+      "joined": "2026-10-25",
+      "credits": "Unlimited ($0.00 Mode)",
+      "videosCreated": 6,
+      "certified": false,
+      "certId": null
+    }
+  ]
+}
