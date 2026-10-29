@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DDMAI.VIDEO — Next-Gen AI Video &amp; Image Production Studio</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>(function(){ try { const t = localStorage.getItem('ddmai_theme') || 'light'; if(t === 'light') document.documentElement.classList.add('theme-light'); } catch(e){} })();</script>
+  <script>(function(){ try { document.documentElement.classList.add('theme-light'); localStorage.setItem('ddmai_theme', 'light'); } catch(e){} })();</script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Google+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -380,7 +380,7 @@
       </div>
 
       <!-- Welcome Tour Quick Trigger -->
-      <button onclick="showWelcomeModal()" title="Welcome Tour & Info" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-500 hover:text-white flex items-center justify-center transition">
+      <button onclick="showWelcomeModal()" title="Welcome Tour & Info" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-500 hover:text-slate-900 flex items-center justify-center transition">
         <i class="fa-solid fa-circle-question text-xs"></i>
       </button>
     </div>
@@ -492,15 +492,15 @@
     <main class="flex-1 overflow-y-auto p-4 lg:p-6 space-y-6">
 
       <!-- WELCOME HERO BANNER (Dismissible) -->
-      <div id="welcome-banner" class="rounded-2xl p-4 sm:p-5 bg-gradient-to-r from-indigo-950/60 via-purple-950/40 to-slate-900 border border-indigo-500/30 flex items-center justify-between relative shadow-xl">
+      <div id="welcome-banner" class="rounded-2xl p-4 sm:p-5 bg-gradient-to-r from-indigo-50 via-purple-50 to-blue-50 border border-indigo-200 flex items-center justify-between relative shadow-sm">
         <div class="flex items-center space-x-4">
-          <div class="w-11 h-11 rounded-2xl bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-indigo-300 text-lg shadow-inner">
+          <div class="w-11 h-11 rounded-2xl bg-indigo-100 border border-indigo-300 flex items-center justify-center text-indigo-700 text-lg shadow-xs">
             <i class="fa-solid fa-clapperboard"></i>
           </div>
           <div>
             <h2 class="text-sm sm:text-base font-flow font-extrabold text-slate-900 flex items-center space-x-2">
               <span>Welcome to DDMAI.VIDEO Studio v3.0!</span>
-              <span class="px-2 py-0.5 rounded text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-mono">Academy Edition</span>
+              <span class="px-2 py-0.5 rounded text-[10px] bg-indigo-100 text-indigo-700 border border-indigo-300 font-mono font-semibold">Academy Edition</span>
             </h2>
             <p class="text-xs text-slate-700 mt-0.5">
               Zero-cost AI video generation studio with built-in <strong>2D Noir Documentary Rules</strong>, <strong>User Login Dashboard</strong>, and <strong>Director Certification System</strong>.
@@ -508,11 +508,11 @@
           </div>
         </div>
         <div class="flex items-center space-x-2">
-          <button onclick="openCertificateModal()" class="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 border border-yellow-500/40 text-xs font-semibold items-center space-x-1.5 transition">
+          <button onclick="openCertificateModal()" class="hidden sm:inline-flex px-3 py-1.5 rounded-xl bg-amber-100 hover:bg-amber-200 text-amber-900 border border-amber-300 text-xs font-semibold items-center space-x-1.5 transition shadow-xs">
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Earn Certificate</span>
           </button>
-          <button onclick="dismissWelcomeBanner()" class="text-slate-500 hover:text-white p-1.5"><i class="fa-solid fa-xmark"></i></button>
+          <button onclick="dismissWelcomeBanner()" class="text-slate-500 hover:text-slate-900 p-1.5"><i class="fa-solid fa-xmark"></i></button>
         </div>
       </div>
 
@@ -607,7 +607,7 @@
                 <i class="fa-solid fa-paper-plane text-xs"></i>
                 <span>Ask / Run AI (Enter)</span>
               </button>
-              <button onclick="executeFlowDecomposition()" class="bg-slate-100 hover:bg-[#222636] border border-slate-300 text-slate-700 font-medium text-xs px-3 py-1.5 rounded-xl transition flex items-center space-x-1.5">
+              <button onclick="executeFlowDecomposition()" class="bg-white hover:bg-slate-100 border border-slate-300 text-slate-800 font-medium text-xs px-3 py-1.5 rounded-xl transition flex items-center space-x-1.5 shadow-xs">
                 <i class="fa-solid fa-bolt text-amber-400"></i>
                 <span>Generate (Zero-Cost Mode)</span>
               </button>
@@ -622,12 +622,12 @@
         <div class="flow-card rounded-2xl p-4 shadow-lg space-y-3">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-800 border border-amber-300 font-mono">
                 PROMPT 1: KEYFRAME IMAGE STILL
               </span>
               <span class="text-[10px] text-slate-500 font-mono">2D Graphic Novel / 16:9</span>
             </div>
-            <button onclick="copyCardPrompt('p1-content')" class="text-xs text-slate-500 hover:text-white transition">
+            <button onclick="copyCardPrompt('p1-content')" class="text-xs text-slate-500 hover:text-slate-900 transition">
               <i class="fa-regular fa-copy mr-1"></i>Copy
             </button>
           </div>
@@ -643,13 +643,13 @@
           <!-- Quick Launch AI Image Generators -->
           <div class="pt-2 border-t border-slate-200 flex flex-wrap items-center gap-1.5 text-[10px]">
             <span class="text-slate-500 mr-1">Generate in:</span>
-            <a href="https://aitestkitchen.withgoogle.com/tools/image-fx" target="_blank" class="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition flex items-center space-x-1">
+            <a href="https://aitestkitchen.withgoogle.com/tools/image-fx" target="_blank" class="px-2 py-0.5 rounded-md bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 transition flex items-center space-x-1">
               <i class="fa-solid fa-bolt text-[9px]"></i><span>Google Flow / ImageFX ↗</span>
             </a>
-            <a href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell" target="_blank" class="px-2 py-0.5 rounded-md bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 transition flex items-center space-x-1 shadow-xs">
               <span>FLUX ↗</span>
             </a>
-            <a href="https://www.midjourney.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://www.midjourney.com" target="_blank" class="px-2 py-0.5 rounded-md bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 transition flex items-center space-x-1 shadow-xs">
               <span>Midjourney ↗</span>
             </a>
           </div>
@@ -659,12 +659,12 @@
         <div class="flow-card rounded-2xl p-4 shadow-lg space-y-3">
           <div class="flex items-center justify-between">
             <div class="flex items-center space-x-2">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono">
+              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-100 text-cyan-800 border border-cyan-300 font-mono">
                 PROMPT 2: VIDEO MOTION & AUDIO
               </span>
               <span class="text-[10px] text-slate-500 font-mono">Veo / Kling / Omni</span>
             </div>
-            <button onclick="copyCardPrompt('p2-content')" class="text-xs text-slate-500 hover:text-white transition">
+            <button onclick="copyCardPrompt('p2-content')" class="text-xs text-slate-500 hover:text-slate-900 transition">
               <i class="fa-regular fa-copy mr-1"></i>Copy
             </button>
           </div>
@@ -680,16 +680,16 @@
           <!-- Quick Launch AI Video Engines -->
           <div class="pt-2 border-t border-slate-200 flex flex-wrap items-center gap-1.5 text-[10px]">
             <span class="text-slate-500 mr-1">Generate in:</span>
-            <a href="https://aitestkitchen.withgoogle.com/tools/video-fx" target="_blank" class="px-2 py-0.5 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition flex items-center space-x-1">
+            <a href="https://aitestkitchen.withgoogle.com/tools/video-fx" target="_blank" class="px-2 py-0.5 rounded-md bg-cyan-50 hover:bg-cyan-100 text-cyan-800 border border-cyan-300 transition flex items-center space-x-1">
               <i class="fa-solid fa-video text-[9px]"></i><span>Google Veo / Flow ↗</span>
             </a>
-            <a href="https://klingai.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://klingai.com" target="_blank" class="px-2 py-0.5 rounded-md bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 transition flex items-center space-x-1 shadow-xs">
               <span>Kling AI ↗</span>
             </a>
-            <a href="https://runwayml.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://runwayml.com" target="_blank" class="px-2 py-0.5 rounded-md bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 transition flex items-center space-x-1 shadow-xs">
               <span>Runway Gen-3 ↗</span>
             </a>
-            <a href="https://hailuoai.video" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://hailuoai.video" target="_blank" class="px-2 py-0.5 rounded-md bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 transition flex items-center space-x-1 shadow-xs">
               <span>Hailuo ↗</span>
             </a>
           </div>
@@ -711,11 +711,11 @@
             <input type="file" id="media-video-picker" accept="video/mp4,video/webm" class="hidden" onchange="handleVideoFileLoaded(event)">
             <input type="file" id="media-image-picker" accept="image/png,image/jpeg,image/webp" class="hidden" onchange="handleImageFileLoaded(event)">
 
-            <button onclick="document.getElementById('media-image-picker').click()" class="bg-slate-100 hover:bg-[#222636] text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5">
+            <button onclick="document.getElementById('media-image-picker').click()" class="bg-white hover:bg-slate-100 text-amber-800 border border-amber-300 px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow-xs">
               <i class="fa-regular fa-image text-xs"></i>
               <span>Load Keyframe (PNG)</span>
             </button>
-            <button onclick="document.getElementById('media-video-picker').click()" class="bg-slate-100 hover:bg-[#222636] text-cyan-300 border border-cyan-500/30 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5">
+            <button onclick="document.getElementById('media-video-picker').click()" class="bg-white hover:bg-slate-100 text-cyan-800 border border-cyan-300 px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow-xs">
               <i class="fa-solid fa-file-video text-xs"></i>
               <span>Load Rendered Video (MP4)</span>
             </button>
@@ -731,7 +731,7 @@
         </div>
 
         <!-- LIVE MEDIA SCREEN / MONITOR -->
-        <div id="media-monitor-viewport" class="relative w-full aspect-video max-h-[360px] bg-[#07080c] border border-slate-200 rounded-2xl overflow-hidden flex items-center justify-center group shadow-inner">
+        <div id="media-monitor-viewport" class="relative w-full aspect-video max-h-[360px] bg-slate-100 border border-slate-300 rounded-2xl overflow-hidden flex items-center justify-center group shadow-xs">
           <!-- Real HTML5 Video Player -->
           <video id="active-scene-video" class="hidden w-full h-full object-contain" controls></video>
 
@@ -740,28 +740,28 @@
 
           <!-- Fallback Interactive 2D Noir Canvas Visualizer -->
           <div id="active-scene-placeholder" class="text-center p-6 space-y-3">
-            <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-950/50 border border-indigo-700/40 flex items-center justify-center text-indigo-400 text-2xl shadow-lg">
+            <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 text-2xl shadow-xs">
               <i class="fa-solid fa-clapperboard"></i>
             </div>
             <div>
               <h4 class="text-sm font-bold text-slate-800">Scene 01 Monitor: Damascus Presidential Reception</h4>
               <p class="text-xs text-slate-500 max-w-md mx-auto mt-1">100% 2D Animated Noir Graphic Novel • Chiaroscuro Chandelier Lighting • Adult Spy &amp; General</p>
             </div>
-            <div class="inline-flex items-center space-x-2 text-[11px] font-mono text-amber-300 bg-amber-950/40 border border-amber-600/30 px-3 py-1 rounded-lg">
+            <div class="inline-flex items-center space-x-2 text-[11px] font-mono text-amber-800 bg-amber-50 border border-amber-300 px-3 py-1 rounded-lg">
               <i class="fa-solid fa-camera"></i>
               <span>Ready for Render: 4.0s Fast Punchy Hook • 16:9 Widescreen</span>
             </div>
           </div>
 
           <!-- Overlay Badge -->
-          <div class="absolute top-3 left-3 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700/50 text-[10px] text-slate-700 font-mono flex items-center space-x-1.5">
+          <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-300 text-[10px] text-slate-800 font-mono flex items-center space-x-1.5 shadow-sm">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span id="viewport-status-badge">MONITOR: READY (16:9)</span>
           </div>
 
           <!-- Quick Action Floating Buttons -->
           <div class="absolute bottom-3 right-3 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition duration-200">
-            <button onclick="downloadActiveMedia()" class="bg-black/80 hover:bg-black text-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-xs flex items-center space-x-1.5 backdrop-blur-sm">
+            <button onclick="downloadActiveMedia()" class="bg-white hover:bg-slate-50 text-slate-800 px-3 py-1.5 rounded-lg border border-slate-300 text-xs flex items-center space-x-1.5 shadow-sm">
               <i class="fa-solid fa-download text-[11px]"></i>
               <span>Download Media</span>
             </button>
@@ -779,9 +779,9 @@
             
             <div class="flex space-x-2 h-16">
               <!-- Shot 1: 4.0s Hook -->
-              <div class="w-full bg-gradient-to-r from-amber-900/40 via-indigo-900/50 to-purple-900/50 border border-amber-500/40 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-amber-400 transition">
+              <div class="w-full bg-gradient-to-r from-amber-50 via-indigo-50 to-purple-50 border border-amber-300 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-amber-400 transition shadow-xs">
                 <div class="flex items-center justify-between text-[10px]">
-                  <span class="font-bold text-amber-300">SH01: Damascus Presidential Reception (Two Figures)</span>
+                  <span class="font-bold text-amber-900">SH01: Damascus Presidential Reception (Two Figures)</span>
                   <span class="font-mono bg-slate-50 px-1.5 py-0.2 rounded text-white text-[9px]">4.0s</span>
                 </div>
                 <div class="text-[9px] text-slate-700 truncate">2D Noir Chiaroscuro • Adult Spy &amp; General • Ghost Avatar Voice</div>
@@ -814,7 +814,7 @@
   </div>
 
   <!-- ==================== MODAL 1: WELCOME & ONBOARDING ==================== -->
-  <div id="welcome-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+  <div id="welcome-modal" class="hidden fixed inset-0 bg-slate-500/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-2xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden">
       <!-- Decorative Glow -->
       <div class="absolute -top-24 -right-24 w-60 h-60 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -830,7 +830,7 @@
             <p class="text-xs text-indigo-300 font-medium">World's #1 Zero-Cost AI Video Studio &amp; Certification Academy</p>
           </div>
         </div>
-        <button onclick="closeWelcomeModal()" class="text-slate-500 hover:text-white p-1 rounded-lg hover:bg-[#1f2330] transition"><i class="fa-solid fa-xmark text-base"></i></button>
+        <button onclick="closeWelcomeModal()" class="text-slate-500 hover:text-slate-900 p-1 rounded-lg hover:bg-slate-100 transition"><i class="fa-solid fa-xmark text-base"></i></button>
       </div>
 
       <!-- 4 Pillars of DDMAI Studio -->
@@ -895,7 +895,7 @@
   </div>
 
   <!-- ==================== MODAL 2: USER AUTH (LOGIN / REGISTER) ==================== -->
-  <div id="auth-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+  <div id="auth-modal" class="hidden fixed inset-0 bg-slate-500/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-md p-6 space-y-5 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <div class="flex items-center space-x-2.5">
@@ -907,13 +907,13 @@
             <p class="text-[11px] text-slate-500">Access your dashboard, projects, and certificates</p>
           </div>
         </div>
-        <button onclick="closeAuthModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeAuthModal()" class="text-slate-500 hover:text-slate-900"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <!-- Auth Tabs: Sign In / Sign Up -->
       <div class="flex p-1 rounded-xl bg-slate-50 border border-slate-200 text-xs">
         <button onclick="switchAuthTab('signin')" id="tab-signin-btn" class="flex-1 py-1.5 rounded-lg bg-indigo-600 text-white font-bold transition">Sign In</button>
-        <button onclick="switchAuthTab('signup')" id="tab-signup-btn" class="flex-1 py-1.5 rounded-lg text-slate-500 hover:text-white font-medium transition">Register</button>
+        <button onclick="switchAuthTab('signup')" id="tab-signup-btn" class="flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 font-medium transition">Register</button>
       </div>
 
       <!-- Quick 1-Click Demo Accounts -->
@@ -965,7 +965,7 @@
   </div>
 
   <!-- ==================== MODAL 3: USER LOGIN DASHBOARD ==================== -->
-  <div id="user-dashboard-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+  <div id="user-dashboard-modal" class="hidden fixed inset-0 bg-slate-500/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-3xl p-6 sm:p-7 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
       <!-- Dashboard Header -->
       <div class="flex items-center justify-between border-b border-slate-200 pb-4">
@@ -982,10 +982,10 @@
           </div>
         </div>
         <div class="flex items-center space-x-2">
-          <button onclick="handleUserLogout()" class="px-3 py-1.5 rounded-xl bg-red-950/40 hover:bg-red-900/50 border border-red-500/40 text-red-300 text-xs font-semibold transition">
+          <button onclick="handleUserLogout()" class="px-3 py-1.5 rounded-xl bg-rose-50 hover:bg-rose-100 border border-rose-300 text-rose-700 text-xs font-semibold transition">
             <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i>Logout
           </button>
-          <button onclick="closeUserDashboard()" class="text-slate-500 hover:text-white p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+          <button onclick="closeUserDashboard()" class="text-slate-500 hover:text-slate-900 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
         </div>
       </div>
 
@@ -1059,7 +1059,7 @@
   </div>
 
   <!-- ==================== MODAL 4: ADMIN PANEL DASHBOARD ==================== -->
-  <div id="admin-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
+  <div id="admin-modal" class="hidden fixed inset-0 bg-slate-500/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-4xl p-6 sm:p-7 space-y-6 shadow-2xl max-h-[90vh] flex flex-col">
       <!-- Admin Header -->
       <div class="flex items-center justify-between border-b border-slate-200 pb-4 shrink-0">
@@ -1075,7 +1075,7 @@
             <p class="text-xs text-slate-500">Platform Analytics, User Roles, Certification Authority &amp; System Rules</p>
           </div>
         </div>
-        <button onclick="closeAdminModal()" class="text-slate-500 hover:text-white p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+        <button onclick="closeAdminModal()" class="text-slate-500 hover:text-slate-900 p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
       </div>
 
       <!-- Admin Navigation Tabs -->
@@ -1083,13 +1083,13 @@
         <button onclick="switchAdminTab('overview')" id="adm-tab-overview" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition">
           <i class="fa-solid fa-chart-pie mr-1.5"></i>Overview &amp; Stats
         </button>
-        <button onclick="switchAdminTab('users')" id="adm-tab-users" class="px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-white font-semibold transition">
+        <button onclick="switchAdminTab('users')" id="adm-tab-users" class="px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-slate-900 font-semibold transition">
           <i class="fa-solid fa-users mr-1.5"></i>User Management (<span id="admin-user-count">4</span>)
         </button>
-        <button onclick="switchAdminTab('certs')" id="adm-tab-certs" class="px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-white font-semibold transition">
+        <button onclick="switchAdminTab('certs')" id="adm-tab-certs" class="px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-slate-900 font-semibold transition">
           <i class="fa-solid fa-certificate mr-1.5"></i>Certification Authority
         </button>
-        <button onclick="switchAdminTab('rules')" id="adm-tab-rules" class="px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-white font-semibold transition">
+        <button onclick="switchAdminTab('rules')" id="adm-tab-rules" class="px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-slate-900 font-semibold transition">
           <i class="fa-solid fa-sliders mr-1.5"></i>System Rules (10,000)
         </button>
       </div>
@@ -1229,8 +1229,8 @@
   </div>
 
   <!-- ==================== MODAL 5: LUXURY INTERACTIVE CERTIFICATE ==================== -->
-  <div id="certificate-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-md z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
-    <div class="bg-[#0f172a] border-2 border-amber-500/60 rounded-3xl w-full max-w-4xl p-6 sm:p-8 space-y-6 shadow-2xl relative my-auto">
+  <div id="certificate-modal" class="hidden fixed inset-0 bg-slate-500/20 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+    <div class="bg-white border-2 border-amber-400 rounded-3xl w-full max-w-4xl p-6 sm:p-8 space-y-6 shadow-2xl relative my-auto">
       
       <!-- Top Action Bar (No-Print) -->
       <div class="flex items-center justify-between border-b border-amber-500/30 pb-4 no-print">
@@ -1239,14 +1239,14 @@
           <span class="font-flow font-bold text-slate-900 text-sm">DDMAI Official Credential Verification System</span>
         </div>
         <div class="flex items-center space-x-2">
-          <button onclick="customizeCertificateName()" class="px-3 py-1.5 rounded-xl bg-[#1e293b] hover:bg-[#334155] text-amber-300 text-xs font-semibold border border-amber-500/30 transition">
+          <button onclick="customizeCertificateName()" class="px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-semibold border border-amber-300 transition">
             <i class="fa-solid fa-pen-to-square mr-1"></i>Edit Name
           </button>
           <button onclick="window.print()" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition flex items-center space-x-1.5">
             <i class="fa-solid fa-print"></i>
             <span>Print / Save as PDF</span>
           </button>
-          <button onclick="closeCertificateModal()" class="text-slate-500 hover:text-white p-1 ml-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+          <button onclick="closeCertificateModal()" class="text-slate-500 hover:text-slate-900 p-1 ml-2"><i class="fa-solid fa-xmark text-lg"></i></button>
         </div>
       </div>
 
@@ -1327,14 +1327,14 @@
 
   <!-- ==================== EXISTING MODALS (TOOLS & OPTIONS & API KEYS) ==================== -->
   <!-- MODAL: ADVANCED FLOW TOOLS -->
-  <div id="tools-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div id="tools-modal" class="hidden fixed inset-0 bg-slate-500/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-2xl w-full max-w-3xl p-6 space-y-5 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <div class="flex items-center space-x-2">
           <i class="fa-solid fa-sliders text-cyan-400 text-base"></i>
           <h3 class="text-sm font-flow font-bold text-slate-900">DDMAI.VIDEO AI Video Tools Suite</h3>
         </div>
-        <button onclick="closeToolsModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeToolsModal()" class="text-slate-500 hover:text-slate-900"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
         <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
@@ -1361,14 +1361,14 @@
   </div>
 
   <!-- MODAL: 50 OPTIONS -->
-  <div id="options-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div id="options-modal" class="hidden fixed inset-0 bg-slate-500/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-2xl w-full max-w-4xl p-6 space-y-4 shadow-2xl max-h-[85vh] flex flex-col">
       <div class="flex items-center justify-between border-b border-slate-200 pb-3 shrink-0">
         <div>
           <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO — 50 Platform &amp; Agent Architectural Options</h3>
           <p class="text-[11px] text-slate-500">10 Production Pillars • Zero-Cost &amp; Commercial Configurations</p>
         </div>
-        <button onclick="closeOptionsModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeOptionsModal()" class="text-slate-500 hover:text-slate-900"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div id="modal-options-grid" class="flex-1 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-3 pr-1 text-xs"></div>
       <div class="flex justify-end pt-3 border-t border-slate-200 shrink-0">
@@ -1378,7 +1378,7 @@
   </div>
 
   <!-- MODAL: API KEYS -->
-  <div id="api-keys-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+  <div id="api-keys-modal" class="hidden fixed inset-0 bg-slate-500/20 backdrop-blur-sm z-50 flex items-center justify-center p-4">
     <div class="bg-white border border-slate-200 rounded-2xl w-full max-w-2xl p-6 space-y-5 shadow-2xl">
       <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <div class="flex items-center space-x-2.5">
@@ -1390,7 +1390,7 @@
             <p class="text-[11px] text-slate-500">Connect Free &amp; Zero-Cost Model Providers to Generate Images &amp; Videos</p>
           </div>
         </div>
-        <button onclick="closeApiKeysModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeApiKeysModal()" class="text-slate-500 hover:text-slate-900"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="space-y-4 text-xs">
         <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
@@ -1428,16 +1428,15 @@
 
     // Theme Management (Clean Light / Dark Mode)
     function initTheme() {
-      // Default to 'light' theme as user requested, or load saved preference
-      const savedTheme = localStorage.getItem('ddmai_theme') || 'light';
-      applyTheme(savedTheme);
+      // Enforce permanent clean Light Theme everywhere
+      applyTheme('light');
     }
 
     function toggleTheme() {
-      const isLight = document.body.classList.contains('theme-light') || document.documentElement.classList.contains('theme-light');
-      const nextTheme = isLight ? 'dark' : 'light';
+      const current = localStorage.getItem('ddmai_theme');
+      const nextTheme = current === 'light' ? 'dark' : 'light';
       applyTheme(nextTheme);
-      showToast(nextTheme === 'light' ? "☀️ Clean Light Theme Activated" : "🌙 Dark Theme Activated", 'info');
+      showToast("☀️ Clean Light Studio Active", 'info');
     }
 
     function applyTheme(theme) {
@@ -1447,21 +1446,14 @@
       const label = document.getElementById('theme-toggle-label');
       const btn = document.getElementById('theme-toggle-btn');
 
-      if (theme === 'light') {
-        body.classList.add('theme-light');
-        html.classList.add('theme-light');
-        localStorage.setItem('ddmai_theme', 'light');
-        if (icon) icon.className = "fa-solid fa-moon text-indigo-600 text-xs";
-        if (label) label.textContent = "Dark Mode";
-        if (btn) btn.className = "px-3 py-1.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-800 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs";
-      } else {
-        body.classList.remove('theme-light');
-        html.classList.remove('theme-light');
-        localStorage.setItem('ddmai_theme', 'dark');
-        if (icon) icon.className = "fa-solid fa-sun text-amber-400 text-xs";
-        if (label) label.textContent = "Light Mode";
-        if (btn) btn.className = "px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 text-amber-300 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs";
-      }
+      // Keep light theme classes ALWAYS active to guarantee pure light background
+      body.classList.add('theme-light');
+      html.classList.add('theme-light');
+      localStorage.setItem('ddmai_theme', theme);
+
+      if (icon) icon.className = "fa-solid fa-sun text-amber-500 text-xs";
+      if (label) label.textContent = "Light Studio";
+      if (btn) btn.className = "px-3 py-1.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs";
     }
 
     // Initialize App on DOM Ready
@@ -1483,11 +1475,11 @@
       if (!container) return;
       container.innerHTML = ''; // Prevent stacking toasts!
       const toast = document.createElement('div');
-      const bg = type === 'success' ? 'bg-emerald-950/90 border-emerald-500 text-emerald-200' :
-                 type === 'error' ? 'bg-rose-950/90 border-rose-500 text-rose-200' :
-                 'bg-indigo-950/90 border-indigo-500 text-indigo-200';
-      toast.className = `p-3 rounded-2xl border ${bg} shadow-2xl backdrop-blur-md text-xs font-semibold flex items-center space-x-2 transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto`;
-      toast.innerHTML = `<i class="fa-solid fa-circle-info"></i><span>${msg}</span>`;
+      const bg = type === 'success' ? 'bg-white border-2 border-emerald-500 text-emerald-900 shadow-xl' :
+                 type === 'error' ? 'bg-white border-2 border-rose-500 text-rose-900 shadow-xl' :
+                 'bg-white border-2 border-indigo-500 text-indigo-900 shadow-xl';
+      toast.className = `p-3 rounded-2xl border ${bg} text-xs font-bold flex items-center space-x-2 transition-all duration-300 transform translate-y-2 opacity-0 pointer-events-auto`;
+      toast.innerHTML = `<i class="fa-solid fa-circle-info text-indigo-600"></i><span>${msg}</span>`;
       container.appendChild(toast);
 
       requestAnimationFrame(() => {
@@ -1802,12 +1794,12 @@
 
       if (tab === 'signin') {
         btnIn.className = "flex-1 py-1.5 rounded-lg bg-indigo-600 text-white font-bold transition";
-        btnUp.className = "flex-1 py-1.5 rounded-lg text-slate-500 hover:text-white font-medium transition";
+        btnUp.className = "flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 font-medium transition";
         nameField.classList.add('hidden');
         submitBtn.textContent = "Sign In to DDMAI Studio";
       } else {
         btnUp.className = "flex-1 py-1.5 rounded-lg bg-indigo-600 text-white font-bold transition";
-        btnIn.className = "flex-1 py-1.5 rounded-lg text-slate-500 hover:text-white font-medium transition";
+        btnIn.className = "flex-1 py-1.5 rounded-lg text-slate-500 hover:text-slate-900 font-medium transition";
         nameField.classList.remove('hidden');
         submitBtn.textContent = "Create Account & Activate $0.00 Mode";
       }
@@ -1862,7 +1854,7 @@
 
     function switchAdminTab(tab) {
       ['overview', 'users', 'certs', 'rules'].forEach(t => {
-        document.getElementById(`adm-tab-${t}`).className = "px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-white font-semibold transition";
+        document.getElementById(`adm-tab-${t}`).className = "px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-slate-900 font-semibold transition";
         document.getElementById(`admin-sec-${t}`).classList.add('hidden');
       });
       document.getElementById(`adm-tab-${tab}`).className = "px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition";
@@ -1911,7 +1903,7 @@
           </td>
           <td class="p-3 space-x-1.5">
             <button onclick="issueCertToUser('${u.name}', '${u.email}')" class="px-2 py-1 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 font-semibold text-[10px]">Issue Cert</button>
-            <button onclick="toggleUserRole('${u.id}')" class="px-2 py-1 rounded bg-[#202433] text-slate-700 hover:text-white text-[10px]">Role</button>
+            <button onclick="toggleUserRole('${u.id}')" class="px-2 py-1 rounded bg-slate-100 text-slate-700 hover:text-slate-900 text-[10px]">Role</button>
           </td>
         </tr>
       `).join('');
