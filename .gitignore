@@ -5,3 +5,4 @@ node_modules/
 temp_*
 temp_guide.zip
 temp_guide2.zip
+test-results/

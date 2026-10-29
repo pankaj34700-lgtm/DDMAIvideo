@@ -170,4 +170,49 @@ test.describe('DDMAI.VIDEO Studio E2E Suite', () => {
     expect(feedText).toContain('Scene 1');
   });
 
+  test('10: Multi-Prompt Dynamic Video & Keyframe Playback Across Scenes', async ({ page }) => {
+    await page.addInitScript(() => {
+      localStorage.setItem('ddmai_welcome_dismissed', 'true');
+    });
+    await page.goto('/');
+
+    // 1. Initial Video is Scene 1
+    const videoElem = page.locator('#active-scene-video');
+    await expect(videoElem).toHaveAttribute('src', /scene_01_hook\.mp4/);
+
+    // 2. Switch to Scene 2 (Clock Surveillance)
+    await page.click('#scene-tab-scene_02');
+    await page.waitForTimeout(400);
+    await expect(videoElem).toHaveAttribute('src', /scene_02_surveillance\.mp4/);
+    await expect(page.locator('#timeline-shot-tag')).toContainText('Clock Surveillance');
+
+    // 3. Switch to Scene 3 (Graveyard Coffin)
+    await page.click('#scene-tab-scene_03');
+    await page.waitForTimeout(400);
+    await expect(videoElem).toHaveAttribute('src', /scene_03_coffin\.mp4/);
+    await expect(page.locator('#timeline-shot-tag')).toContainText('Graveyard Coffin');
+
+    // 4. Switch to Perfume Commercial (9:16 Vertical)
+    await page.click('#scene-tab-perfume');
+    await page.waitForTimeout(400);
+    await expect(videoElem).toHaveAttribute('src', /perfume_commercial\.mp4/);
+    await expect(page.locator('#timeline-shot-tag')).toContainText('Perfume Flacon');
+
+    // 5. Switch to UGC TikTok (9:16 Vertical)
+    await page.click('#scene-tab-ugc');
+    await page.waitForTimeout(400);
+    await expect(videoElem).toHaveAttribute('src', /ugc_tiktok\.mp4/);
+    await expect(page.locator('#timeline-shot-tag')).toContainText('Skincare');
+
+    // 6. Test Keyframe toggle
+    await page.click('#view-mode-toggle-btn');
+    await page.waitForTimeout(300);
+    await expect(page.locator('#active-scene-image')).toBeVisible();
+
+    // Toggle back to video
+    await page.click('#view-mode-toggle-btn');
+    await page.waitForTimeout(300);
+    await expect(videoElem).toBeVisible();
+  });
+
 });

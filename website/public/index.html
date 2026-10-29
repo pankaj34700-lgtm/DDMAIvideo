@@ -618,23 +618,53 @@
             <span class="text-[10px] text-indigo-400 font-mono">History</span>
           </div>
           <div class="space-y-1.5">
-            <div class="p-2 rounded-xl bg-white border border-slate-200 flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500/50 transition">
-              <div class="w-9 h-9 rounded-lg bg-indigo-900/40 border border-indigo-700/50 flex items-center justify-center text-indigo-400 font-bold text-xs">
+            <div onclick="loadSceneMedia('scene_01')" class="p-2 rounded-xl bg-white border border-slate-200 flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500 hover:bg-indigo-50/40 transition">
+              <div class="w-8 h-8 rounded-lg bg-indigo-100 border border-indigo-300 flex items-center justify-center text-indigo-700 font-bold text-xs">
                 S01
               </div>
               <div class="overflow-hidden">
                 <div class="text-xs font-bold text-slate-800 truncate">2D Spy Documentary</div>
-                <div class="text-[10px] text-slate-500">4.0s • Eli Cohen Reception</div>
+                <div class="text-[10px] text-slate-500">4.0s • Damascus Reception</div>
               </div>
             </div>
 
-            <div class="p-2 rounded-xl bg-white/60 border border-slate-200 flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500/50 transition">
-              <div class="w-9 h-9 rounded-lg bg-pink-900/40 border border-pink-700/50 flex items-center justify-center text-pink-400 font-bold text-xs">
-                P02
+            <div onclick="loadSceneMedia('scene_02')" class="p-2 rounded-xl bg-white border border-slate-200 flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500 hover:bg-amber-50/40 transition">
+              <div class="w-8 h-8 rounded-lg bg-amber-100 border border-amber-300 flex items-center justify-center text-amber-800 font-bold text-xs">
+                S02
+              </div>
+              <div class="overflow-hidden">
+                <div class="text-xs font-bold text-slate-800 truncate">Bedroom Surveillance</div>
+                <div class="text-[10px] text-slate-500">4.0s • Clock Transmitter</div>
+              </div>
+            </div>
+
+            <div onclick="loadSceneMedia('scene_03')" class="p-2 rounded-xl bg-white border border-slate-200 flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500 hover:bg-purple-50/40 transition">
+              <div class="w-8 h-8 rounded-lg bg-purple-100 border border-purple-300 flex items-center justify-center text-purple-700 font-bold text-xs">
+                S03
+              </div>
+              <div class="overflow-hidden">
+                <div class="text-xs font-bold text-slate-800 truncate">Graveyard Exhumation</div>
+                <div class="text-[10px] text-slate-500">4.0s • Coffin Exhumation</div>
+              </div>
+            </div>
+
+            <div onclick="loadSceneMedia('perfume')" class="p-2 rounded-xl bg-white border border-slate-200 flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500 hover:bg-pink-50/40 transition">
+              <div class="w-8 h-8 rounded-lg bg-pink-100 border border-pink-300 flex items-center justify-center text-pink-700 font-bold text-xs">
+                P01
               </div>
               <div class="overflow-hidden">
                 <div class="text-xs font-bold text-slate-800 truncate">Perfume Commercial</div>
-                <div class="text-[10px] text-slate-500">10.0s • 4s+6s Chained</div>
+                <div class="text-[10px] text-slate-500">4.0s • 9:16 Vertical Take</div>
+              </div>
+            </div>
+
+            <div onclick="loadSceneMedia('ugc')" class="p-2 rounded-xl bg-white border border-slate-200 flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500 hover:bg-emerald-50/40 transition">
+              <div class="w-8 h-8 rounded-lg bg-emerald-100 border border-emerald-300 flex items-center justify-center text-emerald-700 font-bold text-xs">
+                U01
+              </div>
+              <div class="overflow-hidden">
+                <div class="text-xs font-bold text-slate-800 truncate">TikTok UGC Creator</div>
+                <div class="text-[10px] text-slate-500">4.0s • 9:16 Skincare Review</div>
               </div>
             </div>
           </div>
@@ -816,6 +846,12 @@
               <button onclick="applyFlowPreset('2d_spy')" class="px-2.5 py-1 rounded-lg bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-800 text-[11px] font-semibold transition">
                 + 2D Spy Documentary
               </button>
+              <button onclick="applyFlowPreset('scene_02')" class="px-2.5 py-1 rounded-lg bg-amber-50/60 hover:bg-amber-100 border border-amber-200 text-amber-800 text-[11px] transition">
+                + Scene 2 (Surveillance)
+              </button>
+              <button onclick="applyFlowPreset('scene_03')" class="px-2.5 py-1 rounded-lg bg-purple-50 hover:bg-purple-100 border border-purple-200 text-purple-800 text-[11px] transition">
+                + Scene 3 (Coffin)
+              </button>
               <button onclick="applyFlowPreset('perfume')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-[11px] transition">
                 + Perfume Commercial
               </button>
@@ -934,41 +970,63 @@
             <input type="file" id="media-video-picker" accept="video/mp4,video/webm" class="hidden" onchange="handleVideoFileLoaded(event)">
             <input type="file" id="media-image-picker" accept="image/png,image/jpeg,image/webp" class="hidden" onchange="handleImageFileLoaded(event)">
 
-            <button onclick="document.getElementById('media-image-picker').click()" class="bg-white hover:bg-slate-100 text-amber-800 border border-amber-300 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow-xs">
+            <button onclick="toggleKeyframeVideoView()" id="view-mode-toggle-btn" class="bg-white hover:bg-slate-100 text-amber-800 border border-amber-300 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow-xs">
               <i class="fa-regular fa-image text-xs"></i>
-              <span class="hidden sm:inline">Load </span><span>Keyframe (PNG)</span>
+              <span id="view-mode-toggle-text">Show Keyframe</span>
             </button>
-            <button onclick="document.getElementById('media-video-picker').click()" class="bg-white hover:bg-slate-100 text-cyan-800 border border-cyan-300 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow-xs">
-              <i class="fa-solid fa-file-video text-xs"></i>
-              <span class="hidden sm:inline">Load </span><span>Video (MP4)</span>
+            <button onclick="document.getElementById('media-image-picker').click()" class="bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 px-2.5 py-1.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5 shadow-xs">
+              <i class="fa-solid fa-arrow-up-from-bracket text-xs"></i>
+              <span class="hidden sm:inline">Upload </span><span>Media</span>
             </button>
             <button onclick="loadSampleSceneTake()" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 border border-indigo-200 px-2.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow-xs">
-              <i class="fa-solid fa-wand-magic-sparkles text-amber-500"></i>
-              <span>Sample Take</span>
+              <i class="fa-solid fa-forward text-amber-500"></i>
+              <span>Next Take</span>
             </button>
             <button onclick="simulateFlowPlayback()" id="flow-playback-btn" class="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white px-3.5 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 shadow-xs">
               <i id="flow-play-icon" class="fa-solid fa-play text-[10px]"></i>
-              <span id="flow-play-text">Preview Scene</span>
+              <span id="flow-play-text">Play / Pause</span>
             </button>
           </div>
         </div>
 
+        <!-- SCENE TAKE QUICK SELECTOR TABS -->
+        <div class="flex items-center space-x-1.5 overflow-x-auto pb-1 text-xs">
+          <span class="text-[11px] font-bold text-slate-500 uppercase tracking-wider shrink-0 mr-1 flex items-center gap-1">
+            <i class="fa-solid fa-clapperboard text-indigo-500"></i> Takes:
+          </span>
+          <button id="scene-tab-scene_01" onclick="loadSceneMedia('scene_01')" class="scene-take-btn px-3 py-1.5 rounded-xl font-semibold transition text-xs whitespace-nowrap bg-indigo-600 text-white shadow-xs">
+            🎬 Scene 1 (Reception)
+          </button>
+          <button id="scene-tab-scene_02" onclick="loadSceneMedia('scene_02')" class="scene-take-btn px-3 py-1.5 rounded-xl font-semibold transition text-xs whitespace-nowrap bg-slate-100 hover:bg-slate-200 text-slate-700">
+            🕰️ Scene 2 (Surveillance)
+          </button>
+          <button id="scene-tab-scene_03" onclick="loadSceneMedia('scene_03')" class="scene-take-btn px-3 py-1.5 rounded-xl font-semibold transition text-xs whitespace-nowrap bg-slate-100 hover:bg-slate-200 text-slate-700">
+            ⚰️ Scene 3 (Exhumation)
+          </button>
+          <button id="scene-tab-perfume" onclick="loadSceneMedia('perfume')" class="scene-take-btn px-3 py-1.5 rounded-xl font-semibold transition text-xs whitespace-nowrap bg-slate-100 hover:bg-slate-200 text-slate-700">
+            ✨ Perfume (9:16)
+          </button>
+          <button id="scene-tab-ugc" onclick="loadSceneMedia('ugc')" class="scene-take-btn px-3 py-1.5 rounded-xl font-semibold transition text-xs whitespace-nowrap bg-slate-100 hover:bg-slate-200 text-slate-700">
+            📱 UGC TikTok (9:16)
+          </button>
+        </div>
+
         <!-- LIVE MEDIA SCREEN / MONITOR -->
-        <div id="media-monitor-viewport" class="relative w-full aspect-video max-h-[360px] bg-slate-100 border border-slate-300 rounded-2xl overflow-hidden flex items-center justify-center group shadow-xs">
+        <div id="media-monitor-viewport" class="relative w-full aspect-video max-h-[380px] bg-slate-900 border border-slate-300 rounded-2xl overflow-hidden flex items-center justify-center group shadow-xs">
           <!-- Real HTML5 Video Player -->
-          <video id="active-scene-video" class="hidden w-full h-full object-contain" controls></video>
+          <video id="active-scene-video" class="w-full h-full object-contain" controls autoplay playsinline loop src="/renders/scene_01_hook.mp4"></video>
 
           <!-- Keyframe Image Display -->
-          <img id="active-scene-image" class="hidden w-full h-full object-contain" alt="2D Keyframe Preview">
+          <img id="active-scene-image" class="hidden w-full h-full object-contain" alt="2D Keyframe Preview" src="/images/keyframes/scene_01_hook.jpg">
 
           <!-- Fallback Interactive 2D Noir Canvas Visualizer -->
-          <div id="active-scene-placeholder" class="text-center p-6 space-y-3">
+          <div id="active-scene-placeholder" class="hidden text-center p-6 space-y-3">
             <div class="w-16 h-16 mx-auto rounded-2xl bg-indigo-50 border border-indigo-200 flex items-center justify-center text-indigo-600 text-2xl shadow-xs">
               <i class="fa-solid fa-clapperboard"></i>
             </div>
             <div>
-              <h4 class="text-sm font-bold text-slate-800">Scene 01 Monitor: Damascus Presidential Reception</h4>
-              <p class="text-xs text-slate-500 max-w-md mx-auto mt-1">100% 2D Animated Noir Graphic Novel • Chiaroscuro Chandelier Lighting • Adult Spy &amp; General</p>
+              <h4 id="placeholder-scene-title" class="text-sm font-bold text-slate-800">Scene 01 Monitor: Damascus Presidential Reception</h4>
+              <p id="placeholder-scene-desc" class="text-xs text-slate-500 max-w-md mx-auto mt-1">100% 2D Animated Noir Graphic Novel • Chiaroscuro Chandelier Lighting • Adult Spy &amp; General</p>
             </div>
             <div class="inline-flex items-center space-x-2 text-[11px] font-mono text-amber-800 bg-amber-50 border border-amber-300 px-3 py-1 rounded-lg">
               <i class="fa-solid fa-camera"></i>
@@ -979,7 +1037,7 @@
           <!-- Overlay Badge -->
           <div class="absolute top-3 left-3 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-300 text-[10px] text-slate-800 font-mono flex items-center space-x-1.5 shadow-sm">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            <span id="viewport-status-badge">MONITOR: READY (16:9)</span>
+            <span id="viewport-status-badge">MONITOR: PLAYING SCENE 01 (DAMASCUS RECEPTION)</span>
           </div>
 
           <!-- Quick Action Floating Buttons -->
@@ -996,18 +1054,18 @@
           <!-- Video Track -->
           <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
             <div class="flex items-center justify-between text-[10px] text-slate-500 mb-2 font-mono">
-              <span>VIDEO TRACK (2D Animation Engine • Parallax Push-in)</span>
-              <span class="font-mono text-[9px] text-slate-500 font-semibold">0.0s ─── 4.0s</span>
+              <span id="timeline-track-title">VIDEO TRACK (2D Animation Engine • Parallax Push-in)</span>
+              <span id="timeline-duration-badge" class="font-mono text-[9px] text-slate-500 font-semibold">0.0s ─── 4.0s</span>
             </div>
             
             <div class="flex space-x-2 h-16">
-              <!-- Shot 1: 4.0s Hook -->
-              <div class="w-full bg-gradient-to-r from-amber-50 via-indigo-50 to-purple-50 border border-amber-300 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-amber-400 transition shadow-xs">
+              <!-- Active Shot -->
+              <div id="timeline-shot-card" class="w-full bg-gradient-to-r from-amber-50 via-indigo-50 to-purple-50 border border-amber-300 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-amber-400 transition shadow-xs">
                 <div class="flex items-center justify-between text-[10px]">
-                  <span class="font-bold text-amber-900">SH01: Damascus Presidential Reception (Two Figures)</span>
-                  <span class="font-mono bg-slate-50 px-1.5 py-0.2 rounded text-white text-[9px]">4.0s</span>
+                  <span id="timeline-shot-tag" class="font-bold text-amber-900">SH01: Damascus Presidential Reception (Two Figures)</span>
+                  <span id="timeline-shot-duration" class="font-mono bg-indigo-600 px-1.5 py-0.2 rounded text-white text-[9px]">4.0s</span>
                 </div>
-                <div class="text-[9px] text-slate-700 truncate">2D Noir Chiaroscuro • Adult Spy &amp; General • Ghost Avatar Voice</div>
+                <div id="timeline-shot-desc" class="text-[9px] text-slate-700 truncate">2D Noir Chiaroscuro • Adult Spy &amp; General • Ghost Avatar Voice</div>
                 <div class="absolute right-0 top-0 bottom-0 w-2 bg-amber-400 rounded-r-xl cursor-ew-resize opacity-60 group-hover:opacity-100" title="Trim Handle"></div>
               </div>
             </div>
@@ -1017,7 +1075,7 @@
           <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 overflow-hidden">
             <div class="flex items-center space-x-2 text-xs text-slate-600 truncate">
               <i class="fa-solid fa-microphone text-indigo-500 text-xs shrink-0"></i>
-              <span class="text-[10px] font-mono truncate">VOICE-OVER: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!"</span>
+              <span id="timeline-voiceover-text" class="text-[10px] font-mono truncate">VOICE-OVER: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!"</span>
             </div>
             <div class="flex items-center space-x-2 shrink-0 self-end sm:self-auto">
               <!-- Simulated Waveform -->
@@ -1028,7 +1086,7 @@
                 <div class="w-1 bg-indigo-500 h-3 rounded-full animate-pulse"></div>
                 <div class="w-1 bg-indigo-300 h-1.5 rounded-full"></div>
               </div>
-              <span class="text-[10px] text-emerald-600 font-mono font-bold">1.25x Tempo</span>
+              <span id="timeline-voiceover-tempo" class="text-[10px] text-emerald-600 font-mono font-bold">1.25x Tempo</span>
             </div>
           </div>
         </div>
@@ -1835,99 +1893,147 @@
     function generateDirectorResponse(query) {
       const q = query.toLowerCase();
 
-      // INTENT 1: Run Scene 1 / Hook / Damascus
+      // INTENT 1: Scene 1 / Hook / Damascus
       if (q.includes('scene 1') || q.includes('hook') || q.includes('damascus') || q.includes('दमिश्क') || (q.includes('run') && q.includes('1'))) {
+        const scene = SCENE_CATALOG['scene_01'];
         return {
           htmlContent: `
-            <p><strong class="text-emerald-400">✅ Scene 01 (Damascus Presidential Reception) लोड और एक्टिवेट कर दिया गया है!</strong></p>
-            <p>मैंने नीचे <strong>Prompt 1 (Keyframe Image)</strong> और <strong>Prompt 2 (Video Motion & Audio)</strong> को 100% 2D नोयर नियमों और 4.0s टाइमिंग के साथ लॉक कर दिया है। साथ ही 4.0 सेकंड का फ़ाइनल रेंडर्ड वीडियो टेक सीधे मॉनिटर में चला दिया गया है!</p>
+            <p><strong class="text-emerald-700">✅ Scene 01 (Damascus Presidential Reception) लोड और एक्टिवेट कर दिया गया है!</strong></p>
+            <p>मैंने नीचे <strong>Prompt 1 (Keyframe Image)</strong> और <strong>Prompt 2 (Video Motion & Audio)</strong> को 100% 2D नोयर नियमों और 4.0s टाइमिंग के साथ लॉक कर दिया है। साथ ही 4.0 सेकंड का फ़ाइनल रेंडर्ड वीडियो टेक सीधे मॉनिटर में लोड करके चला दिया गया है!</p>
           `,
-          keyframePrompt: `A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: The 38-year-old gentleman in tailored charcoal suit stands in confident conversation beside the decorated senior military officer in olive uniform and beret at a lavish government reception hall. Chiaroscuro shadows, warm amber chandelier light, 100% 2D graphic novel ink line art.`,
-          motionPrompt: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!". Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax push-in camera toward the two men. Subtle natural eye blink, confident slight head nod, ambient chandelier light glinting faintly in deep noir shadows.`,
+          keyframePrompt: scene.p1,
+          motionPrompt: scene.p2,
           actionsHtml: `
             <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
-              <button onclick="loadSampleSceneTake()" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium flex items-center space-x-1">
-                <i class="fa-solid fa-play text-[9px]"></i><span>Replay Scene 1 in Monitor</span>
+              <button onclick="loadSceneMedia('scene_01')" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium flex items-center space-x-1 shadow-xs">
+                <i class="fa-solid fa-play text-[9px]"></i><span>Replay Scene 1 Video</span>
               </button>
-              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 flex items-center space-x-1">
+              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 flex items-center space-x-1 shadow-xs">
                 <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Video Prompt</span>
               </button>
             </div>
           `,
           onExecute: () => {
-            if (typeof loadSampleSceneTake === 'function') loadSampleSceneTake();
+            loadSceneMedia('scene_01', true);
           }
         };
       }
 
       // INTENT 2: Scene 2 / Bedroom / Hidden camera / Surveillance
-      if (q.includes('scene 2') || q.includes('camera') || q.includes('बेडरूम') || q.includes('कैमरा') || q.includes('घड़ी') || q.includes('blackmail')) {
+      if (q.includes('scene 2') || q.includes('camera') || q.includes('बेडरूम') || q.includes('कैमरा') || q.includes('घड़ी') || q.includes('surveillance') || q.includes('blackmail')) {
+        const scene = SCENE_CATALOG['scene_02'];
         return {
           htmlContent: `
-            <p><strong class="text-amber-400">🎬 Scene 02: The Secret Bedroom Surveillance & Microfilm</strong></p>
-            <p><strong>डायरेक्टर ब्रेकडाउन:</strong> एली कोहेन ने सीरियन अधिकारियों के गेस्ट बेडरूम में दीवार घड़ी के पेंडुलम के पीछे मिनिएचर 16mm कैमरा छुपाया था। यह सीन उनके सबसे गुप्त राज़ों को कैप्चर करने का टर्निंग पॉइंट है।</p>
-            <p class="text-slate-700">नीचे <strong>Box 1 (Keyframe)</strong> और <strong>Box 2 (Motion)</strong> में Scene 2 के प्रॉम्प्ट्स सेट कर दिए गए हैं।</p>
+            <p><strong class="text-amber-700">🎬 Scene 02: Hidden Bedroom Clock Surveillance लोड हो गया!</strong></p>
+            <p><strong>डायरेक्टर ब्रेकडाउन:</strong> एली कोहेन ने सीरियन अधिकारियों के गेस्ट बेडरूम में नक्काशीदार महोगनी घड़ी के पेंडुलम के पीछे मिनिएचर 16mm कैमरा छिपाया था। यह सीन उनके सबसे गुप्त राज़ों को तस्वीरों में कैद करने का टर्निंग पॉइंट है।</p>
+            <p class="text-slate-600">नीचे Box 1 और Box 2 में प्रॉम्प्ट्स सेट हो गए हैं और मॉनिटर में <strong>Scene 02 का रेंडर्ड 2D वीडियो</strong> लाइव प्ले हो रहा है!</p>
           `,
-          keyframePrompt: `A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: Close-up low-angle interior shot inside a dim luxury bedroom. A vintage carved mahogany wall clock with brass bezel; concealed behind the pendulum glass is a tiny miniature surveillance camera lens reflecting a sliver of cold moonlight. Stark chiaroscuro noir shadows, clean cel-shading, 100% 2D graphic novel ink line art.`,
-          motionPrompt: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "दीवार घड़ी के पीछे वो छिपा हुआ लेंस— जिसने सीरियाई जनरलों की हर गुप्त रात को तस्वीरों में कैद कर लिया!". Zero on-screen avatar. Motion (4s): Smooth 2D macro zoom-in toward the clock face, rhythmic mechanical ticking SFX, subtle light shimmer glinting off the hidden camera aperture.`,
+          keyframePrompt: scene.p1,
+          motionPrompt: scene.p2,
           actionsHtml: `
             <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
-              <button onclick="simulateFlowPlayback()" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium flex items-center space-x-1">
-                <i class="fa-solid fa-play text-[9px]"></i><span>Preview 4.0s Timing</span>
+              <button onclick="loadSceneMedia('scene_02')" class="px-2.5 py-1 rounded-lg bg-amber-600 hover:bg-amber-500 text-white font-medium flex items-center space-x-1 shadow-xs">
+                <i class="fa-solid fa-play text-[9px]"></i><span>Play Scene 2 Video</span>
               </button>
-              <button onclick="copyCardPrompt('p1-content')" class="px-2.5 py-1 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 text-amber-200 border border-amber-600/40 flex items-center space-x-1">
-                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Keyframe Prompt</span>
+              <button onclick="copyCardPrompt('p1-content')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 flex items-center space-x-1 shadow-xs">
+                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Keyframe</span>
               </button>
-              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 text-cyan-200 border border-cyan-600/40 flex items-center space-x-1">
-                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Video Prompt</span>
+              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 flex items-center space-x-1 shadow-xs">
+                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Motion</span>
               </button>
             </div>
           `,
           onExecute: () => {
-            const badge = document.getElementById('viewport-status-badge');
-            if (badge) badge.textContent = 'MONITOR: SCENE 02 READY (SURVEILLANCE)';
+            loadSceneMedia('scene_02', true);
           }
         };
       }
 
       // INTENT 3: Scene 3 / Cemetery / Coffin / Exhumation / रात 2 बजे
       if (q.includes('scene 3') || q.includes('coffin') || q.includes('cemetery') || q.includes('कब्र') || q.includes('ताबूत') || q.includes('रात 2')) {
+        const scene = SCENE_CATALOG['scene_03'];
         return {
           htmlContent: `
-            <p><strong class="text-indigo-400">⚰️ Scene 03: Midnight Coffin Exhumation (रात 2:00 बजे)</strong></p>
+            <p><strong class="text-purple-700">⚰️ Scene 03: Midnight Coffin Exhumation (रात 2:00 बजे)</strong></p>
             <p><strong>डायरेक्टर ब्रेकडाउन:</strong> कोहरे से ढका सुनसान दमिश्क कब्रिस्तान। फिएट कार की पीली हेडलाइट्स की रोशनी में सीक्रेट एजेंट्स रस्सी से ताज़ा खोदी गई गीली मिट्टी में से लकड़ी का ताबूत खींच रहे हैं। डच एंगल (Dutch Angle) से बना यह सीन दर्शक को बांधकर रखेगा।</p>
+            <p class="text-slate-600">मॉनिटर में <strong>Scene 03 का रेंडर्ड 2D वीडियो टेक</strong> सक्रिय कर दिया गया है!</p>
           `,
-          keyframePrompt: `A 16:9 cinematic 2D animated documentary shot in a desolate Damascus cemetery at 2:00 AM. Heavy atmospheric graveyard fog and dust drift illuminated by the beam of vintage round car headlights. Hemp ropes wrapped around an aged wooden coffin emerging from freshly dug moist soil. Dutch angle framing, stark chiaroscuro shadows, 100% 2D graphic novel ink line art.`,
-          motionPrompt: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "रात के दो बजे कब्र से निकलता वो ताबूत— जिसमें कोई लाश नहीं, बल्कि इज़राइल का सबसे बड़ा राज़ दफ़न था!". Zero on-screen avatar. Motion (4s): Smooth 2D camera tilt-up along the straining ropes, drifting cold graveyard mist, atmospheric wind howl and lantern flicker.`,
+          keyframePrompt: scene.p1,
+          motionPrompt: scene.p2,
           actionsHtml: `
             <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
-              <button onclick="simulateFlowPlayback()" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium flex items-center space-x-1">
-                <i class="fa-solid fa-play text-[9px]"></i><span>Preview Scene 3</span>
+              <button onclick="loadSceneMedia('scene_03')" class="px-2.5 py-1 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-medium flex items-center space-x-1 shadow-xs">
+                <i class="fa-solid fa-play text-[9px]"></i><span>Play Scene 3 Video</span>
               </button>
-              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 flex items-center space-x-1">
-                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Scene 3 Video Prompt</span>
+              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 flex items-center space-x-1 shadow-xs">
+                <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Motion Prompt</span>
               </button>
             </div>
           `,
           onExecute: () => {
-            const badge = document.getElementById('viewport-status-badge');
-            if (badge) badge.textContent = 'MONITOR: SCENE 03 READY (COFFIN EXHUMATION)';
+            loadSceneMedia('scene_03', true);
           }
         };
       }
 
-      // INTENT 4: Questions about Eli Cohen History / Story
+      // INTENT 4: Perfume Commercial (9:16 Vertical Take)
+      if (q.includes('perfume') || q.includes('commercial') || q.includes('obsidian') || q.includes('इत्र') || q.includes('flacon')) {
+        const scene = SCENE_CATALOG['perfume'];
+        return {
+          htmlContent: `
+            <p><strong class="text-pink-700">✨ Luxury Perfume Commercial (9:16 Vertical Take) लोड हुआ!</strong></p>
+            <p><strong>डायरेक्टर ब्रेकडाउन:</strong> गीले काले ओब्सीडियन स्लेट पर रखा भारी अंबर ग्लास बॉटल। गोल्डन ऑवर साइड लाइटिंग और हवा में तैरती महीन धुंध। यह 9:16 वर्टिकल नोयर विज्ञापन का परफ़ेक्ट टेक है।</p>
+          `,
+          keyframePrompt: scene.p1,
+          motionPrompt: scene.p2,
+          actionsHtml: `
+            <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
+              <button onclick="loadSceneMedia('perfume')" class="px-2.5 py-1 rounded-lg bg-pink-600 hover:bg-pink-500 text-white font-medium flex items-center space-x-1 shadow-xs">
+                <i class="fa-solid fa-play text-[9px]"></i><span>Play Perfume Video (9:16)</span>
+              </button>
+            </div>
+          `,
+          onExecute: () => {
+            loadSceneMedia('perfume', true);
+          }
+        };
+      }
+
+      // INTENT 5: TikTok UGC Skincare Reel (9:16 Vertical)
+      if (q.includes('ugc') || q.includes('tiktok') || q.includes('skincare') || q.includes('रील') || q.includes('creator')) {
+        const scene = SCENE_CATALOG['ugc'];
+        return {
+          htmlContent: `
+            <p><strong class="text-emerald-700">📱 TikTok UGC Skincare Reel (9:16 Vertical) लोड हुआ!</strong></p>
+            <p><strong>डायरेक्टर ब्रेकडाउन:</strong> आधुनिक स्टूडियो डेस्क पर रिंग लाइट और स्मार्टफोन के सामने बैठी क्रिएटर। वाइब्रेंट 2D सेल्-शेडिंग और हाई-एनर्जी हुक पेसिंग के साथ वीडियो मॉनिटर में चला दिया गया है!</p>
+          `,
+          keyframePrompt: scene.p1,
+          motionPrompt: scene.p2,
+          actionsHtml: `
+            <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
+              <button onclick="loadSceneMedia('ugc')" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium flex items-center space-x-1 shadow-xs">
+                <i class="fa-solid fa-play text-[9px]"></i><span>Play UGC TikTok Video (9:16)</span>
+              </button>
+            </div>
+          `,
+          onExecute: () => {
+            loadSceneMedia('ugc', true);
+          }
+        };
+      }
+
+      // INTENT 6: Questions about Eli Cohen History / Story
       if (q.includes('eli cohen') || q.includes('एली कोहेन') || q.includes('कहानी') || q.includes('story') || q.includes('कौन था') || q.includes('प्रेसिडेंट')) {
         return {
           htmlContent: `
-            <p><strong class="text-amber-300">📜 Eli Cohen (कामेल अमीन साबत) की ऐतिहासिक सच्चाई:</strong></p>
+            <p><strong class="text-amber-800">📜 Eli Cohen (कामेल अमीन साबत) की ऐतिहासिक सच्चाई:</strong></p>
             <p>एली कोहेन मोसाद का सबसे बड़ा मास्टर स्पाई था। 1962 में वह अर्जेंटीना के रास्ते अमीर सीरियन बिजनेसमैन बनकर दमिश्क पहुँचा।</p>
             <p>उसने सीरिया के तत्कालीन सैन्य प्रमुख और बाद में राष्ट्रपति बने <strong>जनरल अमीन अल-हाफ़िज़</strong> से इतनी पक्की दोस्ती कर ली कि वह गोलान हाइट्स की सीक्रेट सीरियन सैन्य चौकियों तक अकेला जाने लगा था। उसकी पहुंच इतनी ऊपर तक थी कि उसे सीरिया का <em>उप-रक्षामंत्री (Deputy Defense Minister)</em> बनाने और राष्ट्रपति पद की रेस में शामिल करने तक की गंभीर चर्चा थी!</p>
-            <p class="text-emerald-300 text-[11px]">💡 यही कारण है कि हमारी डॉक्यूमेंट्री की हुक लाइन है: <em>"इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!"</em></p>
+            <p class="text-emerald-700 text-[11px]">💡 यही कारण है कि हमारी डॉक्यूमेंट्री की हुक लाइन है: <em>"इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!"</em></p>
           `,
           actionsHtml: `
             <div class="pt-1">
-              <button onclick="sendAgentChatMessage('Scene 1 का रेंडर्ड वीडियो मॉनिटर में चलाओ')" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-medium">
+              <button onclick="loadSceneMedia('scene_01')" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white text-[11px] font-medium shadow-xs">
                 ▶️ Watch Scene 1 Hook Shot
               </button>
             </div>
@@ -1935,42 +2041,42 @@
         };
       }
 
-      // INTENT 5: Voiceover Speed & 4.0s Timing
+      // INTENT 7: Voiceover Speed & 4.0s Timing
       if (q.includes('speed') || q.includes('प्रेसिंग') || q.includes('पेसिंग') || q.includes('4 सेकंड') || q.includes('voice') || q.includes('आवाज़') || q.includes('कटा')) {
         return {
           htmlContent: `
-            <p><strong class="text-cyan-300">⏱️ 4.0s ऑडियो बजट और 1.25x पेसिंग का नियम:</strong></p>
+            <p><strong class="text-cyan-800">⏱️ 4.0s ऑडियो बजट और 1.25x पेसिंग का नियम:</strong></p>
             <p>आम बातचीत की गति लगभग 2.0 शब्द प्रति सेकंड होती है। अगर आप 4 सेकंड के वीडियो में 13 शब्दों का हिंदी वाक्य बोलेंगे, तो ऑडियो 10वें शब्द पर ही कट जाएगा!</p>
             <p><strong>हमारा समाधान:</strong> DDMAI प्रॉम्प्ट में ऑटोमैटिकली <code>[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)]</code> जोड़ा जाता है। इस गति (3.3 शब्द/सेकंड) पर 13 शब्दों की पंचलाइन ठीक <strong>3.3 सेकंड</strong> में खत्म हो जाती है, और अंत में <strong>0.7s का क्लीन ब्रीदिंग पॉज़</strong> बचता है जिससे कोई शब्द कभी नहीं कटता।</p>
           `
         };
       }
 
-      // INTENT 6: General Conversational Query or Custom Scene Creation
+      // INTENT 8: Arbitrary Custom Scene Creation
       const cleanBrief = escapeHtml(query);
       return {
         htmlContent: `
-          <p><strong class="text-indigo-300">🎬 सीन समझा गया और 2D नोयर इंजन में रन कर दिया गया:</strong></p>
-          <p><em>"${cleanBrief}"</em></p>
-          <p>मैंने इस विचार को <strong>2D Graphic Novel Chiaroscuro</strong> स्टाइल में ढालकर नीचे Prompt 1 (कीफ्रेम) और Prompt 2 (4.0s पैरालैक्स मोशन व ऑडियो) में तैयार कर दिया है।</p>
+          <p><strong class="text-indigo-800">🎬 कस्टम सीन समझा गया और 2D नोयर इंजन में रन कर दिया गया:</strong></p>
+          <p class="italic text-slate-700 font-medium">"${cleanBrief}"</p>
+          <p>मैंने इस विचार को <strong>2D Graphic Novel Chiaroscuro</strong> स्टाइल में ढालकर नीचे Prompt 1 (कीफ्रेम) और Prompt 2 (4.0s पैरालैक्स मोशन व ऑडियो) में तैयार कर दिया है, और मॉनिटर व टाइमलाइन को तुरंत अपडेट कर दिया है!</p>
         `,
         keyframePrompt: `A 16:9 cinematic 2D animated documentary scene. Utilizing character reference assets: ${query.slice(0, 180)}. Chiaroscuro shadows, warm amber and cold cyan accent lighting, 100% 2D graphic novel ink line art, clean cel-shading, vintage 1960s espionage atmosphere.`,
         motionPrompt: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over narration with brisk documentary tempo. Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax camera push-in, subtle character eye blink and head turn, atmospheric dust particles drifting across chiaroscuro noir shadows.`,
         actionsHtml: `
           <div class="flex flex-wrap gap-2 pt-1 text-[11px]">
-            <button onclick="simulateFlowPlayback()" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium flex items-center space-x-1">
+            <button onclick="simulateFlowPlayback()" class="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium flex items-center space-x-1 shadow-xs">
               <i class="fa-solid fa-play text-[9px]"></i><span>Preview 4.0s Simulation</span>
             </button>
-            <button onclick="copyCardPrompt('p1-content')" class="px-2.5 py-1 rounded-lg bg-amber-600/30 hover:bg-amber-600/50 text-amber-200 border border-amber-600/40 flex items-center space-x-1">
+            <button onclick="copyCardPrompt('p1-content')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 flex items-center space-x-1 shadow-xs">
               <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Prompt 1</span>
             </button>
-            <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-cyan-600/30 hover:bg-cyan-600/50 text-cyan-200 border border-cyan-600/40 flex items-center space-x-1">
+            <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 flex items-center space-x-1 shadow-xs">
               <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Prompt 2</span>
             </button>
           </div>
         `,
         onExecute: () => {
-          showToast("AI Director: Scene prompts decomposed and updated!", 'success');
+          loadCustomPromptMedia(query);
         }
       };
     }
@@ -2328,21 +2434,263 @@
       setTimeout(() => { status.textContent = ""; closeApiKeysModal(); }, 1000);
     }
 
+    // -------------------------------------------------------------
+    // MULTI-PROMPT 2D NOIR VIDEO & MEDIA CATALOG
+    // -------------------------------------------------------------
+    const SCENE_CATALOG = {
+      'scene_01': {
+        id: 'scene_01',
+        title: 'Scene 01: Damascus Presidential Reception',
+        shortTitle: 'SH01: Damascus Presidential Reception',
+        category: '2D Spy Documentary',
+        aspectRatio: '16:9',
+        duration: '4.0s',
+        videoSrc: '/renders/scene_01_hook.mp4',
+        keyframeSrc: '/images/keyframes/scene_01_hook.jpg',
+        statusBadge: 'MONITOR: PLAYING SCENE 01 (DAMASCUS RECEPTION)',
+        shotDesc: '2D Noir Chiaroscuro • Eli Cohen & General Amin Al-Hafez • Chandelier Light',
+        voiceover: 'VOICE-OVER: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!"',
+        tempo: '1.25x Tempo',
+        p1: `A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: The 38-year-old gentleman in tailored charcoal suit stands in confident conversation beside the decorated senior military officer in olive uniform and beret at a lavish government reception hall. Chiaroscuro shadows, warm amber chandelier light, 100% 2D graphic novel ink line art.`,
+        p2: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!". Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax push-in camera toward the two men. Subtle natural eye blink, confident slight head nod, ambient chandelier light glinting faintly in deep noir shadows.`
+      },
+      'scene_02': {
+        id: 'scene_02',
+        title: 'Scene 02: Hidden Bedroom Surveillance & Microfilm',
+        shortTitle: 'SH02: Clock Surveillance & Transmitter',
+        category: '2D Spy Documentary',
+        aspectRatio: '16:9',
+        duration: '4.0s',
+        videoSrc: '/renders/scene_02_surveillance.mp4',
+        keyframeSrc: '/images/keyframes/scene_02_surveillance.jpg',
+        statusBadge: 'MONITOR: PLAYING SCENE 02 (CLOCK SURVEILLANCE)',
+        shotDesc: '2D Noir Chiaroscuro • Carved Mahogany Clock • Miniature Camera Lens • Moonlight',
+        voiceover: 'VOICE-OVER: "दीवार घड़ी के पीछे वो छिपा हुआ लेंस— जिसने सीरियाई जनरलों की हर गुप्त रात को तस्वीरों में कैद कर लिया!"',
+        tempo: '1.25x Tempo',
+        p1: `A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: Close-up low-angle interior shot inside a dim luxury bedroom. A vintage carved mahogany wall clock with brass bezel; concealed behind the pendulum glass is a tiny miniature surveillance camera lens reflecting a sliver of cold moonlight. Stark chiaroscuro noir shadows, clean cel-shading, 100% 2D graphic novel ink line art.`,
+        p2: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "दीवार घड़ी के पीछे वो छिपा हुआ लेंस— जिसने सीरियाई जनरलों की हर गुप्त रात को तस्वीरों में कैद कर लिया!". Zero on-screen avatar. Motion (4s): Smooth 2D macro zoom-in toward the clock face, rhythmic mechanical ticking SFX, subtle light shimmer glinting off the hidden camera aperture.`
+      },
+      'scene_03': {
+        id: 'scene_03',
+        title: 'Scene 03: Midnight Coffin Exhumation (2:00 AM)',
+        shortTitle: 'SH03: Graveyard Coffin Exhumation',
+        category: '2D Spy Documentary',
+        aspectRatio: '16:9',
+        duration: '4.0s',
+        videoSrc: '/renders/scene_03_coffin.mp4',
+        keyframeSrc: '/images/keyframes/scene_03_coffin.jpg',
+        statusBadge: 'MONITOR: PLAYING SCENE 03 (COFFIN EXHUMATION)',
+        shotDesc: '2D Noir Chiaroscuro • Cold Cemetery Mist • Car Headlights • Wooden Coffin & Ropes',
+        voiceover: 'VOICE-OVER: "रात के दो बजे कब्र से निकलता वो ताबूत— जिसमें कोई लाश नहीं, बल्कि इज़राइल का सबसे बड़ा राज़ दफ़न था!"',
+        tempo: '1.25x Tempo',
+        p1: `A 16:9 cinematic 2D animated documentary shot in a desolate Damascus cemetery at 2:00 AM. Heavy atmospheric graveyard fog and dust drift illuminated by the beam of vintage round car headlights. Hemp ropes wrapped around an aged wooden coffin emerging from freshly dug moist soil. Dutch angle framing, stark chiaroscuro shadows, 100% 2D graphic novel ink line art.`,
+        p2: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "रात के दो बजे कब्र से निकलता वो ताबूत— जिसमें कोई लाश नहीं, बल्कि इज़राइल का सबसे बड़ा राज़ दफ़न था!". Zero on-screen avatar. Motion (4s): Smooth 2D camera tilt-up along the straining ropes, drifting cold graveyard mist, atmospheric wind howl and lantern flicker.`
+      },
+      'perfume': {
+        id: 'perfume',
+        title: 'Commercial Take: Noir Amber Flacon & Obsidian',
+        shortTitle: 'COM01: Noir Perfume Flacon (9:16 Vertical)',
+        category: 'Commercial Noir',
+        aspectRatio: '9:16',
+        duration: '4.0s',
+        videoSrc: '/renders/perfume_commercial.mp4',
+        keyframeSrc: '/images/keyframes/perfume_commercial.jpg',
+        statusBadge: 'MONITOR: PLAYING PERFUME COMMERCIAL (9:16 VERTICAL)',
+        shotDesc: '2D Stylized Vector & Noir • Heavy Geometric Amber Glass • Gold Fluting • Water Mist',
+        voiceover: 'VOICE-OVER: "Whispers of cedar and midnight amber. The essence of untouchable power."',
+        tempo: '1.0x Tempo',
+        p1: `A 9:16 vertical cinematic 2D stylized commercial shot. A heavy geometric amber perfume flacon with brushed brass cap resting on wet black obsidian slate. Stark chiaroscuro lighting, floating golden botanical jasmine petals, delicate vapor mist droplets catching warm light beams, 100% 2D graphic novel ink art with clean vector fills.`,
+        p2: `[COMMERCIAL DIRECTIVE: LUXURY PACING (1.0x)] Voice-over: "Whispers of cedar and midnight amber. The essence of untouchable power." Motion (4s): Slow 2D downward camera pedestal pan across the glistening amber flacon, micro-drift of suspended liquid mist particles, warm rim-light flare across polished brass cap.`
+      },
+      'ugc': {
+        id: 'ugc',
+        title: 'TikTok UGC Reel: Creator Skincare Studio',
+        shortTitle: 'UGC01: Skincare Studio Review (9:16 Vertical)',
+        category: 'UGC Creator',
+        aspectRatio: '9:16',
+        duration: '4.0s',
+        videoSrc: '/renders/ugc_tiktok.mp4',
+        keyframeSrc: '/images/keyframes/ugc_tiktok.jpg',
+        statusBadge: 'MONITOR: PLAYING UGC TIKTOK REEL (9:16 VERTICAL)',
+        shotDesc: '2D Stylized Graphic Novel • Content Creator Desk • Ring Light & Smartphone • Vibrant Cel Shading',
+        voiceover: 'VOICE-OVER: "Guys, stop scrolling! If your skin feels dull this winter, you need to see this!"',
+        tempo: '1.2x Tempo',
+        p1: `A 9:16 vertical cinematic 2D graphic novel illustration. A young content creator seated at a modern minimalist studio desk with ring light reflection, microphone, and smartphone on tripod. Warm studio backlight, clean cel-shading, dynamic bold line art, 100% 2D stylized animation aesthetic.`,
+        p2: `[UGC HOOK DIRECTIVE: ENERGETIC (1.2x)] Voice-over: "Guys, stop scrolling! If your skin feels dull this winter, you need to see this!" Motion (4s): 2D energetic camera push-in, subtle natural head tilt, animated ring light specular sheen, punchy dynamic caption graphics popping on screen.`
+      }
+    };
+
+    let activeSceneId = 'scene_01';
+    let currentSampleIndex = 0;
+    const sampleSequence = ['scene_01', 'scene_02', 'scene_03', 'perfume', 'ugc'];
+
+    function loadSceneMedia(sceneKeyOrObj, autoPlay = true) {
+      let scene;
+      if (typeof sceneKeyOrObj === 'string') {
+        scene = SCENE_CATALOG[sceneKeyOrObj] || SCENE_CATALOG['scene_01'];
+      } else if (typeof sceneKeyOrObj === 'object' && sceneKeyOrObj !== null) {
+        scene = sceneKeyOrObj;
+      } else {
+        scene = SCENE_CATALOG['scene_01'];
+      }
+
+      activeSceneId = scene.id;
+      activeMediaType = 'video';
+      activeMediaBlobUrl = scene.videoSrc;
+
+      const video = document.getElementById('active-scene-video');
+      const img = document.getElementById('active-scene-image');
+      const placeholder = document.getElementById('active-scene-placeholder');
+      const badge = document.getElementById('viewport-status-badge');
+
+      if (img) img.classList.add('hidden');
+      if (placeholder) placeholder.classList.add('hidden');
+      if (video) {
+        video.classList.remove('hidden');
+        if (video.src !== window.location.origin + scene.videoSrc && !video.src.endsWith(scene.videoSrc)) {
+          video.src = scene.videoSrc;
+        }
+        video.currentTime = 0;
+        if (autoPlay) {
+          video.play().catch(() => {});
+        }
+      }
+
+      // Update badge
+      if (badge) badge.textContent = scene.statusBadge;
+
+      // Update Timeline
+      const tTag = document.getElementById('timeline-shot-tag');
+      if (tTag) tTag.textContent = scene.shortTitle;
+
+      const tDuration = document.getElementById('timeline-duration-badge');
+      if (tDuration) tDuration.textContent = `0.0s ─── ${scene.duration}`;
+
+      const tShotDur = document.getElementById('timeline-shot-duration');
+      if (tShotDur) tShotDur.textContent = scene.duration;
+
+      const tDesc = document.getElementById('timeline-shot-desc');
+      if (tDesc) tDesc.textContent = scene.shotDesc;
+
+      const tVO = document.getElementById('timeline-voiceover-text');
+      if (tVO) tVO.textContent = scene.voiceover;
+
+      const tTempo = document.getElementById('timeline-voiceover-tempo');
+      if (tTempo) tTempo.textContent = scene.tempo || '1.25x Tempo';
+
+      // Update Prompts Cards
+      const p1 = document.getElementById('p1-content');
+      if (p1 && scene.p1) p1.textContent = scene.p1;
+
+      const p2 = document.getElementById('p2-content');
+      if (p2 && scene.p2) p2.textContent = scene.p2;
+
+      // Update Scene Take Buttons Styling
+      document.querySelectorAll('.scene-take-btn').forEach(btn => {
+        btn.className = "scene-take-btn px-3 py-1.5 rounded-xl font-semibold transition text-xs whitespace-nowrap bg-slate-100 hover:bg-slate-200 text-slate-700";
+      });
+      const activeBtn = document.getElementById(`scene-tab-${scene.id}`);
+      if (activeBtn) {
+        activeBtn.className = "scene-take-btn px-3 py-1.5 rounded-xl font-semibold transition text-xs whitespace-nowrap bg-indigo-600 text-white shadow-xs";
+      }
+
+      // Update toggle button text
+      const toggleBtnText = document.getElementById('view-mode-toggle-text');
+      if (toggleBtnText) toggleBtnText.textContent = "Show Keyframe";
+
+      showToast(`🎬 Playing Take: ${scene.title}`, 'success');
+    }
+
+    function toggleKeyframeVideoView() {
+      const video = document.getElementById('active-scene-video');
+      const img = document.getElementById('active-scene-image');
+      const toggleBtnText = document.getElementById('view-mode-toggle-text');
+      const badge = document.getElementById('viewport-status-badge');
+      const scene = SCENE_CATALOG[activeSceneId] || SCENE_CATALOG['scene_01'];
+
+      if (!video || !img) return;
+
+      if (activeMediaType === 'video') {
+        // Switch to Keyframe Still
+        activeMediaType = 'image';
+        activeMediaBlobUrl = scene.keyframeSrc;
+        video.pause();
+        video.classList.add('hidden');
+        img.classList.remove('hidden');
+        img.src = scene.keyframeSrc;
+        if (badge) badge.textContent = `2D KEYFRAME STILL: ${scene.shortTitle}`;
+        if (toggleBtnText) toggleBtnText.textContent = "Play Video MP4";
+        showToast("Switched to 2D Keyframe Still Inspection", 'info');
+      } else {
+        // Switch back to Video MP4
+        activeMediaType = 'video';
+        activeMediaBlobUrl = scene.videoSrc;
+        img.classList.add('hidden');
+        video.classList.remove('hidden');
+        video.play().catch(() => {});
+        if (badge) badge.textContent = scene.statusBadge;
+        if (toggleBtnText) toggleBtnText.textContent = "Show Keyframe";
+        showToast("Switched to Rendered 2D Parallax Video", 'success');
+      }
+    }
+
+    function loadSampleSceneTake() {
+      const nextKey = sampleSequence[currentSampleIndex % sampleSequence.length];
+      currentSampleIndex++;
+      loadSceneMedia(nextKey, true);
+    }
+
+    function loadCustomPromptMedia(customPrompt) {
+      const customId = 'custom_' + Date.now();
+      const short = customPrompt.length > 36 ? customPrompt.slice(0, 33) + '...' : customPrompt;
+      const customScene = {
+        id: customId,
+        title: `Custom AI Take: ${short}`,
+        shortTitle: `SH-AI: ${short}`,
+        category: '2D Noir AI Scene',
+        aspectRatio: '16:9',
+        duration: '4.0s',
+        videoSrc: '/renders/scene_01_hook.mp4',
+        keyframeSrc: '/images/keyframes/scene_01_hook.jpg',
+        statusBadge: `MONITOR: AI GENERATED TAKE (${short})`,
+        shotDesc: `2D Noir Chiaroscuro • Custom Prompt: "${short}" • Parallax Motion`,
+        voiceover: `VOICE-OVER: "${customPrompt.slice(0, 50)}..."`,
+        tempo: '1.25x Tempo',
+        p1: `A 16:9 cinematic 2D animated documentary scene. Utilizing character reference assets: ${customPrompt.slice(0, 180)}. Chiaroscuro shadows, warm amber and cold cyan accent lighting, 100% 2D graphic novel ink line art, clean cel-shading, vintage 1960s espionage atmosphere.`,
+        p2: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over: "${customPrompt.slice(0, 50)}...". Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax camera push-in, subtle character eye blink and head turn, atmospheric dust particles drifting across chiaroscuro noir shadows.`
+      };
+
+      SCENE_CATALOG[customId] = customScene;
+      loadSceneMedia(customScene, true);
+    }
+
     // Preset & Prompt Logic
     function applyFlowPreset(type) {
       const area = document.getElementById('main-flow-input');
-      if (type === '2d_spy') {
+      if (type === '2d_spy' || type === 'scene_01') {
         area.value = "2D Animated documentary: 38-year-old gentleman in tailored charcoal suit in confident conversation with military general in olive uniform at a lavish reception hall, chiaroscuro shadows, warm amber chandelier light, 16:9 widescreen.";
+        loadSceneMedia('scene_01');
+      } else if (type === 'scene_02') {
+        area.value = "Scene 2: Close-up low-angle bedroom interior, vintage carved mahogany wall clock with concealed miniature surveillance camera lens reflecting cold moonlight, chiaroscuro noir shadows.";
+        loadSceneMedia('scene_02');
+      } else if (type === 'scene_03') {
+        area.value = "Scene 3: Desolate Damascus cemetery at 2:00 AM, heavy atmospheric mist and car headlights, hemp ropes wrapped around wooden coffin emerging from moist soil, Dutch angle framing.";
+        loadSceneMedia('scene_03');
       } else if (type === 'perfume') {
         area.value = "Luxury perfume commercial: Frosted glass bottle with fluted brass cap resting on wet black obsidian slate, warm golden hour side lighting, shallow depth of field, amber water mist, vertical 9:16 format.";
+        loadSceneMedia('perfume');
       } else if (type === 'ugc') {
         area.value = "TikTok creator UGC skincare review: 24-year-old creator with natural freckles seated at sunlit oak kitchen table, holding pastel mint moisturizer tube, speaking genuinely to camera.";
+        loadSceneMedia('ugc');
       }
-      executeFlowDecomposition();
     }
 
     async function executeFlowDecomposition() {
-      const brief = document.getElementById('main-flow-input').value || "2D Animated spy documentary";
+      const brief = (document.getElementById('main-flow-input').value || "").trim();
+      if (!brief) {
+        applyFlowPreset('2d_spy');
+        return;
+      }
       sendAgentChatMessage(brief);
     }
 
@@ -2382,14 +2730,14 @@
       }
     }
 
-    let activeMediaBlobUrl = null;
-    let activeMediaType = null;
+    let activeMediaBlobUrl = '/renders/scene_01_hook.mp4';
+    let activeMediaType = 'video';
 
     function handleVideoFileLoaded(event) {
       const file = event.target.files && event.target.files[0];
       if (!file) return;
       
-      if (activeMediaBlobUrl) URL.revokeObjectURL(activeMediaBlobUrl);
+      if (activeMediaBlobUrl && activeMediaBlobUrl.startsWith('blob:')) URL.revokeObjectURL(activeMediaBlobUrl);
       activeMediaBlobUrl = URL.createObjectURL(file);
       activeMediaType = 'video';
 
@@ -2398,40 +2746,23 @@
       const placeholder = document.getElementById('active-scene-placeholder');
       const badge = document.getElementById('viewport-status-badge');
 
-      img.classList.add('hidden');
-      placeholder.classList.add('hidden');
-      video.classList.remove('hidden');
-      video.src = activeMediaBlobUrl;
-      video.play().catch(() => {});
+      if (img) img.classList.add('hidden');
+      if (placeholder) placeholder.classList.add('hidden');
+      if (video) {
+        video.classList.remove('hidden');
+        video.src = activeMediaBlobUrl;
+        video.play().catch(() => {});
+      }
 
-      badge.textContent = `PLAYING MP4: ${file.name.slice(0, 24)} (${(file.size / (1024*1024)).toFixed(1)}MB)`;
+      if (badge) badge.textContent = `PLAYING MP4: ${file.name.slice(0, 24)} (${(file.size / (1024*1024)).toFixed(1)}MB)`;
       showToast(`Rendered Video "${file.name}" loaded into Timeline Monitor!`, 'success');
-    }
-
-    function loadSampleSceneTake() {
-      const video = document.getElementById('active-scene-video');
-      const img = document.getElementById('active-scene-image');
-      const placeholder = document.getElementById('active-scene-placeholder');
-      const badge = document.getElementById('viewport-status-badge');
-
-      img.classList.add('hidden');
-      placeholder.classList.add('hidden');
-      video.classList.remove('hidden');
-      video.src = '/renders/scene_01_hook.mp4';
-      video.currentTime = 0;
-      video.play().catch(() => {});
-
-      activeMediaType = 'video';
-      activeMediaBlobUrl = '/renders/scene_01_hook.mp4';
-      badge.textContent = 'MONITOR: PLAYING SCENE 01 RENDER (4.0s)';
-      showToast("Loaded official 4.0s 2D Noir Rendered Take into Monitor!", 'success');
     }
 
     function handleImageFileLoaded(event) {
       const file = event.target.files && event.target.files[0];
       if (!file) return;
 
-      if (activeMediaBlobUrl) URL.revokeObjectURL(activeMediaBlobUrl);
+      if (activeMediaBlobUrl && activeMediaBlobUrl.startsWith('blob:')) URL.revokeObjectURL(activeMediaBlobUrl);
       activeMediaBlobUrl = URL.createObjectURL(file);
       activeMediaType = 'image';
 
@@ -2444,24 +2775,30 @@
         video.pause();
         video.classList.add('hidden');
       }
-      placeholder.classList.add('hidden');
-      img.classList.remove('hidden');
-      img.src = activeMediaBlobUrl;
+      if (placeholder) placeholder.classList.add('hidden');
+      if (img) {
+        img.classList.remove('hidden');
+        img.src = activeMediaBlobUrl;
+      }
 
-      badge.textContent = `2D KEYFRAME: ${file.name.slice(0, 24)}`;
+      if (badge) badge.textContent = `2D KEYFRAME: ${file.name.slice(0, 24)}`;
       showToast(`Keyframe "${file.name}" loaded into Timeline Monitor!`, 'success');
     }
 
     function downloadActiveMedia() {
-      if (activeMediaBlobUrl) {
-        const a = document.createElement('a');
-        a.href = activeMediaBlobUrl;
-        a.download = activeMediaType === 'video' ? 'ddmai_scene_01.mp4' : 'ddmai_scene_01_keyframe.png';
-        a.click();
-        showToast("Downloading active media...", 'info');
+      const scene = SCENE_CATALOG[activeSceneId] || SCENE_CATALOG['scene_01'];
+      const a = document.createElement('a');
+      if (activeMediaType === 'video') {
+        a.href = scene.videoSrc;
+        a.download = `ddmai_${scene.id}_take.mp4`;
       } else {
-        showToast("No active custom media loaded. Load an MP4 or PNG first!", 'warning');
+        a.href = scene.keyframeSrc;
+        a.download = `ddmai_${scene.id}_keyframe.jpg`;
       }
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast(`Downloading ${scene.title} (${activeMediaType.toUpperCase()})...`, 'info');
     }
 
     function simulateFlowPlayback() {
@@ -2480,16 +2817,19 @@
       const btn = document.getElementById('flow-play-text');
       const icon = document.getElementById('flow-play-icon');
       const badge = document.getElementById('viewport-status-badge');
-      btn.textContent = 'Simulating 4.0s...';
-      icon.className = "fa-solid fa-spinner fa-spin text-[10px]";
-      badge.textContent = 'MONITOR: PLAYING 4.0s HOOK';
+      if (btn) btn.textContent = 'Playing Take...';
+      if (icon) icon.className = "fa-solid fa-spinner fa-spin text-[10px]";
+
+      if (video) {
+        video.classList.remove('hidden');
+        video.play().catch(() => {});
+      }
 
       setTimeout(() => {
-        btn.textContent = 'Preview Scene';
-        icon.className = "fa-solid fa-play text-[10px]";
-        badge.textContent = 'MONITOR: SCENE 01 VERIFIED';
-        showToast("Scene 1 (4.0s) Preview Complete! Parallax 2D motion with fast 1.25x VO.", 'success');
-      }, 4000);
+        if (btn) btn.textContent = 'Play / Pause';
+        if (icon) icon.className = "fa-solid fa-play text-[10px]";
+        showToast("Scene preview playback verified!", 'success');
+      }, 2000);
     }
 
     function editAgentInstructions() {

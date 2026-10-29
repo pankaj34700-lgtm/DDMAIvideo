@@ -19,7 +19,7 @@ export default defineConfig({
     viewport: { width: 1440, height: 900 },
   },
   webServer: process.env.TARGET === 'cloud' ? undefined : {
-    command: 'node "../self reserch with video/website/server.js"',
+    command: 'node "../website/server.js"',
     url: 'http://localhost:3000',
     reuseExistingServer: true,
     timeout: 12000,
