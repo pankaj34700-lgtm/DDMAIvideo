@@ -21,7 +21,7 @@ const MIME_TYPES = {
 let USERS = [
   {
     id: 'usr_001',
-    name: 'Pankaj Sharma',
+    name: 'Veteran, PankajBhai Umesh Gupta',
     email: 'admin@ddmai.video',
     role: 'SuperAdmin',
     status: 'Active',
@@ -73,7 +73,7 @@ let USERS = [
 let CERTIFICATES = [
   {
     id: 'DDMAI-CERT-2026-8942A',
-    recipientName: 'Pankaj Sharma',
+    recipientName: 'Veteran, PankajBhai Umesh Gupta',
     recipientEmail: 'admin@ddmai.video',
     courseName: 'Master AI Film Director & 2D Animated Documentary Specialist',
     issueDate: 'October 26, 2026',
