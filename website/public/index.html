@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DDMAI.VIDEO — Next-Gen AI Video &amp; Image Production Studio</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>(function(){ try { const t = localStorage.getItem('ddmai_theme') || 'light'; if(t === 'light') document.documentElement.classList.add('theme-light'); } catch(e){} })();</script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Google+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
@@ -40,6 +41,255 @@
         border: 8px double #b45309 !important;
       }
       .no-print { display: none !important; }
+    }
+
+    /* ========================================================
+       ☀️ DDMAI CLEAN & MODERN LIGHT THEME SPECIFICATION
+       ======================================================== */
+    html.theme-light body,
+    body.theme-light {
+      background-color: #f8fafc !important;
+      color: #0f172a !important;
+    }
+
+    .theme-light ::-webkit-scrollbar-track {
+      background: #f1f5f9;
+    }
+    .theme-light ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    .theme-light ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* Header & Navigation */
+    .theme-light header {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 4px rgba(15, 23, 42, 0.06) !important;
+    }
+    .theme-light header .font-flow,
+    .theme-light header span.font-extrabold {
+      color: #0f172a !important;
+    }
+    .theme-light header select {
+      background-color: #f8fafc !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    .theme-light header select option {
+      background-color: #ffffff;
+      color: #0f172a;
+    }
+
+    /* Left Sidebar */
+    .theme-light aside {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    .theme-light aside .bg-\[\#151722\],
+    .theme-light aside .bg-\[\#151722\]\/60 {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
+    }
+    .theme-light aside .text-slate-200,
+    .theme-light aside .text-slate-300 {
+      color: #0f172a !important;
+    }
+    .theme-light aside .text-slate-400 {
+      color: #64748b !important;
+    }
+
+    /* Flow Cards */
+    .theme-light .flow-card {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02) !important;
+    }
+    .theme-light .flow-card:hover {
+      border-color: #cbd5e1 !important;
+    }
+    .theme-light .flow-card h2,
+    .theme-light .flow-card h3,
+    .theme-light .flow-card h4,
+    .theme-light .flow-card .text-white {
+      color: #0f172a !important;
+    }
+    .theme-light .flow-card .text-slate-100,
+    .theme-light .flow-card .text-slate-200 {
+      color: #1e293b !important;
+    }
+    .theme-light .flow-card .text-slate-300,
+    .theme-light .flow-card .text-slate-400 {
+      color: #475569 !important;
+    }
+
+    /* Welcome Banner */
+    .theme-light #welcome-banner {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      box-shadow: 0 4px 16px rgba(15, 23, 42, 0.05) !important;
+    }
+    .theme-light #welcome-banner h3,
+    .theme-light #welcome-banner .text-white {
+      color: #0f172a !important;
+    }
+    .theme-light #welcome-banner p {
+      color: #475569 !important;
+    }
+
+    /* Chat Feed */
+    .theme-light #agent-chat-feed {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    .theme-light #agent-chat-feed .bg-\[\#131622\] {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      color: #1e293b !important;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04) !important;
+    }
+    .theme-light #agent-chat-feed .bg-\[\#131622\] p {
+      color: #1e293b !important;
+    }
+    .theme-light #agent-chat-feed .bg-indigo-600\/30 {
+      background-color: #eef2ff !important;
+      border-color: #c7d2fe !important;
+      color: #1e1b4b !important;
+    }
+    .theme-light #agent-chat-feed .bg-indigo-600\/30 p {
+      color: #1e1b4b !important;
+    }
+    .theme-light #agent-chat-feed .bg-indigo-600\/30 .text-indigo-300 {
+      color: #4338ca !important;
+    }
+    .theme-light #agent-chat-feed .bg-\[\#181c2b\] {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #334155 !important;
+    }
+    .theme-light #agent-chat-feed .bg-\[\#181c2b\]:hover {
+      background-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+
+    /* Inputs, Selects & Textareas */
+    .theme-light textarea#main-flow-input,
+    .theme-light input[type="text"],
+    .theme-light input[type="password"],
+    .theme-light input[type="email"],
+    .theme-light select {
+      background-color: #ffffff !important;
+      border-color: #cbd5e1 !important;
+      color: #0f172a !important;
+    }
+    .theme-light textarea#main-flow-input::placeholder {
+      color: #94a3b8 !important;
+    }
+    .theme-light textarea#main-flow-input:focus,
+    .theme-light input:focus,
+    .theme-light select:focus {
+      border-color: #6366f1 !important;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15) !important;
+    }
+
+    /* Sub-containers & prompt boxes */
+    .theme-light .bg-\[\#0e1017\],
+    .theme-light .bg-\[\#07080c\]:not(#media-monitor-viewport) {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    .theme-light .bg-\[\#0e1017\] p,
+    .theme-light #p1-content,
+    .theme-light #p2-content {
+      color: #0f172a !important;
+    }
+
+    /* Buttons & Secondary Action Pills */
+    .theme-light .bg-\[\#181a24\] {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #1e293b !important;
+    }
+    .theme-light .bg-\[\#181a24\]:hover {
+      background-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+    .theme-light .bg-\[\#1f2433\] {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #0e7490 !important;
+    }
+    .theme-light .bg-\[\#1f2433\]:hover {
+      background-color: #e2e8f0 !important;
+    }
+    .theme-light .border-\[\#1f2330\],
+    .theme-light .border-\[\#222636\],
+    .theme-light .border-\[\#262b3b\],
+    .theme-light .border-\[\#1f2434\],
+    .theme-light .border-\[\#23283a\] {
+      border-color: #e2e8f0 !important;
+    }
+
+    /* Timeline Section */
+    .theme-light .bg-\[\#0b0c10\] {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+    }
+    .theme-light .bg-\[\#0b0c10\] .text-slate-400 {
+      color: #64748b !important;
+    }
+    .theme-light .bg-\[\#0b0c10\] .text-slate-300 {
+      color: #334155 !important;
+    }
+
+    /* Modals (Clean White Cards) */
+    .theme-light #admin-modal > div > div,
+    .theme-light #user-dashboard-modal > div,
+    .theme-light #auth-modal > div,
+    .theme-light #api-keys-modal > div,
+    .theme-light #certificate-modal > div:not(#printable-certificate),
+    .theme-light #welcome-modal > div {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      color: #0f172a !important;
+      box-shadow: 0 25px 50px -12px rgba(15, 23, 42, 0.25) !important;
+    }
+    .theme-light .bg-\[\#11131a\] {
+      background-color: #ffffff !important;
+      border-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+    .theme-light .bg-\[\#151722\] {
+      background-color: #f8fafc !important;
+      border-color: #e2e8f0 !important;
+      color: #0f172a !important;
+    }
+    .theme-light table thead {
+      background-color: #f1f5f9 !important;
+      color: #475569 !important;
+    }
+    .theme-light table tbody tr {
+      border-color: #e2e8f0 !important;
+    }
+    .theme-light table tbody tr:hover {
+      background-color: #f8fafc !important;
+    }
+    .theme-light table td {
+      color: #334155 !important;
+    }
+
+    /* External Links */
+    .theme-light a[target="_blank"].bg-slate-800 {
+      background-color: #f1f5f9 !important;
+      border-color: #cbd5e1 !important;
+      color: #334155 !important;
+    }
+    .theme-light a[target="_blank"].bg-slate-800:hover {
+      background-color: #e2e8f0 !important;
+      color: #0f172a !important;
     }
   </style>
 </head>
@@ -112,6 +362,12 @@
       <button onclick="openAdminModal()" id="admin-panel-btn" class="px-3 py-1.5 rounded-xl bg-gradient-to-r from-red-600 via-rose-600 to-indigo-600 hover:from-red-500 hover:to-indigo-500 text-white font-bold transition flex items-center space-x-1.5 shadow-md shadow-rose-600/25 border border-rose-400/30">
         <i class="fa-solid fa-shield-halved text-xs"></i>
         <span>Admin Panel</span>
+      </button>
+
+      <!-- THEME TOGGLE BUTTON (LIGHT / DARK SWITCH) -->
+      <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-3 py-1.5 rounded-xl border border-[#262b3b] bg-[#181a24] hover:bg-[#202433] text-amber-300 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs" title="Toggle Clean Light Theme / Dark Mode">
+        <i id="theme-toggle-icon" class="fa-solid fa-sun text-amber-400 text-xs"></i>
+        <span id="theme-toggle-label" class="hidden sm:inline">Light Mode</span>
       </button>
 
       <!-- USER LOGIN / DASHBOARD BUTTON -->
@@ -1170,8 +1426,47 @@
     let usersList = [];
     let certsList = [];
 
+    // Theme Management (Clean Light / Dark Mode)
+    function initTheme() {
+      // Default to 'light' theme as user requested, or load saved preference
+      const savedTheme = localStorage.getItem('ddmai_theme') || 'light';
+      applyTheme(savedTheme);
+    }
+
+    function toggleTheme() {
+      const isLight = document.body.classList.contains('theme-light') || document.documentElement.classList.contains('theme-light');
+      const nextTheme = isLight ? 'dark' : 'light';
+      applyTheme(nextTheme);
+      showToast(nextTheme === 'light' ? "☀️ Clean Light Theme Activated" : "🌙 Dark Theme Activated", 'info');
+    }
+
+    function applyTheme(theme) {
+      const body = document.body;
+      const html = document.documentElement;
+      const icon = document.getElementById('theme-toggle-icon');
+      const label = document.getElementById('theme-toggle-label');
+      const btn = document.getElementById('theme-toggle-btn');
+
+      if (theme === 'light') {
+        body.classList.add('theme-light');
+        html.classList.add('theme-light');
+        localStorage.setItem('ddmai_theme', 'light');
+        if (icon) icon.className = "fa-solid fa-moon text-indigo-600 text-xs";
+        if (label) label.textContent = "Dark Mode";
+        if (btn) btn.className = "px-3 py-1.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-100 text-slate-800 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs";
+      } else {
+        body.classList.remove('theme-light');
+        html.classList.remove('theme-light');
+        localStorage.setItem('ddmai_theme', 'dark');
+        if (icon) icon.className = "fa-solid fa-sun text-amber-400 text-xs";
+        if (label) label.textContent = "Light Mode";
+        if (btn) btn.className = "px-3 py-1.5 rounded-xl border border-[#262b3b] bg-[#181a24] hover:bg-[#202433] text-amber-300 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs";
+      }
+    }
+
     // Initialize App on DOM Ready
     window.addEventListener('DOMContentLoaded', async () => {
+      initTheme();
       initSession();
       loadOptions();
       loadAdminData();
