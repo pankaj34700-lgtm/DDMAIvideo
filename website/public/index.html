@@ -10,18 +10,18 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Google+Sans:wght@400;500;700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
     
-    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #0b0c10; color: #e2e8f0; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc; color: #0f172a; }
     .font-flow { font-family: 'Google Sans', 'Inter', sans-serif; }
     .font-mono { font-family: 'JetBrains Mono', monospace; }
     .font-cert { font-family: 'Cinzel', serif; }
     
     ::-webkit-scrollbar { width: 5px; height: 5px; }
-    ::-webkit-scrollbar-track { background: #0b0c10; }
-    ::-webkit-scrollbar-thumb { background: #232733; border-radius: 4px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
     ::-webkit-scrollbar-thumb:hover { background: #374151; }
     
-    .flow-card { background: #13151c; border: 1px solid #1f2330; }
-    .flow-card:hover { border-color: #31384d; }
+    .flow-card { background: #ffffff; border: 1px solid #e2e8f0; box-shadow: 0 1px 3px 0 rgba(0,0,0,0.05); }
+    .flow-card:hover { border-color: #cbd5e1; }
     
     /* Certificate Print Styling */
     @media print {
@@ -94,11 +94,11 @@
       border-color: #e2e8f0 !important;
       box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04) !important;
     }
-    .theme-light aside .text-slate-200,
-    .theme-light aside .text-slate-300 {
+    .theme-light aside .text-slate-800,
+    .theme-light aside .text-slate-700 {
       color: #0f172a !important;
     }
-    .theme-light aside .text-slate-400 {
+    .theme-light aside .text-slate-500 {
       color: #64748b !important;
     }
 
@@ -117,12 +117,12 @@
     .theme-light .flow-card .text-white {
       color: #0f172a !important;
     }
-    .theme-light .flow-card .text-slate-100,
-    .theme-light .flow-card .text-slate-200 {
+    .theme-light .flow-card .text-slate-900,
+    .theme-light .flow-card .text-slate-800 {
       color: #1e293b !important;
     }
-    .theme-light .flow-card .text-slate-300,
-    .theme-light .flow-card .text-slate-400 {
+    .theme-light .flow-card .text-slate-700,
+    .theme-light .flow-card .text-slate-500 {
       color: #475569 !important;
     }
 
@@ -238,10 +238,10 @@
       background-color: #f8fafc !important;
       border-color: #e2e8f0 !important;
     }
-    .theme-light .bg-\[\#0b0c10\] .text-slate-400 {
+    .theme-light .bg-\[\#0b0c10\] .text-slate-500 {
       color: #64748b !important;
     }
-    .theme-light .bg-\[\#0b0c10\] .text-slate-300 {
+    .theme-light .bg-\[\#0b0c10\] .text-slate-700 {
       color: #334155 !important;
     }
 
@@ -296,7 +296,7 @@
 <body class="min-h-screen flex flex-col antialiased selection:bg-indigo-500 selection:text-white">
 
   <!-- ==================== TOP NAVIGATION BAR ==================== -->
-  <header class="bg-[#11131a] border-b border-[#1f2330] px-4 lg:px-6 py-2.5 flex items-center justify-between sticky top-0 z-50">
+  <header class="bg-white border-b border-slate-200 shadow-xs px-4 lg:px-6 py-2.5 flex items-center justify-between sticky top-0 z-50">
     <!-- Left: Brand Logo & Title -->
     <div class="flex items-center space-x-4">
       <div class="flex items-center space-x-2.5 cursor-pointer" onclick="showWelcomeModal()">
@@ -305,7 +305,7 @@
           <i class="fa-solid fa-play text-xs ml-0.5"></i>
         </div>
         <div class="flex items-center space-x-2">
-          <span class="font-flow font-extrabold text-base tracking-tight text-white">DDMAI<span class="text-indigo-400">.VIDEO</span></span>
+          <span class="font-flow font-extrabold text-base tracking-tight text-slate-900">DDMAI<span class="text-indigo-600">.VIDEO</span></span>
           <span class="px-2 py-0.5 rounded-full text-[10px] font-mono font-semibold bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 flex items-center space-x-1">
             <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
             <span>$0.00 ZERO-COST MODE</span>
@@ -314,9 +314,9 @@
       </div>
 
       <!-- Project Breadcrumb & Session Selector -->
-      <div class="hidden xl:flex items-center space-x-2 pl-4 border-l border-[#1f2330] text-xs">
+      <div class="hidden xl:flex items-center space-x-2 pl-4 border-l border-slate-200 text-xs">
         <span class="text-slate-500">Project /</span>
-        <select class="bg-[#181a24] text-slate-200 border border-[#262b3b] rounded-lg px-2.5 py-1 text-xs outline-none focus:border-indigo-500 font-medium">
+        <select class="bg-slate-100 text-slate-800 border border-slate-200 rounded-lg px-2.5 py-1 text-xs outline-none focus:border-indigo-500 font-medium">
           <option>2D Animated Spy Documentary (Eli Cohen)</option>
           <option>Commercial Campaign 2026 (10s Scenes)</option>
           <option>TikTok UGC Skincare Reel</option>
@@ -335,25 +335,25 @@
       </button>
 
       <!-- Advanced DDMAI Tools Drawer Trigger -->
-      <button onclick="openToolsModal()" class="hidden md:flex px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-200 font-medium transition items-center space-x-1.5">
+      <button onclick="openToolsModal()" class="hidden md:flex px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 font-medium transition items-center space-x-1.5">
         <i class="fa-solid fa-sliders text-cyan-400"></i>
         <span>FX Tools</span>
       </button>
 
       <!-- 50 Options Matrix -->
-      <button onclick="openOptionsModal()" class="hidden sm:flex px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-200 font-medium transition items-center space-x-1.5">
+      <button onclick="openOptionsModal()" class="hidden sm:flex px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-800 font-medium transition items-center space-x-1.5">
         <i class="fa-solid fa-cube text-purple-400"></i>
         <span>50 Options</span>
       </button>
 
       <!-- API Keys Manager Trigger -->
-      <button onclick="openApiKeysModal()" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-amber-950/30 hover:bg-amber-900/40 border border-amber-500/40 text-amber-300 font-medium transition flex items-center space-x-1.5 shadow-sm shadow-amber-500/10">
+      <button onclick="openApiKeysModal()" class="px-2.5 sm:px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 border border-amber-300 text-amber-300 font-medium transition flex items-center space-x-1.5 shadow-sm shadow-amber-500/10">
         <i class="fa-solid fa-key text-amber-400 text-xs"></i>
         <span class="hidden sm:inline">API Keys</span>
       </button>
 
       <!-- Certificate System Button -->
-      <button onclick="openCertificateModal()" class="px-3 py-1.5 rounded-xl bg-yellow-950/40 hover:bg-yellow-900/50 border border-yellow-500/40 text-yellow-300 font-medium transition flex items-center space-x-1.5 shadow-sm">
+      <button onclick="openCertificateModal()" class="px-3 py-1.5 rounded-xl bg-amber-100/70 hover:bg-amber-200/80 border border-amber-300 text-amber-900 font-medium transition flex items-center space-x-1.5 shadow-sm">
         <i class="fa-solid fa-award text-yellow-400 text-xs"></i>
         <span class="hidden md:inline">Certificates</span>
       </button>
@@ -365,7 +365,7 @@
       </button>
 
       <!-- THEME TOGGLE BUTTON (LIGHT / DARK SWITCH) -->
-      <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-3 py-1.5 rounded-xl border border-[#262b3b] bg-[#181a24] hover:bg-[#202433] text-amber-300 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs" title="Toggle Clean Light Theme / Dark Mode">
+      <button onclick="toggleTheme()" id="theme-toggle-btn" class="px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 text-amber-300 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs" title="Toggle Clean Light Theme / Dark Mode">
         <i id="theme-toggle-icon" class="fa-solid fa-sun text-amber-400 text-xs"></i>
         <span id="theme-toggle-label" class="hidden sm:inline">Light Mode</span>
       </button>
@@ -380,7 +380,7 @@
       </div>
 
       <!-- Welcome Tour Quick Trigger -->
-      <button onclick="showWelcomeModal()" title="Welcome Tour & Info" class="w-8 h-8 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-400 hover:text-white flex items-center justify-center transition">
+      <button onclick="showWelcomeModal()" title="Welcome Tour & Info" class="w-8 h-8 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-500 hover:text-white flex items-center justify-center transition">
         <i class="fa-solid fa-circle-question text-xs"></i>
       </button>
     </div>
@@ -390,32 +390,32 @@
   <div class="flex-1 flex overflow-hidden">
 
     <!-- LEFT SIDEBAR: ASSETS & INGREDIENTS STACK -->
-    <aside class="w-64 bg-[#0e1017] border-r border-[#1f2330] p-4 flex flex-col justify-between shrink-0 overflow-y-auto hidden md:flex">
+    <aside class="w-64 bg-slate-50/80 border-r border-slate-200 p-4 flex flex-col justify-between shrink-0 overflow-y-auto hidden md:flex">
       <div class="space-y-5">
         <!-- Asset Collections / History -->
         <div>
           <div class="flex items-center justify-between px-1 mb-2">
-            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Asset Stack & Collections</span>
+            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Asset Stack & Collections</span>
             <span class="text-[10px] text-indigo-400 font-mono">History</span>
           </div>
           <div class="space-y-1.5">
-            <div class="p-2 rounded-xl bg-[#151722] border border-[#222636] flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500/50 transition">
+            <div class="p-2 rounded-xl bg-white border border-slate-200 flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500/50 transition">
               <div class="w-9 h-9 rounded-lg bg-indigo-900/40 border border-indigo-700/50 flex items-center justify-center text-indigo-400 font-bold text-xs">
                 S01
               </div>
               <div class="overflow-hidden">
-                <div class="text-xs font-bold text-slate-200 truncate">2D Spy Documentary</div>
-                <div class="text-[10px] text-slate-400">4.0s • Eli Cohen Reception</div>
+                <div class="text-xs font-bold text-slate-800 truncate">2D Spy Documentary</div>
+                <div class="text-[10px] text-slate-500">4.0s • Eli Cohen Reception</div>
               </div>
             </div>
 
-            <div class="p-2 rounded-xl bg-[#151722]/60 border border-[#222636] flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500/50 transition">
+            <div class="p-2 rounded-xl bg-white/60 border border-slate-200 flex items-center space-x-2.5 cursor-pointer hover:border-indigo-500/50 transition">
               <div class="w-9 h-9 rounded-lg bg-pink-900/40 border border-pink-700/50 flex items-center justify-center text-pink-400 font-bold text-xs">
                 P02
               </div>
               <div class="overflow-hidden">
-                <div class="text-xs font-bold text-slate-200 truncate">Perfume Commercial</div>
-                <div class="text-[10px] text-slate-400">10.0s • 4s+6s Chained</div>
+                <div class="text-xs font-bold text-slate-800 truncate">Perfume Commercial</div>
+                <div class="text-[10px] text-slate-500">10.0s • 4s+6s Chained</div>
               </div>
             </div>
           </div>
@@ -424,66 +424,66 @@
         <!-- Zero-Cost Model Switcher -->
         <div>
           <div class="flex items-center justify-between px-1 mb-2">
-            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Zero-Cost Model Matrix</span>
+            <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Zero-Cost Model Matrix</span>
             <span class="text-[9px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.2 rounded font-mono font-bold">$0.00</span>
           </div>
           <div class="space-y-2 text-xs">
             <!-- Free Tier 1: Gemini Omni 360p Draft + 0-credit 720p -->
-            <label class="p-2.5 rounded-xl bg-[#151722] border border-[#222636] block cursor-pointer hover:border-indigo-500/50 transition">
+            <label class="p-2.5 rounded-xl bg-white border border-slate-200 block cursor-pointer hover:border-indigo-500/50 transition">
               <div class="flex items-center justify-between">
-                <span class="font-bold text-slate-200">Gemini Omni Flash 1.1</span>
+                <span class="font-bold text-slate-800">Gemini Omni Flash 1.1</span>
                 <input type="radio" name="engine" value="omni_free" checked class="text-indigo-600 focus:ring-0">
               </div>
               <div class="text-[10px] text-emerald-400 mt-1">360p Draft (50% Off) + 0-Credit 720p Upscale</div>
-              <div class="text-[9px] text-slate-400 mt-0.5">Native 10s clips, 3-turn V2V conversational edit.</div>
+              <div class="text-[9px] text-slate-500 mt-0.5">Native 10s clips, 3-turn V2V conversational edit.</div>
             </label>
 
             <!-- Free Tier 2: Open Source FLUX + LTX/CogVideo -->
-            <label class="p-2.5 rounded-xl bg-[#151722] border border-[#222636] block cursor-pointer hover:border-indigo-500/50 transition">
+            <label class="p-2.5 rounded-xl bg-white border border-slate-200 block cursor-pointer hover:border-indigo-500/50 transition">
               <div class="flex items-center justify-between">
-                <span class="font-bold text-slate-200">FLUX.1 + LTX-Video</span>
+                <span class="font-bold text-slate-800">FLUX.1 + LTX-Video</span>
                 <input type="radio" name="engine" value="opensource_free" class="text-indigo-600 focus:ring-0">
               </div>
               <div class="text-[10px] text-emerald-400 mt-1">100% Free Open-Source (Local / Colab)</div>
-              <div class="text-[9px] text-slate-400 mt-0.5">Zero API fees, Apache 2.0 commercial weights.</div>
+              <div class="text-[9px] text-slate-500 mt-0.5">Zero API fees, Apache 2.0 commercial weights.</div>
             </label>
 
             <!-- Free Audio: Microsoft Edge-TTS / Kokoro -->
-            <label class="p-2.5 rounded-xl bg-[#151722] border border-[#222636] block cursor-pointer hover:border-indigo-500/50 transition">
+            <label class="p-2.5 rounded-xl bg-white border border-slate-200 block cursor-pointer hover:border-indigo-500/50 transition">
               <div class="flex items-center justify-between">
-                <span class="font-bold text-slate-200">Edge-TTS &amp; Kokoro Voice</span>
+                <span class="font-bold text-slate-800">Edge-TTS &amp; Kokoro Voice</span>
                 <input type="radio" name="engine" value="edgetts_free" class="text-indigo-600 focus:ring-0">
               </div>
               <div class="text-[10px] text-emerald-400 mt-1">Free Broadcast Neural Audio ($0.00)</div>
-              <div class="text-[9px] text-slate-400 mt-0.5">High-fidelity voiceover under 2.5 wps budget.</div>
+              <div class="text-[9px] text-slate-500 mt-0.5">High-fidelity voiceover under 2.5 wps budget.</div>
             </label>
           </div>
         </div>
 
         <!-- Persistent Agent Instructions (Google Flow Standard) -->
-        <div class="p-3 rounded-xl bg-[#151722] border border-[#222636] space-y-2">
+        <div class="p-3 rounded-xl bg-white border border-slate-200 space-y-2">
           <div class="flex items-center justify-between text-xs">
-            <span class="font-bold text-slate-300">Agent Instructions</span>
+            <span class="font-bold text-slate-700">Agent Instructions</span>
             <button onclick="editAgentInstructions()" class="text-[10px] text-indigo-400 hover:underline">Edit</button>
           </div>
-          <div class="text-[10px] text-slate-400 leading-snug line-clamp-3" id="agent-instructions-preview">
+          <div class="text-[10px] text-slate-500 leading-snug line-clamp-3" id="agent-instructions-preview">
             "2D Animated Documentary Mode: Noir graphic novel, ink line art, cel-shading, chiaroscuro lighting. Zero photorealism, zero 3D CGI."
           </div>
         </div>
       </div>
 
       <!-- Studio Node Status & Certification Status -->
-      <div class="pt-3 border-t border-[#1f2330] space-y-2">
+      <div class="pt-3 border-t border-slate-200 space-y-2">
         <div class="flex items-center justify-between px-1">
-          <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Node Domain</span>
+          <span class="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Node Domain</span>
           <span class="text-[10px] text-emerald-400 font-mono">v3.0 Live</span>
         </div>
-        <div class="w-full py-2 px-3 rounded-xl bg-[#151722] border border-[#222636] text-xs text-indigo-300 font-medium flex items-center justify-between">
+        <div class="w-full py-2 px-3 rounded-xl bg-white border border-slate-200 text-xs text-indigo-300 font-medium flex items-center justify-between">
           <div class="flex items-center space-x-2">
             <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
-            <span class="font-bold text-white tracking-wide">DDMAI.VIDEO</span>
+            <span class="font-bold text-slate-800 tracking-wide">DDMAI.VIDEO</span>
           </div>
-          <span class="text-[10px] text-slate-400 font-mono">PORT 3000</span>
+          <span class="text-[10px] text-slate-500 font-mono">PORT 3000</span>
         </div>
       </div>
     </aside>
@@ -498,11 +498,11 @@
             <i class="fa-solid fa-clapperboard"></i>
           </div>
           <div>
-            <h2 class="text-sm sm:text-base font-flow font-extrabold text-white flex items-center space-x-2">
+            <h2 class="text-sm sm:text-base font-flow font-extrabold text-slate-900 flex items-center space-x-2">
               <span>Welcome to DDMAI.VIDEO Studio v3.0!</span>
               <span class="px-2 py-0.5 rounded text-[10px] bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-mono">Academy Edition</span>
             </h2>
-            <p class="text-xs text-slate-300 mt-0.5">
+            <p class="text-xs text-slate-700 mt-0.5">
               Zero-cost AI video generation studio with built-in <strong>2D Noir Documentary Rules</strong>, <strong>User Login Dashboard</strong>, and <strong>Director Certification System</strong>.
             </p>
           </div>
@@ -512,7 +512,7 @@
             <i class="fa-solid fa-graduation-cap"></i>
             <span>Earn Certificate</span>
           </button>
-          <button onclick="dismissWelcomeBanner()" class="text-slate-400 hover:text-white p-1.5"><i class="fa-solid fa-xmark"></i></button>
+          <button onclick="dismissWelcomeBanner()" class="text-slate-500 hover:text-white p-1.5"><i class="fa-solid fa-xmark"></i></button>
         </div>
       </div>
 
@@ -522,20 +522,20 @@
         <div class="flex items-center justify-between text-xs">
           <div class="flex items-center space-x-2">
             <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
-            <span class="font-flow font-bold text-white text-sm" id="prompt-box-mode-title">DDMAI.VIDEO Agent Prompt Box</span>
+            <span class="font-flow font-bold text-slate-900 text-sm" id="prompt-box-mode-title">DDMAI.VIDEO Agent Prompt Box</span>
           </div>
 
           <div class="flex items-center space-x-2">
-            <span class="text-[11px] text-slate-400">Aspect Ratio:</span>
-            <select id="canvas-aspect" class="bg-[#181a24] text-slate-200 border border-[#262b3b] rounded-lg px-2.5 py-1 text-xs outline-none">
+            <span class="text-[11px] text-slate-500">Aspect Ratio:</span>
+            <select id="canvas-aspect" class="bg-slate-100 text-slate-800 border border-slate-200 rounded-lg px-2.5 py-1 text-xs outline-none">
               <option value="16:9">16:9 Widescreen (YouTube / Doc)</option>
               <option value="9:16">9:16 Vertical (TikTok / Reels)</option>
               <option value="1:1">1:1 Square (Social Feed)</option>
               <option value="4:5">4:5 Portrait</option>
             </select>
 
-            <span class="text-[11px] text-slate-400 ml-2">Scene Math:</span>
-            <select id="scene-plan-select" class="bg-[#181a24] text-slate-200 border border-[#262b3b] rounded-lg px-2.5 py-1 text-xs outline-none font-mono">
+            <span class="text-[11px] text-slate-500 ml-2">Scene Math:</span>
+            <select id="scene-plan-select" class="bg-slate-100 text-slate-800 border border-slate-200 rounded-lg px-2.5 py-1 text-xs outline-none font-mono">
               <option value="4.0s">4.0s Fast Punchy Hook</option>
               <option value="6.0s">6.0s Narrative Beat</option>
               <option value="4+6">4s + 6s = 10.0s Standard</option>
@@ -545,13 +545,13 @@
         </div>
 
         <!-- CONVERSATIONAL CHAT FEED (Gemini / ChatGPT Style) -->
-        <div id="agent-chat-feed" class="space-y-3 max-h-[300px] overflow-y-auto p-3.5 rounded-xl bg-[#090b10] border border-[#1f2434] text-xs">
+        <div id="agent-chat-feed" class="space-y-3 max-h-[300px] overflow-y-auto p-3.5 rounded-xl bg-slate-50 border border-slate-200 text-xs">
           <!-- Initial AI Welcome Bubble -->
           <div class="flex items-start space-x-2.5">
             <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shrink-0 shadow">
               <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i>
             </div>
-            <div class="flex-1 bg-[#131622] border border-[#23293d] rounded-2xl rounded-tl-none p-3 space-y-2 text-slate-200">
+            <div class="flex-1 bg-white border border-slate-200 rounded-2xl rounded-tl-none p-3 space-y-2 text-slate-800">
               <div class="flex items-center justify-between">
                 <span class="font-bold text-indigo-300 text-[11px]">DDMAI Director AI (Gemini Conversational Engine)</span>
                 <span class="text-[10px] text-emerald-400 font-mono"><i class="fa-solid fa-circle text-[7px] mr-1"></i>Active</span>
@@ -566,10 +566,10 @@
                 <button onclick="sendAgentChatMessage('Scene 2: बेडरूम में छिपा हुआ कैमरा बनाओ')" class="px-2.5 py-1 rounded-lg bg-amber-950/60 hover:bg-amber-900 border border-amber-700/40 text-amber-300 transition flex items-center space-x-1">
                   <i class="fa-solid fa-film text-[9px]"></i><span>Scene 2 बनाओ</span>
                 </button>
-                <button onclick="sendAgentChatMessage('Eli Cohen की असली कहानी क्या थी और वो राष्ट्रपति की रेस तक कैसे पहुँचा?')" class="px-2.5 py-1 rounded-lg bg-[#181c2b] hover:bg-[#20263a] border border-slate-700 text-slate-300 transition flex items-center space-x-1">
+                <button onclick="sendAgentChatMessage('Eli Cohen की असली कहानी क्या थी और वो राष्ट्रपति की रेस तक कैसे पहुँचा?')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-700 text-slate-700 transition flex items-center space-x-1">
                   <i class="fa-solid fa-question text-[9px]"></i><span>Eli Cohen की कहानी?</span>
                 </button>
-                <button onclick="sendAgentChatMessage('4 सेकंड में डायलॉग स्पीड और वॉइस-ओवर कैसे सेट करें?')" class="px-2.5 py-1 rounded-lg bg-[#181c2b] hover:bg-[#20263a] border border-slate-700 text-slate-300 transition flex items-center space-x-1">
+                <button onclick="sendAgentChatMessage('4 सेकंड में डायलॉग स्पीड और वॉइस-ओवर कैसे सेट करें?')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-700 text-slate-700 transition flex items-center space-x-1">
                   <i class="fa-solid fa-stopwatch text-[9px]"></i><span>4s वॉइस-ओवर टाइमिंग?</span>
                 </button>
               </div>
@@ -579,24 +579,24 @@
 
         <!-- Multi-Line Prompt Input -->
         <div class="relative">
-          <textarea id="main-flow-input" rows="2" onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); sendAgentChatMessage(); }" class="w-full bg-[#0e1017] border border-[#222636] rounded-xl p-3.5 text-xs text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 leading-relaxed font-sans" placeholder="Type command or question (e.g. 'Scene 2 बनाओ', 'अगला सीन क्या है?', 'Run Scene 1')... Press Enter to send"></textarea>
+          <textarea id="main-flow-input" rows="2" onkeydown="if(event.key==='Enter' && !event.shiftKey){ event.preventDefault(); sendAgentChatMessage(); }" class="w-full bg-slate-50 border border-slate-200 rounded-xl p-3.5 text-xs text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 shadow-xs leading-relaxed font-sans" placeholder="Type command or question (e.g. 'Scene 2 बनाओ', 'अगला सीन क्या है?', 'Run Scene 1')... Press Enter to send"></textarea>
           
           <!-- Bottom Toolbar of Prompt Box (Flow Style) -->
-          <div class="flex flex-wrap items-center justify-between gap-2.5 mt-3 pt-2 border-t border-[#1f2330]">
+          <div class="flex flex-wrap items-center justify-between gap-2.5 mt-3 pt-2 border-t border-slate-200">
             <!-- Quick References & Presets -->
             <div class="flex items-center space-x-2 text-xs">
-              <button onclick="triggerIngredientUpload()" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-300 text-[11px] flex items-center space-x-1.5 transition">
-                <i class="fa-solid fa-paperclip text-slate-400"></i>
+              <button onclick="triggerIngredientUpload()" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-[11px] flex items-center space-x-1.5 transition">
+                <i class="fa-solid fa-paperclip text-slate-500"></i>
                 <span>Attach Reference / Avatar</span>
               </button>
 
-              <button onclick="applyFlowPreset('2d_spy')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-amber-500/40 text-amber-300 text-[11px] font-semibold transition">
+              <button onclick="applyFlowPreset('2d_spy')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 border border-amber-500/40 text-amber-300 text-[11px] font-semibold transition">
                 + 2D Spy Documentary
               </button>
-              <button onclick="applyFlowPreset('perfume')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-slate-300 text-[11px] transition">
+              <button onclick="applyFlowPreset('perfume')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 text-[11px] transition">
                 + Perfume Commercial
               </button>
-              <button onclick="applyFlowPreset('ugc')" class="px-2.5 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] text-pink-300 text-[11px] transition">
+              <button onclick="applyFlowPreset('ugc')" class="px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 border border-slate-200 text-pink-300 text-[11px] transition">
                 + UGC TikTok
               </button>
             </div>
@@ -607,7 +607,7 @@
                 <i class="fa-solid fa-paper-plane text-xs"></i>
                 <span>Ask / Run AI (Enter)</span>
               </button>
-              <button onclick="executeFlowDecomposition()" class="bg-[#181a24] hover:bg-[#222636] border border-[#2d3345] text-slate-300 font-medium text-xs px-3 py-1.5 rounded-xl transition flex items-center space-x-1.5">
+              <button onclick="executeFlowDecomposition()" class="bg-slate-100 hover:bg-[#222636] border border-slate-300 text-slate-700 font-medium text-xs px-3 py-1.5 rounded-xl transition flex items-center space-x-1.5">
                 <i class="fa-solid fa-bolt text-amber-400"></i>
                 <span>Generate (Zero-Cost Mode)</span>
               </button>
@@ -625,31 +625,31 @@
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30 font-mono">
                 PROMPT 1: KEYFRAME IMAGE STILL
               </span>
-              <span class="text-[10px] text-slate-400 font-mono">2D Graphic Novel / 16:9</span>
+              <span class="text-[10px] text-slate-500 font-mono">2D Graphic Novel / 16:9</span>
             </div>
-            <button onclick="copyCardPrompt('p1-content')" class="text-xs text-slate-400 hover:text-white transition">
+            <button onclick="copyCardPrompt('p1-content')" class="text-xs text-slate-500 hover:text-white transition">
               <i class="fa-regular fa-copy mr-1"></i>Copy
             </button>
           </div>
-          <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] min-h-[90px]">
-            <p id="p1-content" class="text-xs text-slate-200 leading-relaxed font-mono">
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 min-h-[90px]">
+            <p id="p1-content" class="text-xs text-slate-800 leading-relaxed font-mono">
               A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: The 38-year-old gentleman in tailored charcoal suit stands in confident conversation beside the decorated senior military officer in olive uniform and beret at a lavish government reception hall. Chiaroscuro shadows, warm amber chandelier light, 100% 2D graphic novel ink line art.
             </p>
           </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-400">
+          <div class="flex items-center justify-between text-[10px] text-slate-500">
             <span>Disk Path: <code class="text-indigo-300">website/public/images/keyframes/</code></span>
             <span class="text-emerald-400"><i class="fa-solid fa-check mr-1"></i>2D Rules Enforced</span>
           </div>
           <!-- Quick Launch AI Image Generators -->
-          <div class="pt-2 border-t border-[#1f2330] flex flex-wrap items-center gap-1.5 text-[10px]">
-            <span class="text-slate-400 mr-1">Generate in:</span>
+          <div class="pt-2 border-t border-slate-200 flex flex-wrap items-center gap-1.5 text-[10px]">
+            <span class="text-slate-500 mr-1">Generate in:</span>
             <a href="https://aitestkitchen.withgoogle.com/tools/image-fx" target="_blank" class="px-2 py-0.5 rounded-md bg-amber-500/10 hover:bg-amber-500/20 text-amber-300 border border-amber-500/30 transition flex items-center space-x-1">
               <i class="fa-solid fa-bolt text-[9px]"></i><span>Google Flow / ImageFX ↗</span>
             </a>
-            <a href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://huggingface.co/spaces/black-forest-labs/FLUX.1-schnell" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
               <span>FLUX ↗</span>
             </a>
-            <a href="https://www.midjourney.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://www.midjourney.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
               <span>Midjourney ↗</span>
             </a>
           </div>
@@ -662,34 +662,34 @@
               <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 font-mono">
                 PROMPT 2: VIDEO MOTION & AUDIO
               </span>
-              <span class="text-[10px] text-slate-400 font-mono">Veo / Kling / Omni</span>
+              <span class="text-[10px] text-slate-500 font-mono">Veo / Kling / Omni</span>
             </div>
-            <button onclick="copyCardPrompt('p2-content')" class="text-xs text-slate-400 hover:text-white transition">
+            <button onclick="copyCardPrompt('p2-content')" class="text-xs text-slate-500 hover:text-white transition">
               <i class="fa-regular fa-copy mr-1"></i>Copy
             </button>
           </div>
-          <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] min-h-[90px]">
-            <p id="p2-content" class="text-xs text-slate-200 leading-relaxed font-mono">
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 min-h-[90px]">
+            <p id="p2-content" class="text-xs text-slate-800 leading-relaxed font-mono">
               [AVATAR &amp; AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!". Zero on-screen avatar. Motion (4s): Smooth 2D layered parallax push-in camera toward the two men. Subtle natural eye blink, confident slight head nod, ambient chandelier light glinting faintly in deep noir shadows.
             </p>
           </div>
-          <div class="flex items-center justify-between text-[10px] text-slate-400">
+          <div class="flex items-center justify-between text-[10px] text-slate-500">
             <span>Speech Budget: <strong class="text-emerald-400 font-mono">3.3s Spoken (4.0s Budget)</strong></span>
             <span class="text-cyan-400 font-mono">Duration: 4.0s</span>
           </div>
           <!-- Quick Launch AI Video Engines -->
-          <div class="pt-2 border-t border-[#1f2330] flex flex-wrap items-center gap-1.5 text-[10px]">
-            <span class="text-slate-400 mr-1">Generate in:</span>
+          <div class="pt-2 border-t border-slate-200 flex flex-wrap items-center gap-1.5 text-[10px]">
+            <span class="text-slate-500 mr-1">Generate in:</span>
             <a href="https://aitestkitchen.withgoogle.com/tools/video-fx" target="_blank" class="px-2 py-0.5 rounded-md bg-cyan-500/10 hover:bg-cyan-500/20 text-cyan-300 border border-cyan-500/30 transition flex items-center space-x-1">
               <i class="fa-solid fa-video text-[9px]"></i><span>Google Veo / Flow ↗</span>
             </a>
-            <a href="https://klingai.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://klingai.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
               <span>Kling AI ↗</span>
             </a>
-            <a href="https://runwayml.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://runwayml.com" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
               <span>Runway Gen-3 ↗</span>
             </a>
-            <a href="https://hailuoai.video" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition flex items-center space-x-1">
+            <a href="https://hailuoai.video" target="_blank" class="px-2 py-0.5 rounded-md bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 transition flex items-center space-x-1">
               <span>Hailuo ↗</span>
             </a>
           </div>
@@ -702,8 +702,8 @@
           <div class="flex items-center space-x-2.5">
             <i class="fa-solid fa-film text-indigo-400 text-sm"></i>
             <div>
-              <h3 class="text-sm font-flow font-bold text-white tracking-tight">Active Scene Viewport &amp; Timeline (4.0s Hook Take • Scene 01)</h3>
-              <p class="text-[11px] text-slate-400">Play, preview, and inspect your rendered 2D animated shots &amp; keyframes</p>
+              <h3 class="text-sm font-flow font-bold text-slate-900 tracking-tight">Active Scene Viewport &amp; Timeline (4.0s Hook Take • Scene 01)</h3>
+              <p class="text-[11px] text-slate-500">Play, preview, and inspect your rendered 2D animated shots &amp; keyframes</p>
             </div>
           </div>
           <div class="flex items-center space-x-2">
@@ -711,11 +711,11 @@
             <input type="file" id="media-video-picker" accept="video/mp4,video/webm" class="hidden" onchange="handleVideoFileLoaded(event)">
             <input type="file" id="media-image-picker" accept="image/png,image/jpeg,image/webp" class="hidden" onchange="handleImageFileLoaded(event)">
 
-            <button onclick="document.getElementById('media-image-picker').click()" class="bg-[#181a24] hover:bg-[#222636] text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5">
+            <button onclick="document.getElementById('media-image-picker').click()" class="bg-slate-100 hover:bg-[#222636] text-amber-300 border border-amber-500/30 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5">
               <i class="fa-regular fa-image text-xs"></i>
               <span>Load Keyframe (PNG)</span>
             </button>
-            <button onclick="document.getElementById('media-video-picker').click()" class="bg-[#181a24] hover:bg-[#222636] text-cyan-300 border border-cyan-500/30 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5">
+            <button onclick="document.getElementById('media-video-picker').click()" class="bg-slate-100 hover:bg-[#222636] text-cyan-300 border border-cyan-500/30 px-3 py-1.5 rounded-xl text-xs font-medium transition flex items-center space-x-1.5">
               <i class="fa-solid fa-file-video text-xs"></i>
               <span>Load Rendered Video (MP4)</span>
             </button>
@@ -731,7 +731,7 @@
         </div>
 
         <!-- LIVE MEDIA SCREEN / MONITOR -->
-        <div id="media-monitor-viewport" class="relative w-full aspect-video max-h-[360px] bg-[#07080c] border border-[#23283a] rounded-2xl overflow-hidden flex items-center justify-center group shadow-inner">
+        <div id="media-monitor-viewport" class="relative w-full aspect-video max-h-[360px] bg-[#07080c] border border-slate-200 rounded-2xl overflow-hidden flex items-center justify-center group shadow-inner">
           <!-- Real HTML5 Video Player -->
           <video id="active-scene-video" class="hidden w-full h-full object-contain" controls></video>
 
@@ -744,8 +744,8 @@
               <i class="fa-solid fa-clapperboard"></i>
             </div>
             <div>
-              <h4 class="text-sm font-bold text-slate-200">Scene 01 Monitor: Damascus Presidential Reception</h4>
-              <p class="text-xs text-slate-400 max-w-md mx-auto mt-1">100% 2D Animated Noir Graphic Novel • Chiaroscuro Chandelier Lighting • Adult Spy &amp; General</p>
+              <h4 class="text-sm font-bold text-slate-800">Scene 01 Monitor: Damascus Presidential Reception</h4>
+              <p class="text-xs text-slate-500 max-w-md mx-auto mt-1">100% 2D Animated Noir Graphic Novel • Chiaroscuro Chandelier Lighting • Adult Spy &amp; General</p>
             </div>
             <div class="inline-flex items-center space-x-2 text-[11px] font-mono text-amber-300 bg-amber-950/40 border border-amber-600/30 px-3 py-1 rounded-lg">
               <i class="fa-solid fa-camera"></i>
@@ -754,14 +754,14 @@
           </div>
 
           <!-- Overlay Badge -->
-          <div class="absolute top-3 left-3 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700/50 text-[10px] text-slate-300 font-mono flex items-center space-x-1.5">
+          <div class="absolute top-3 left-3 bg-black/75 backdrop-blur-md px-2.5 py-1 rounded-lg border border-slate-700/50 text-[10px] text-slate-700 font-mono flex items-center space-x-1.5">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <span id="viewport-status-badge">MONITOR: READY (16:9)</span>
           </div>
 
           <!-- Quick Action Floating Buttons -->
           <div class="absolute bottom-3 right-3 flex items-center space-x-2 opacity-0 group-hover:opacity-100 transition duration-200">
-            <button onclick="downloadActiveMedia()" class="bg-black/80 hover:bg-black text-slate-200 px-3 py-1.5 rounded-lg border border-slate-700 text-xs flex items-center space-x-1.5 backdrop-blur-sm">
+            <button onclick="downloadActiveMedia()" class="bg-black/80 hover:bg-black text-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-xs flex items-center space-x-1.5 backdrop-blur-sm">
               <i class="fa-solid fa-download text-[11px]"></i>
               <span>Download Media</span>
             </button>
@@ -771,8 +771,8 @@
         <!-- Timeline Video & Audio Tracks -->
         <div class="space-y-2">
           <!-- Video Track -->
-          <div class="bg-[#0b0c10] p-3 rounded-xl border border-[#1f2330]">
-            <div class="flex items-center justify-between text-[10px] text-slate-400 mb-2 font-mono">
+          <div class="bg-slate-50 p-3 rounded-xl border border-slate-200">
+            <div class="flex items-center justify-between text-[10px] text-slate-500 mb-2 font-mono">
               <span>VIDEO TRACK (2D Animation Engine • Parallax Push-in)</span>
               <span>0.0s ───────────────────────────────────────────────────────────── 4.0s</span>
             </div>
@@ -782,17 +782,17 @@
               <div class="w-full bg-gradient-to-r from-amber-900/40 via-indigo-900/50 to-purple-900/50 border border-amber-500/40 rounded-xl p-2.5 flex flex-col justify-between relative group hover:border-amber-400 transition">
                 <div class="flex items-center justify-between text-[10px]">
                   <span class="font-bold text-amber-300">SH01: Damascus Presidential Reception (Two Figures)</span>
-                  <span class="font-mono bg-[#0e1017] px-1.5 py-0.2 rounded text-white text-[9px]">4.0s</span>
+                  <span class="font-mono bg-slate-50 px-1.5 py-0.2 rounded text-white text-[9px]">4.0s</span>
                 </div>
-                <div class="text-[9px] text-slate-300 truncate">2D Noir Chiaroscuro • Adult Spy &amp; General • Ghost Avatar Voice</div>
+                <div class="text-[9px] text-slate-700 truncate">2D Noir Chiaroscuro • Adult Spy &amp; General • Ghost Avatar Voice</div>
                 <div class="absolute right-0 top-0 bottom-0 w-2 bg-amber-400 rounded-r-xl cursor-ew-resize opacity-60 group-hover:opacity-100" title="Trim Handle"></div>
               </div>
             </div>
           </div>
 
           <!-- Audio Track with Voiceover Waveform -->
-          <div class="bg-[#0b0c10] p-2.5 rounded-xl border border-[#1f2330] flex items-center justify-between space-x-3">
-            <div class="flex items-center space-x-2 text-xs text-slate-400">
+          <div class="bg-slate-50 p-2.5 rounded-xl border border-slate-200 flex items-center justify-between space-x-3">
+            <div class="flex items-center space-x-2 text-xs text-slate-500">
               <i class="fa-solid fa-microphone text-indigo-400 text-xs"></i>
               <span class="text-[10px] font-mono">VOICE-OVER BED: "इकलौता स्पाई— जो दुश्मन देश के प्रेसिडेंट बनने की रेस तक पहुँच गया!"</span>
             </div>
@@ -815,7 +815,7 @@
 
   <!-- ==================== MODAL 1: WELCOME & ONBOARDING ==================== -->
   <div id="welcome-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-[#11131a] border border-[#262b3b] rounded-3xl w-full max-w-2xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden">
+    <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-2xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden">
       <!-- Decorative Glow -->
       <div class="absolute -top-24 -right-24 w-60 h-60 bg-indigo-600/20 rounded-full blur-3xl pointer-events-none"></div>
       <div class="absolute -bottom-24 -left-24 w-60 h-60 bg-pink-600/15 rounded-full blur-3xl pointer-events-none"></div>
@@ -826,64 +826,64 @@
             <i class="fa-solid fa-film"></i>
           </div>
           <div>
-            <h2 class="text-lg sm:text-xl font-flow font-extrabold text-white">Welcome to DDMAI.VIDEO!</h2>
+            <h2 class="text-lg sm:text-xl font-flow font-extrabold text-slate-900">Welcome to DDMAI.VIDEO!</h2>
             <p class="text-xs text-indigo-300 font-medium">World's #1 Zero-Cost AI Video Studio &amp; Certification Academy</p>
           </div>
         </div>
-        <button onclick="closeWelcomeModal()" class="text-slate-400 hover:text-white p-1 rounded-lg hover:bg-[#1f2330] transition"><i class="fa-solid fa-xmark text-base"></i></button>
+        <button onclick="closeWelcomeModal()" class="text-slate-500 hover:text-white p-1 rounded-lg hover:bg-[#1f2330] transition"><i class="fa-solid fa-xmark text-base"></i></button>
       </div>
 
       <!-- 4 Pillars of DDMAI Studio -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5 text-xs relative">
-        <div class="p-3.5 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-1.5">
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
           <div class="flex items-center space-x-2 text-indigo-400 font-bold">
             <i class="fa-solid fa-wand-magic-sparkles"></i>
             <span>Agile Scene-by-Scene Studio</span>
           </div>
-          <p class="text-[11px] text-slate-400 leading-relaxed">
+          <p class="text-[11px] text-slate-500 leading-relaxed">
             Eliminates prompt book panic! Lock Scene 1 (4s/6s) with voice and character before advancing.
           </p>
         </div>
 
-        <div class="p-3.5 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-1.5">
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
           <div class="flex items-center space-x-2 text-amber-400 font-bold">
             <i class="fa-solid fa-palette"></i>
             <span>100% 2D Documentary Engine</span>
           </div>
-          <p class="text-[11px] text-slate-400 leading-relaxed">
+          <p class="text-[11px] text-slate-500 leading-relaxed">
             Strict Noir Graphic Novel DNA locked via GEMINI.md. Zero photorealism or 3D distortions.
           </p>
         </div>
 
-        <div class="p-3.5 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-1.5">
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
           <div class="flex items-center space-x-2 text-emerald-400 font-bold">
             <i class="fa-solid fa-piggy-bank"></i>
             <span>$0.00 Zero-Cost Production</span>
           </div>
-          <p class="text-[11px] text-slate-400 leading-relaxed">
+          <p class="text-[11px] text-slate-500 leading-relaxed">
             Combines Google Gemini Omni, FLUX.1, and Edge-TTS for infinite free video creation.
           </p>
         </div>
 
-        <div class="p-3.5 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-1.5">
+        <div class="p-3.5 rounded-2xl bg-slate-50 border border-slate-200 space-y-1.5">
           <div class="flex items-center space-x-2 text-yellow-400 font-bold">
             <i class="fa-solid fa-award"></i>
             <span>Certified AI Director Academy</span>
           </div>
-          <p class="text-[11px] text-slate-400 leading-relaxed">
+          <p class="text-[11px] text-slate-500 leading-relaxed">
             Earn your official verifiable Certificate of Completion with your name and credential ID.
           </p>
         </div>
       </div>
 
       <!-- Quick Action Buttons -->
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-[#1f2330]">
-        <label class="flex items-center space-x-2 text-xs text-slate-400 cursor-pointer">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200">
+        <label class="flex items-center space-x-2 text-xs text-slate-500 cursor-pointer">
           <input type="checkbox" id="dont-show-welcome" class="rounded text-indigo-600 focus:ring-0">
           <span>Don't show automatically on startup</span>
         </label>
         <div class="flex items-center space-x-2.5 w-full sm:w-auto">
-          <button onclick="openAuthModal()" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-[#181a24] hover:bg-[#202433] text-slate-200 text-xs font-semibold border border-[#262b3b] transition">
+          <button onclick="openAuthModal()" class="flex-1 sm:flex-initial px-4 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-semibold border border-slate-200 transition">
             Sign In / Register
           </button>
           <button onclick="closeWelcomeModal()" class="flex-1 sm:flex-initial px-5 py-2 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition">
@@ -896,46 +896,46 @@
 
   <!-- ==================== MODAL 2: USER AUTH (LOGIN / REGISTER) ==================== -->
   <div id="auth-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-[#11131a] border border-[#262b3b] rounded-3xl w-full max-w-md p-6 space-y-5 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-[#1f2330] pb-3">
+    <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-md p-6 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <div class="flex items-center space-x-2.5">
           <div class="w-8 h-8 rounded-xl bg-indigo-600/20 border border-indigo-500/30 flex items-center justify-center text-indigo-400">
             <i class="fa-solid fa-user-lock text-sm"></i>
           </div>
           <div>
-            <h3 class="text-sm font-flow font-bold text-white" id="auth-modal-title">Creator &amp; Director Portal</h3>
-            <p class="text-[11px] text-slate-400">Access your dashboard, projects, and certificates</p>
+            <h3 class="text-sm font-flow font-bold text-slate-900" id="auth-modal-title">Creator &amp; Director Portal</h3>
+            <p class="text-[11px] text-slate-500">Access your dashboard, projects, and certificates</p>
           </div>
         </div>
-        <button onclick="closeAuthModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeAuthModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
       <!-- Auth Tabs: Sign In / Sign Up -->
-      <div class="flex p-1 rounded-xl bg-[#0e1017] border border-[#1f2330] text-xs">
+      <div class="flex p-1 rounded-xl bg-slate-50 border border-slate-200 text-xs">
         <button onclick="switchAuthTab('signin')" id="tab-signin-btn" class="flex-1 py-1.5 rounded-lg bg-indigo-600 text-white font-bold transition">Sign In</button>
-        <button onclick="switchAuthTab('signup')" id="tab-signup-btn" class="flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium transition">Register</button>
+        <button onclick="switchAuthTab('signup')" id="tab-signup-btn" class="flex-1 py-1.5 rounded-lg text-slate-500 hover:text-white font-medium transition">Register</button>
       </div>
 
       <!-- Quick 1-Click Demo Accounts -->
-      <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-2">
-        <div class="flex items-center justify-between text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+      <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 space-y-2">
+        <div class="flex items-center justify-between text-[10px] text-slate-500 font-bold uppercase tracking-wider">
           <span>⚡ Quick 1-Click Demo Logins</span>
           <span class="text-emerald-400">Instant Access</span>
         </div>
         <div class="grid grid-cols-2 gap-2 text-xs">
-          <button onclick="quickLogin('admin@ddmai.video', 'Veteran, PankajBhai Umesh Gupta', 'SuperAdmin')" class="p-2 rounded-xl bg-[#151722] hover:bg-rose-950/40 border border-[#222636] hover:border-rose-500/50 text-left transition">
+          <button onclick="quickLogin('admin@ddmai.video', 'Veteran, PankajBhai Umesh Gupta', 'SuperAdmin')" class="p-2 rounded-xl bg-white hover:bg-rose-950/40 border border-slate-200 hover:border-rose-500/50 text-left transition">
             <div class="font-bold text-rose-300 flex items-center space-x-1.5 truncate">
               <i class="fa-solid fa-crown text-[10px]"></i>
               <span class="truncate">Veteran, PankajBhai Umesh Gupta</span>
             </div>
-            <div class="text-[10px] text-slate-400">SuperAdmin (Full Access)</div>
+            <div class="text-[10px] text-slate-500">SuperAdmin (Full Access)</div>
           </button>
-          <button onclick="quickLogin('director@ddmai.video', 'Kunal Verma', 'Director')" class="p-2 rounded-xl bg-[#151722] hover:bg-indigo-950/40 border border-[#222636] hover:border-indigo-500/50 text-left transition">
+          <button onclick="quickLogin('director@ddmai.video', 'Kunal Verma', 'Director')" class="p-2 rounded-xl bg-white hover:bg-indigo-950/40 border border-slate-200 hover:border-indigo-500/50 text-left transition">
             <div class="font-bold text-indigo-300 flex items-center space-x-1.5">
               <i class="fa-solid fa-clapperboard text-[10px]"></i>
               <span>Kunal Verma</span>
             </div>
-            <div class="text-[10px] text-slate-400">AI Film Director</div>
+            <div class="text-[10px] text-slate-500">AI Film Director</div>
           </button>
         </div>
       </div>
@@ -943,18 +943,18 @@
       <!-- Auth Form -->
       <form id="auth-form" onsubmit="handleAuthSubmit(event)" class="space-y-3 text-xs">
         <div id="signup-name-field" class="hidden space-y-1">
-          <label class="text-[11px] text-slate-300 font-medium">Full Name (For Certificate)</label>
-          <input type="text" id="auth-name" placeholder="e.g. Veteran, PankajBhai Umesh Gupta" class="w-full bg-[#151722] border border-[#222636] rounded-xl px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+          <label class="text-[11px] text-slate-700 font-medium">Full Name (For Certificate)</label>
+          <input type="text" id="auth-name" placeholder="e.g. Veteran, PankajBhai Umesh Gupta" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
         </div>
 
         <div class="space-y-1">
-          <label class="text-[11px] text-slate-300 font-medium">Email Address</label>
-          <input type="email" id="auth-email" required placeholder="your.name@ddmai.video" class="w-full bg-[#151722] border border-[#222636] rounded-xl px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-mono text-xs">
+          <label class="text-[11px] text-slate-700 font-medium">Email Address</label>
+          <input type="email" id="auth-email" required placeholder="your.name@ddmai.video" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500 font-mono text-xs">
         </div>
 
         <div class="space-y-1">
-          <label class="text-[11px] text-slate-300 font-medium">Password</label>
-          <input type="password" id="auth-pass" required placeholder="••••••••" value="demo123" class="w-full bg-[#151722] border border-[#222636] rounded-xl px-3 py-2 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
+          <label class="text-[11px] text-slate-700 font-medium">Password</label>
+          <input type="password" id="auth-pass" required placeholder="••••••••" value="demo123" class="w-full bg-white border border-slate-200 rounded-xl px-3 py-2 text-slate-900 placeholder-slate-500 focus:outline-none focus:border-indigo-500">
         </div>
 
         <button type="submit" id="auth-submit-btn" class="w-full py-2.5 rounded-xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs shadow-lg shadow-indigo-600/30 transition mt-2">
@@ -966,45 +966,45 @@
 
   <!-- ==================== MODAL 3: USER LOGIN DASHBOARD ==================== -->
   <div id="user-dashboard-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-[#11131a] border border-[#262b3b] rounded-3xl w-full max-w-3xl p-6 sm:p-7 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
+    <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-3xl p-6 sm:p-7 space-y-6 shadow-2xl max-h-[90vh] overflow-y-auto">
       <!-- Dashboard Header -->
-      <div class="flex items-center justify-between border-b border-[#1f2330] pb-4">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-4">
         <div class="flex items-center space-x-3.5">
           <div class="w-12 h-12 rounded-2xl bg-indigo-600/30 border border-indigo-500/50 flex items-center justify-center text-white text-xl font-bold font-flow" id="dash-avatar">
             P
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <h3 class="text-base font-flow font-extrabold text-white" id="dash-user-name">Veteran, PankajBhai Umesh Gupta</h3>
+              <h3 class="text-base font-flow font-extrabold text-slate-900" id="dash-user-name">Veteran, PankajBhai Umesh Gupta</h3>
               <span id="dash-user-badge" class="px-2 py-0.5 rounded text-[10px] font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40">SuperAdmin</span>
             </div>
-            <p class="text-xs text-slate-400" id="dash-user-email">admin@ddmai.video</p>
+            <p class="text-xs text-slate-500" id="dash-user-email">admin@ddmai.video</p>
           </div>
         </div>
         <div class="flex items-center space-x-2">
           <button onclick="handleUserLogout()" class="px-3 py-1.5 rounded-xl bg-red-950/40 hover:bg-red-900/50 border border-red-500/40 text-red-300 text-xs font-semibold transition">
             <i class="fa-solid fa-arrow-right-from-bracket mr-1"></i>Logout
           </button>
-          <button onclick="closeUserDashboard()" class="text-slate-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+          <button onclick="closeUserDashboard()" class="text-slate-500 hover:text-white p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
         </div>
       </div>
 
       <!-- Quick Metrics Bar -->
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-        <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
-          <span class="text-[10px] text-slate-400 uppercase font-mono">Cost Guard Mode</span>
+        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <span class="text-[10px] text-slate-500 uppercase font-mono">Cost Guard Mode</span>
           <div class="text-sm font-bold text-emerald-400 mt-0.5">$0.00 Unlimited</div>
         </div>
-        <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
-          <span class="text-[10px] text-slate-400 uppercase font-mono">Videos Rendered</span>
-          <div class="text-sm font-bold text-white mt-0.5" id="dash-stat-videos">42 Takes</div>
+        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <span class="text-[10px] text-slate-500 uppercase font-mono">Videos Rendered</span>
+          <div class="text-sm font-bold text-slate-900 mt-0.5" id="dash-stat-videos">42 Takes</div>
         </div>
-        <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
-          <span class="text-[10px] text-slate-400 uppercase font-mono">Certification</span>
+        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <span class="text-[10px] text-slate-500 uppercase font-mono">Certification</span>
           <div class="text-sm font-bold text-yellow-400 mt-0.5" id="dash-stat-cert">Certified Director</div>
         </div>
-        <div class="p-3 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
-          <span class="text-[10px] text-slate-400 uppercase font-mono">Production Engine</span>
+        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200">
+          <span class="text-[10px] text-slate-500 uppercase font-mono">Production Engine</span>
           <div class="text-sm font-bold text-indigo-400 mt-0.5">2D Noir Multi-Model</div>
         </div>
       </div>
@@ -1016,9 +1016,9 @@
             <i class="fa-solid fa-award"></i>
           </div>
           <div>
-            <div class="text-sm font-bold text-white">Official DDMAI AI Film Director Certificate</div>
+            <div class="text-sm font-bold text-slate-900">Official DDMAI AI Film Director Certificate</div>
             <p class="text-xs text-amber-200/80">Accredited by DDMAI.VIDEO Global Production Academy</p>
-            <div class="text-[10px] text-slate-400 font-mono mt-0.5">Credential: <span id="dash-cert-id" class="text-yellow-400">DDMAI-CERT-2026-8942A</span></div>
+            <div class="text-[10px] text-slate-500 font-mono mt-0.5">Credential: <span id="dash-cert-id" class="text-yellow-400">DDMAI-CERT-2026-8942A</span></div>
           </div>
         </div>
         <button onclick="viewMyCertificate()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-500 hover:to-amber-500 text-slate-950 font-bold text-xs shadow-md transition whitespace-nowrap">
@@ -1028,30 +1028,30 @@
 
       <!-- User Projects / Recents -->
       <div class="space-y-3">
-        <div class="flex items-center justify-between text-xs font-bold text-slate-300">
+        <div class="flex items-center justify-between text-xs font-bold text-slate-700">
           <span>My Video Projects &amp; Prompts</span>
           <span class="text-indigo-400 font-mono text-[11px]">Auto-Synced</span>
         </div>
         <div class="space-y-2 text-xs">
-          <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] flex items-center justify-between">
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
             <div class="flex items-center space-x-3">
               <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
               <div>
-                <div class="font-bold text-slate-200">2D Spy Documentary — Scene 01 (Damascus Hook)</div>
-                <div class="text-[11px] text-slate-400">4.0s • Fast Cadence (1.25x) • Ghost Avatar Voice</div>
+                <div class="font-bold text-slate-800">2D Spy Documentary — Scene 01 (Damascus Hook)</div>
+                <div class="text-[11px] text-slate-500">4.0s • Fast Cadence (1.25x) • Ghost Avatar Voice</div>
               </div>
             </div>
-            <button onclick="alert('Project loaded into Studio!'); closeUserDashboard();" class="px-3 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] text-indigo-300 border border-[#262b3b]">Load</button>
+            <button onclick="alert('Project loaded into Studio!'); closeUserDashboard();" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-indigo-300 border border-slate-200">Load</button>
           </div>
-          <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] flex items-center justify-between">
+          <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
             <div class="flex items-center space-x-3">
               <span class="w-2 h-2 rounded-full bg-blue-400"></span>
               <div>
-                <div class="font-bold text-slate-200">Perfume Commercial 2026 — 10s Lossless Chain</div>
-                <div class="text-[11px] text-slate-400">4.0s SH1 + 6.0s SH2 • Obsidian Glass Studio</div>
+                <div class="font-bold text-slate-800">Perfume Commercial 2026 — 10s Lossless Chain</div>
+                <div class="text-[11px] text-slate-500">4.0s SH1 + 6.0s SH2 • Obsidian Glass Studio</div>
               </div>
             </div>
-            <button onclick="alert('Project loaded into Studio!'); closeUserDashboard();" class="px-3 py-1 rounded-lg bg-[#181a24] hover:bg-[#202433] text-indigo-300 border border-[#262b3b]">Load</button>
+            <button onclick="alert('Project loaded into Studio!'); closeUserDashboard();" class="px-3 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-indigo-300 border border-slate-200">Load</button>
           </div>
         </div>
       </div>
@@ -1060,36 +1060,36 @@
 
   <!-- ==================== MODAL 4: ADMIN PANEL DASHBOARD ==================== -->
   <div id="admin-modal" class="hidden fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4">
-    <div class="bg-[#11131a] border border-[#262b3b] rounded-3xl w-full max-w-4xl p-6 sm:p-7 space-y-6 shadow-2xl max-h-[90vh] flex flex-col">
+    <div class="bg-white border border-slate-200 rounded-3xl w-full max-w-4xl p-6 sm:p-7 space-y-6 shadow-2xl max-h-[90vh] flex flex-col">
       <!-- Admin Header -->
-      <div class="flex items-center justify-between border-b border-[#1f2330] pb-4 shrink-0">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-4 shrink-0">
         <div class="flex items-center space-x-3.5">
           <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-red-600 via-rose-600 to-indigo-600 flex items-center justify-center text-white text-lg shadow-lg shadow-rose-600/30">
             <i class="fa-solid fa-shield-halved"></i>
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <h3 class="text-base font-flow font-extrabold text-white">DDMAI SuperAdmin Command Center</h3>
+              <h3 class="text-base font-flow font-extrabold text-slate-900">DDMAI SuperAdmin Command Center</h3>
               <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold">Node Healthy</span>
             </div>
-            <p class="text-xs text-slate-400">Platform Analytics, User Roles, Certification Authority &amp; System Rules</p>
+            <p class="text-xs text-slate-500">Platform Analytics, User Roles, Certification Authority &amp; System Rules</p>
           </div>
         </div>
-        <button onclick="closeAdminModal()" class="text-slate-400 hover:text-white p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
+        <button onclick="closeAdminModal()" class="text-slate-500 hover:text-white p-1"><i class="fa-solid fa-xmark text-lg"></i></button>
       </div>
 
       <!-- Admin Navigation Tabs -->
-      <div class="flex space-x-2 border-b border-[#1f2330] pb-2 text-xs shrink-0">
+      <div class="flex space-x-2 border-b border-slate-200 pb-2 text-xs shrink-0">
         <button onclick="switchAdminTab('overview')" id="adm-tab-overview" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition">
           <i class="fa-solid fa-chart-pie mr-1.5"></i>Overview &amp; Stats
         </button>
-        <button onclick="switchAdminTab('users')" id="adm-tab-users" class="px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white font-semibold transition">
+        <button onclick="switchAdminTab('users')" id="adm-tab-users" class="px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-white font-semibold transition">
           <i class="fa-solid fa-users mr-1.5"></i>User Management (<span id="admin-user-count">4</span>)
         </button>
-        <button onclick="switchAdminTab('certs')" id="adm-tab-certs" class="px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white font-semibold transition">
+        <button onclick="switchAdminTab('certs')" id="adm-tab-certs" class="px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-white font-semibold transition">
           <i class="fa-solid fa-certificate mr-1.5"></i>Certification Authority
         </button>
-        <button onclick="switchAdminTab('rules')" id="adm-tab-rules" class="px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white font-semibold transition">
+        <button onclick="switchAdminTab('rules')" id="adm-tab-rules" class="px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-white font-semibold transition">
           <i class="fa-solid fa-sliders mr-1.5"></i>System Rules (10,000)
         </button>
       </div>
@@ -1097,50 +1097,50 @@
       <!-- Tab 1: Overview & Stats -->
       <div id="admin-sec-overview" class="space-y-5 overflow-y-auto flex-1 pr-1 text-xs">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
-          <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
-            <span class="text-[10px] text-slate-400 uppercase font-mono">Total Creators</span>
-            <div class="text-xl font-bold text-white mt-1">1,842</div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="text-[10px] text-slate-500 uppercase font-mono">Total Creators</span>
+            <div class="text-xl font-bold text-slate-900 mt-1">1,842</div>
             <span class="text-[10px] text-emerald-400 font-mono">↑ +14% this week</span>
           </div>
-          <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
-            <span class="text-[10px] text-slate-400 uppercase font-mono">Videos Rendered</span>
-            <div class="text-xl font-bold text-white mt-1">24,510</div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="text-[10px] text-slate-500 uppercase font-mono">Videos Rendered</span>
+            <div class="text-xl font-bold text-slate-900 mt-1">24,510</div>
             <span class="text-[10px] text-indigo-400 font-mono">100% Chained Takes</span>
           </div>
-          <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
-            <span class="text-[10px] text-slate-400 uppercase font-mono">Compute Saved</span>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="text-[10px] text-slate-500 uppercase font-mono">Compute Saved</span>
             <div class="text-xl font-bold text-emerald-400 mt-1">$142,500</div>
-            <span class="text-[10px] text-slate-400 font-mono">Zero-Cost Pipeline</span>
+            <span class="text-[10px] text-slate-500 font-mono">Zero-Cost Pipeline</span>
           </div>
-          <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330]">
-            <span class="text-[10px] text-slate-400 uppercase font-mono">Certificates Issued</span>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200">
+            <span class="text-[10px] text-slate-500 uppercase font-mono">Certificates Issued</span>
             <div class="text-xl font-bold text-yellow-400 mt-1" id="admin-cert-count">2</div>
             <span class="text-[10px] text-yellow-300/80 font-mono">Verified Directors</span>
           </div>
         </div>
 
         <!-- Engines Live Status Matrix -->
-        <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-3">
-          <div class="font-bold text-slate-200">AI Generative Engine Health</div>
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <div class="font-bold text-slate-800">AI Generative Engine Health</div>
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            <div class="p-3 rounded-xl bg-[#151722] border border-[#222636] flex items-center justify-between">
+            <div class="p-3 rounded-xl bg-white border border-slate-200 flex items-center justify-between">
               <div>
                 <div class="font-bold text-blue-300">Google Gemini &amp; Imagen 3</div>
-                <div class="text-[10px] text-slate-400">Prompt Decomposition</div>
+                <div class="text-[10px] text-slate-500">Prompt Decomposition</div>
               </div>
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
             </div>
-            <div class="p-3 rounded-xl bg-[#151722] border border-[#222636] flex items-center justify-between">
+            <div class="p-3 rounded-xl bg-white border border-slate-200 flex items-center justify-between">
               <div>
                 <div class="font-bold text-amber-300">FLUX.1 Schnell &amp; LTX</div>
-                <div class="text-[10px] text-slate-400">Open-Source Latent Engine</div>
+                <div class="text-[10px] text-slate-500">Open-Source Latent Engine</div>
               </div>
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
             </div>
-            <div class="p-3 rounded-xl bg-[#151722] border border-[#222636] flex items-center justify-between">
+            <div class="p-3 rounded-xl bg-white border border-slate-200 flex items-center justify-between">
               <div>
                 <div class="font-bold text-purple-300">Edge-TTS &amp; Kokoro Neural</div>
-                <div class="text-[10px] text-slate-400">Voiceover &amp; Pacing Engine</div>
+                <div class="text-[10px] text-slate-500">Voiceover &amp; Pacing Engine</div>
               </div>
               <span class="w-2.5 h-2.5 rounded-full bg-emerald-400"></span>
             </div>
@@ -1151,17 +1151,17 @@
       <!-- Tab 2: User Management -->
       <div id="admin-sec-users" class="hidden space-y-4 overflow-y-auto flex-1 pr-1 text-xs">
         <div class="flex items-center justify-between">
-          <input type="text" id="admin-user-search" oninput="filterAdminUsers()" placeholder="Search users by name or email..." class="bg-[#0e1017] border border-[#222636] rounded-xl px-3 py-1.5 text-xs text-slate-200 w-64 focus:outline-none focus:border-indigo-500">
+          <input type="text" id="admin-user-search" oninput="filterAdminUsers()" placeholder="Search users by name or email..." class="bg-slate-50 border border-slate-200 rounded-xl px-3 py-1.5 text-xs text-slate-800 w-64 focus:outline-none focus:border-indigo-500">
           <button onclick="promptCreateUser()" class="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center space-x-1">
             <i class="fa-solid fa-plus text-[10px]"></i>
             <span>Add New User</span>
           </button>
         </div>
 
-        <div class="overflow-x-auto rounded-2xl border border-[#1f2330]">
+        <div class="overflow-x-auto rounded-2xl border border-slate-200">
           <table class="w-full text-left border-collapse">
             <thead>
-              <tr class="bg-[#0e1017] text-[10px] text-slate-400 font-mono uppercase border-b border-[#1f2330]">
+              <tr class="bg-slate-50 text-[10px] text-slate-500 font-mono uppercase border-b border-slate-200">
                 <th class="p-3">User</th>
                 <th class="p-3">Role</th>
                 <th class="p-3">Status</th>
@@ -1169,7 +1169,7 @@
                 <th class="p-3">Actions</th>
               </tr>
             </thead>
-            <tbody id="admin-users-tbody" class="divide-y divide-[#1f2330] bg-[#11131a]">
+            <tbody id="admin-users-tbody" class="divide-y divide-[#1f2330] bg-white">
               <!-- Populated by JavaScript -->
             </tbody>
           </table>
@@ -1178,10 +1178,10 @@
 
       <!-- Tab 3: Certification Authority -->
       <div id="admin-sec-certs" class="hidden space-y-4 overflow-y-auto flex-1 pr-1 text-xs">
-        <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330] flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
           <div>
-            <div class="font-bold text-white text-sm">Issue Verified Director Certificate</div>
-            <p class="text-slate-400 text-[11px]">Generate accredited certificate with official serial ID and print layout</p>
+            <div class="font-bold text-slate-900 text-sm">Issue Verified Director Certificate</div>
+            <p class="text-slate-500 text-[11px]">Generate accredited certificate with official serial ID and print layout</p>
           </div>
           <button onclick="promptIssueCertificate()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-yellow-600 to-amber-600 hover:from-yellow-500 text-slate-950 font-bold transition">
             <i class="fa-solid fa-stamp mr-1"></i>Issue New Certificate
@@ -1189,7 +1189,7 @@
         </div>
 
         <div class="space-y-2.5">
-          <div class="font-bold text-slate-300">Registry of Issued Credentials</div>
+          <div class="font-bold text-slate-700">Registry of Issued Credentials</div>
           <div id="admin-certs-list" class="space-y-2">
             <!-- Populated by JavaScript -->
           </div>
@@ -1198,27 +1198,27 @@
 
       <!-- Tab 4: System Rules -->
       <div id="admin-sec-rules" class="hidden space-y-4 overflow-y-auto flex-1 pr-1 text-xs">
-        <div class="p-4 rounded-2xl bg-[#0e1017] border border-[#1f2330] space-y-3">
-          <div class="font-bold text-white">Rulebook VR-00001 to VR-10000 Enforcement</div>
+        <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+          <div class="font-bold text-slate-900">Rulebook VR-00001 to VR-10000 Enforcement</div>
           <div class="space-y-2.5">
-            <label class="flex items-center justify-between p-2.5 rounded-xl bg-[#151722] border border-[#222636] cursor-pointer">
+            <label class="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 cursor-pointer">
               <div>
-                <div class="font-bold text-slate-200">100% 2D Documentary Style (GEMINI.md)</div>
-                <div class="text-[10px] text-slate-400">Strictly prohibits photorealism and 3D CGI in prompt output.</div>
+                <div class="font-bold text-slate-800">100% 2D Documentary Style (GEMINI.md)</div>
+                <div class="text-[10px] text-slate-500">Strictly prohibits photorealism and 3D CGI in prompt output.</div>
               </div>
               <input type="checkbox" checked class="text-indigo-600 rounded">
             </label>
-            <label class="flex items-center justify-between p-2.5 rounded-xl bg-[#151722] border border-[#222636] cursor-pointer">
+            <label class="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 cursor-pointer">
               <div>
-                <div class="font-bold text-slate-200">Prominent People Name Shield</div>
-                <div class="text-[10px] text-slate-400">Substitutes real political/celebrity names with anatomical archetypes.</div>
+                <div class="font-bold text-slate-800">Prominent People Name Shield</div>
+                <div class="text-[10px] text-slate-500">Substitutes real political/celebrity names with anatomical archetypes.</div>
               </div>
               <input type="checkbox" checked class="text-indigo-600 rounded">
             </label>
-            <label class="flex items-center justify-between p-2.5 rounded-xl bg-[#151722] border border-[#222636] cursor-pointer">
+            <label class="flex items-center justify-between p-2.5 rounded-xl bg-white border border-slate-200 cursor-pointer">
               <div>
-                <div class="font-bold text-slate-200">Voice-Over Pacing Enforcer (1.25x Dynamic Tempo)</div>
-                <div class="text-[10px] text-slate-400">Prevents audio truncation by ensuring complete speech within 4.0s.</div>
+                <div class="font-bold text-slate-800">Voice-Over Pacing Enforcer (1.25x Dynamic Tempo)</div>
+                <div class="text-[10px] text-slate-500">Prevents audio truncation by ensuring complete speech within 4.0s.</div>
               </div>
               <input type="checkbox" checked class="text-indigo-600 rounded">
             </label>
@@ -1236,7 +1236,7 @@
       <div class="flex items-center justify-between border-b border-amber-500/30 pb-4 no-print">
         <div class="flex items-center space-x-2 text-amber-400">
           <i class="fa-solid fa-graduation-cap text-lg"></i>
-          <span class="font-flow font-bold text-white text-sm">DDMAI Official Credential Verification System</span>
+          <span class="font-flow font-bold text-slate-900 text-sm">DDMAI Official Credential Verification System</span>
         </div>
         <div class="flex items-center space-x-2">
           <button onclick="customizeCertificateName()" class="px-3 py-1.5 rounded-xl bg-[#1e293b] hover:bg-[#334155] text-amber-300 text-xs font-semibold border border-amber-500/30 transition">
@@ -1246,7 +1246,7 @@
             <i class="fa-solid fa-print"></i>
             <span>Print / Save as PDF</span>
           </button>
-          <button onclick="closeCertificateModal()" class="text-slate-400 hover:text-white p-1 ml-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+          <button onclick="closeCertificateModal()" class="text-slate-500 hover:text-white p-1 ml-2"><i class="fa-solid fa-xmark text-lg"></i></button>
         </div>
       </div>
 
@@ -1328,50 +1328,50 @@
   <!-- ==================== EXISTING MODALS (TOOLS & OPTIONS & API KEYS) ==================== -->
   <!-- MODAL: ADVANCED FLOW TOOLS -->
   <div id="tools-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-[#11131a] border border-[#262b3b] rounded-2xl w-full max-w-3xl p-6 space-y-5 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-[#1f2330] pb-3">
+    <div class="bg-white border border-slate-200 rounded-2xl w-full max-w-3xl p-6 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <div class="flex items-center space-x-2">
           <i class="fa-solid fa-sliders text-cyan-400 text-base"></i>
-          <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO AI Video Tools Suite</h3>
+          <h3 class="text-sm font-flow font-bold text-slate-900">DDMAI.VIDEO AI Video Tools Suite</h3>
         </div>
-        <button onclick="closeToolsModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeToolsModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
-        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
           <span class="font-bold text-cyan-300">1. Shader FX &amp; 2D Film Grain</span>
-          <p class="text-slate-400 text-[11px]">Procedural vintage paper grain, halftone ink outlines, and chiaroscuro contrast.</p>
+          <p class="text-slate-500 text-[11px]">Procedural vintage paper grain, halftone ink outlines, and chiaroscuro contrast.</p>
         </div>
-        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
           <span class="font-bold text-indigo-300">2. Pixel Bento (Knob Automation)</span>
-          <p class="text-slate-400 text-[11px]">Real-time recording knobs to automate contrast, grain, and zoom across timeline.</p>
+          <p class="text-slate-500 text-[11px]">Real-time recording knobs to automate contrast, grain, and zoom across timeline.</p>
         </div>
-        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
           <span class="font-bold text-pink-300">3. Poster Designer &amp; Title Overlays</span>
-          <p class="text-slate-400 text-[11px]">Renders clean vector text overlays on top of video, keeping messy glyphs out of diffusion.</p>
+          <p class="text-slate-500 text-[11px]">Renders clean vector text overlays on top of video, keeping messy glyphs out of diffusion.</p>
         </div>
-        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
           <span class="font-bold text-amber-300">4. Transition Machine</span>
-          <p class="text-slate-400 text-[11px]">Automates FFmpeg xfade dissolves (0.5s overlap) and speed whip-pans between scene cuts.</p>
+          <p class="text-slate-500 text-[11px]">Automates FFmpeg xfade dissolves (0.5s overlap) and speed whip-pans between scene cuts.</p>
         </div>
       </div>
-      <div class="flex justify-end pt-2 border-t border-[#1f2330]">
-        <button onclick="closeToolsModal()" class="px-4 py-1.5 rounded-xl bg-[#181a24] text-slate-300 hover:bg-[#202433] text-xs font-medium">Close</button>
+      <div class="flex justify-end pt-2 border-t border-slate-200">
+        <button onclick="closeToolsModal()" class="px-4 py-1.5 rounded-xl bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs font-medium">Close</button>
       </div>
     </div>
   </div>
 
   <!-- MODAL: 50 OPTIONS -->
   <div id="options-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-[#11131a] border border-[#262b3b] rounded-2xl w-full max-w-4xl p-6 space-y-4 shadow-2xl max-h-[85vh] flex flex-col">
-      <div class="flex items-center justify-between border-b border-[#1f2330] pb-3 shrink-0">
+    <div class="bg-white border border-slate-200 rounded-2xl w-full max-w-4xl p-6 space-y-4 shadow-2xl max-h-[85vh] flex flex-col">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3 shrink-0">
         <div>
           <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO — 50 Platform &amp; Agent Architectural Options</h3>
-          <p class="text-[11px] text-slate-400">10 Production Pillars • Zero-Cost &amp; Commercial Configurations</p>
+          <p class="text-[11px] text-slate-500">10 Production Pillars • Zero-Cost &amp; Commercial Configurations</p>
         </div>
-        <button onclick="closeOptionsModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeOptionsModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div id="modal-options-grid" class="flex-1 overflow-y-auto grid grid-cols-1 md:grid-cols-2 gap-3 pr-1 text-xs"></div>
-      <div class="flex justify-end pt-3 border-t border-[#1f2330] shrink-0">
+      <div class="flex justify-end pt-3 border-t border-slate-200 shrink-0">
         <button onclick="closeOptionsModal()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 text-xs font-medium">Apply &amp; Close</button>
       </div>
     </div>
@@ -1379,36 +1379,36 @@
 
   <!-- MODAL: API KEYS -->
   <div id="api-keys-modal" class="hidden fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <div class="bg-[#11131a] border border-[#262b3b] rounded-2xl w-full max-w-2xl p-6 space-y-5 shadow-2xl">
-      <div class="flex items-center justify-between border-b border-[#1f2330] pb-3">
+    <div class="bg-white border border-slate-200 rounded-2xl w-full max-w-2xl p-6 space-y-5 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-200 pb-3">
         <div class="flex items-center space-x-2.5">
           <div class="w-8 h-8 rounded-lg bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400">
             <i class="fa-solid fa-key text-sm"></i>
           </div>
           <div>
-            <h3 class="text-sm font-flow font-bold text-white">DDMAI.VIDEO — API Keys &amp; AI Engines</h3>
-            <p class="text-[11px] text-slate-400">Connect Free &amp; Zero-Cost Model Providers to Generate Images &amp; Videos</p>
+            <h3 class="text-sm font-flow font-bold text-slate-900">DDMAI.VIDEO — API Keys &amp; AI Engines</h3>
+            <p class="text-[11px] text-slate-500">Connect Free &amp; Zero-Cost Model Providers to Generate Images &amp; Videos</p>
           </div>
         </div>
-        <button onclick="closeApiKeysModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <button onclick="closeApiKeysModal()" class="text-slate-500 hover:text-white"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="space-y-4 text-xs">
-        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-200">1. Google Gemini &amp; Imagen 3 API Key</span>
+            <span class="font-bold text-slate-800">1. Google Gemini &amp; Imagen 3 API Key</span>
             <a href="https://aistudio.google.com/app/apikey" target="_blank" class="text-[10px] text-blue-400 hover:underline">Get Free Key</a>
           </div>
-          <input type="password" id="gemini-key-input" placeholder="AIzaSy..." class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 font-mono">
+          <input type="password" id="gemini-key-input" placeholder="AIzaSy..." class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 font-mono">
         </div>
-        <div class="p-3.5 rounded-xl bg-[#0e1017] border border-[#1f2330] space-y-2">
+        <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
           <div class="flex items-center justify-between">
-            <span class="font-bold text-slate-200">2. Hugging Face Access Token (FLUX &amp; LTX)</span>
+            <span class="font-bold text-slate-800">2. Hugging Face Access Token (FLUX &amp; LTX)</span>
             <a href="https://huggingface.co/settings/tokens" target="_blank" class="text-[10px] text-amber-400 hover:underline">Get Free Token</a>
           </div>
-          <input type="password" id="hf-token-input" placeholder="hf_..." class="w-full bg-[#151722] border border-[#222636] rounded-lg px-3 py-2 text-xs text-slate-100 font-mono">
+          <input type="password" id="hf-token-input" placeholder="hf_..." class="w-full bg-white border border-slate-200 rounded-lg px-3 py-2 text-xs text-slate-900 font-mono">
         </div>
       </div>
-      <div class="flex items-center justify-between pt-3 border-t border-[#1f2330]">
+      <div class="flex items-center justify-between pt-3 border-t border-slate-200">
         <span id="keys-save-status" class="text-[11px] text-emerald-400 font-mono"></span>
         <button onclick="saveApiKeys()" class="px-4 py-2 rounded-xl bg-gradient-to-r from-amber-600 to-indigo-600 text-white text-xs font-medium">Save API Keys</button>
       </div>
@@ -1460,7 +1460,7 @@
         localStorage.setItem('ddmai_theme', 'dark');
         if (icon) icon.className = "fa-solid fa-sun text-amber-400 text-xs";
         if (label) label.textContent = "Light Mode";
-        if (btn) btn.className = "px-3 py-1.5 rounded-xl border border-[#262b3b] bg-[#181a24] hover:bg-[#202433] text-amber-300 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs";
+        if (btn) btn.className = "px-3 py-1.5 rounded-xl border border-slate-200 bg-slate-100 hover:bg-slate-200 text-amber-300 font-semibold transition flex items-center space-x-1.5 shadow-sm text-xs";
       }
     }
 
@@ -1519,7 +1519,7 @@
       const userBubble = document.createElement('div');
       userBubble.className = "flex items-start justify-end space-x-2.5";
       userBubble.innerHTML = `
-        <div class="bg-indigo-600/30 border border-indigo-500/40 rounded-2xl rounded-tr-none p-3 max-w-[85%] text-slate-100 space-y-1">
+        <div class="bg-indigo-600/30 border border-indigo-500/40 rounded-2xl rounded-tr-none p-3 max-w-[85%] text-slate-900 space-y-1">
           <div class="flex items-center justify-between text-[10px] text-indigo-300">
             <span class="font-bold">${currentUser ? currentUser.name : 'Director'}</span>
             <span>Just now</span>
@@ -1541,7 +1541,7 @@
         <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shrink-0 shadow">
           <i class="fa-solid fa-spinner fa-spin text-[11px]"></i>
         </div>
-        <div class="bg-[#131622] border border-[#23293d] rounded-2xl rounded-tl-none p-2.5 text-xs text-slate-400">
+        <div class="bg-white border border-slate-200 rounded-2xl rounded-tl-none p-2.5 text-xs text-slate-500">
           <span>DDMAI Director AI सोच रहा है और सीन प्रोसेस कर रहा है...</span>
         </div>
       `;
@@ -1561,7 +1561,7 @@
           <div class="w-7 h-7 rounded-lg bg-gradient-to-tr from-indigo-600 to-purple-600 flex items-center justify-center text-white shrink-0 shadow">
             <i class="fa-solid fa-wand-magic-sparkles text-[11px]"></i>
           </div>
-          <div class="flex-1 bg-[#131622] border border-[#23293d] rounded-2xl rounded-tl-none p-3 space-y-2 text-slate-200">
+          <div class="flex-1 bg-white border border-slate-200 rounded-2xl rounded-tl-none p-3 space-y-2 text-slate-800">
             <div class="flex items-center justify-between">
               <span class="font-bold text-indigo-300 text-[11px]">DDMAI Director AI</span>
               <span class="text-[10px] text-slate-500 font-mono">Executed</span>
@@ -1604,7 +1604,7 @@
               <button onclick="loadSampleSceneTake()" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium flex items-center space-x-1">
                 <i class="fa-solid fa-play text-[9px]"></i><span>Replay Scene 1 in Monitor</span>
               </button>
-              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center space-x-1">
+              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 flex items-center space-x-1">
                 <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Video Prompt</span>
               </button>
             </div>
@@ -1621,7 +1621,7 @@
           htmlContent: `
             <p><strong class="text-amber-400">🎬 Scene 02: The Secret Bedroom Surveillance & Microfilm</strong></p>
             <p><strong>डायरेक्टर ब्रेकडाउन:</strong> एली कोहेन ने सीरियन अधिकारियों के गेस्ट बेडरूम में दीवार घड़ी के पेंडुलम के पीछे मिनिएचर 16mm कैमरा छुपाया था। यह सीन उनके सबसे गुप्त राज़ों को कैप्चर करने का टर्निंग पॉइंट है।</p>
-            <p class="text-slate-300">नीचे <strong>Box 1 (Keyframe)</strong> और <strong>Box 2 (Motion)</strong> में Scene 2 के प्रॉम्प्ट्स सेट कर दिए गए हैं।</p>
+            <p class="text-slate-700">नीचे <strong>Box 1 (Keyframe)</strong> और <strong>Box 2 (Motion)</strong> में Scene 2 के प्रॉम्प्ट्स सेट कर दिए गए हैं।</p>
           `,
           keyframePrompt: `A 16:9 cinematic 2D animated documentary shot in 1960s Damascus. Utilizing the attached character reference assets: Close-up low-angle interior shot inside a dim luxury bedroom. A vintage carved mahogany wall clock with brass bezel; concealed behind the pendulum glass is a tiny miniature surveillance camera lens reflecting a sliver of cold moonlight. Stark chiaroscuro noir shadows, clean cel-shading, 100% 2D graphic novel ink line art.`,
           motionPrompt: `[AVATAR & AUDIO DIRECTIVE: FAST PACING (1.25x)] Voice-over says: "दीवार घड़ी के पीछे वो छिपा हुआ लेंस— जिसने सीरियाई जनरलों की हर गुप्त रात को तस्वीरों में कैद कर लिया!". Zero on-screen avatar. Motion (4s): Smooth 2D macro zoom-in toward the clock face, rhythmic mechanical ticking SFX, subtle light shimmer glinting off the hidden camera aperture.`,
@@ -1659,7 +1659,7 @@
               <button onclick="simulateFlowPlayback()" class="px-2.5 py-1 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-medium flex items-center space-x-1">
                 <i class="fa-solid fa-play text-[9px]"></i><span>Preview Scene 3</span>
               </button>
-              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center space-x-1">
+              <button onclick="copyCardPrompt('p2-content')" class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-800 border border-slate-700 flex items-center space-x-1">
                 <i class="fa-regular fa-copy text-[9px]"></i><span>Copy Scene 3 Video Prompt</span>
               </button>
             </div>
@@ -1763,10 +1763,10 @@
         const initial = currentUser.name.charAt(0).toUpperCase();
         const roleColor = currentUser.role === 'SuperAdmin' ? 'bg-rose-600' : 'bg-indigo-600';
         container.innerHTML = `
-          <button onclick="openUserDashboard()" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-[#181a24] hover:bg-[#202433] border border-[#262b3b] transition">
+          <button onclick="openUserDashboard()" class="flex items-center space-x-2 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 transition">
             <div class="w-6 h-6 rounded-lg ${roleColor} text-white font-bold text-xs flex items-center justify-center">${initial}</div>
-            <span class="text-xs font-bold text-slate-200 hidden sm:inline">${currentUser.name.split(' ')[0]}</span>
-            <i class="fa-solid fa-chevron-down text-[9px] text-slate-400"></i>
+            <span class="text-xs font-bold text-slate-800 hidden sm:inline">${currentUser.name.split(' ')[0]}</span>
+            <i class="fa-solid fa-chevron-down text-[9px] text-slate-500"></i>
           </button>
         `;
       } else {
@@ -1802,12 +1802,12 @@
 
       if (tab === 'signin') {
         btnIn.className = "flex-1 py-1.5 rounded-lg bg-indigo-600 text-white font-bold transition";
-        btnUp.className = "flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium transition";
+        btnUp.className = "flex-1 py-1.5 rounded-lg text-slate-500 hover:text-white font-medium transition";
         nameField.classList.add('hidden');
         submitBtn.textContent = "Sign In to DDMAI Studio";
       } else {
         btnUp.className = "flex-1 py-1.5 rounded-lg bg-indigo-600 text-white font-bold transition";
-        btnIn.className = "flex-1 py-1.5 rounded-lg text-slate-400 hover:text-white font-medium transition";
+        btnIn.className = "flex-1 py-1.5 rounded-lg text-slate-500 hover:text-white font-medium transition";
         nameField.classList.remove('hidden');
         submitBtn.textContent = "Create Account & Activate $0.00 Mode";
       }
@@ -1862,7 +1862,7 @@
 
     function switchAdminTab(tab) {
       ['overview', 'users', 'certs', 'rules'].forEach(t => {
-        document.getElementById(`adm-tab-${t}`).className = "px-3.5 py-1.5 rounded-xl text-slate-400 hover:text-white font-semibold transition";
+        document.getElementById(`adm-tab-${t}`).className = "px-3.5 py-1.5 rounded-xl text-slate-500 hover:text-white font-semibold transition";
         document.getElementById(`admin-sec-${t}`).classList.add('hidden');
       });
       document.getElementById(`adm-tab-${tab}`).className = "px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white font-bold transition";
@@ -1895,10 +1895,10 @@
       const tbody = document.getElementById('admin-users-tbody');
       if (!tbody) return;
       tbody.innerHTML = list.map(u => `
-        <tr class="hover:bg-[#181a24] transition">
+        <tr class="hover:bg-slate-100 transition">
           <td class="p-3">
-            <div class="font-bold text-slate-200">${u.name}</div>
-            <div class="text-[10px] text-slate-400 font-mono">${u.email}</div>
+            <div class="font-bold text-slate-800">${u.name}</div>
+            <div class="text-[10px] text-slate-500 font-mono">${u.email}</div>
           </td>
           <td class="p-3">
             <span class="px-2 py-0.5 rounded text-[10px] font-mono font-bold ${u.role === 'SuperAdmin' ? 'bg-rose-500/20 text-rose-300 border border-rose-500/30' : 'bg-indigo-500/20 text-indigo-300 border border-indigo-500/30'}">${u.role}</span>
@@ -1911,7 +1911,7 @@
           </td>
           <td class="p-3 space-x-1.5">
             <button onclick="issueCertToUser('${u.name}', '${u.email}')" class="px-2 py-1 rounded bg-amber-500/20 text-amber-300 hover:bg-amber-500/30 font-semibold text-[10px]">Issue Cert</button>
-            <button onclick="toggleUserRole('${u.id}')" class="px-2 py-1 rounded bg-[#202433] text-slate-300 hover:text-white text-[10px]">Role</button>
+            <button onclick="toggleUserRole('${u.id}')" class="px-2 py-1 rounded bg-[#202433] text-slate-700 hover:text-white text-[10px]">Role</button>
           </td>
         </tr>
       `).join('');
@@ -1921,13 +1921,13 @@
       const container = document.getElementById('admin-certs-list');
       if (!container) return;
       container.innerHTML = list.map(c => `
-        <div class="p-3 rounded-xl bg-[#0e1017] border border-[#1f2330] flex items-center justify-between">
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between">
           <div>
             <div class="flex items-center space-x-2">
-              <span class="font-bold text-white">${c.recipientName}</span>
+              <span class="font-bold text-slate-900">${c.recipientName}</span>
               <span class="font-mono text-[10px] text-yellow-400 bg-yellow-500/10 px-1.5 py-0.5 rounded border border-yellow-500/30">${c.id}</span>
             </div>
-            <div class="text-[11px] text-slate-400">${c.courseName}</div>
+            <div class="text-[11px] text-slate-500">${c.courseName}</div>
           </div>
           <button onclick="viewSpecificCertificate('${c.recipientName}', '${c.id}', '${c.issueDate}')" class="px-3 py-1 rounded-lg bg-indigo-600/30 hover:bg-indigo-600/50 text-indigo-300 border border-indigo-500/40 font-semibold">View</button>
         </div>
@@ -2040,13 +2040,13 @@
           const grid = document.getElementById('modal-options-grid');
           if (grid && data.options) {
             grid.innerHTML = data.options.map(opt => `
-              <div class="p-3 rounded-xl bg-[#0b0c10] border border-[#1f2330] flex items-start justify-between space-x-2">
+              <div class="p-3 rounded-xl bg-slate-50 border border-slate-200 flex items-start justify-between space-x-2">
                 <div>
                   <div class="flex items-center space-x-1.5">
-                    <span class="text-[9px] font-mono px-1 py-0.2 rounded bg-[#181a24] text-slate-400 font-bold">#${opt.id}</span>
-                    <span class="text-xs font-bold text-slate-200">${opt.title}</span>
+                    <span class="text-[9px] font-mono px-1 py-0.2 rounded bg-slate-100 text-slate-500 font-bold">#${opt.id}</span>
+                    <span class="text-xs font-bold text-slate-800">${opt.title}</span>
                   </div>
-                  <p class="text-[10px] text-slate-400 mt-0.5 leading-snug">${opt.desc}</p>
+                  <p class="text-[10px] text-slate-500 mt-0.5 leading-snug">${opt.desc}</p>
                   <span class="text-[9px] font-mono text-indigo-400 uppercase mt-1 inline-block">${opt.pillar}</span>
                 </div>
                 <input type="checkbox" ${opt.default ? 'checked' : ''} class="rounded text-indigo-600 focus:ring-0 mt-1">
@@ -2111,7 +2111,7 @@
         title.textContent = "DDMAI.VIDEO Agent Prompt Box";
         showToast("DDMAI Autonomous Agent Activated");
       } else {
-        btn.className = "flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#181a24] text-slate-300 font-medium border border-[#262b3b] transition";
+        btn.className = "flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-medium border border-slate-200 transition";
         btn.innerHTML = '<i class="fa-solid fa-terminal text-xs"></i><span>Standard Prompt: <strong>DIRECT</strong></span>';
         title.textContent = "Standard Direct Prompt Box";
         showToast("Standard Prompt Mode Active");
