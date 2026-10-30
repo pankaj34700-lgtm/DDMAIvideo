@@ -1617,25 +1617,34 @@
     <div class="modal-responsive-card bg-white border-2 border-amber-400 rounded-3xl w-full max-w-4xl p-4 sm:p-8 space-y-5 sm:space-y-6 shadow-2xl relative my-auto">
       
       <!-- Top Action Bar (No-Print) -->
-      <div class="flex items-center justify-between border-b border-amber-500/30 pb-4 no-print">
-        <div class="flex items-center space-x-2 text-amber-400">
+      <div class="flex flex-wrap items-center justify-between gap-2 border-b border-amber-500/30 pb-4 no-print">
+        <div class="flex items-center space-x-2 text-amber-500">
           <i class="fa-solid fa-graduation-cap text-lg"></i>
           <span class="font-flow font-bold text-slate-900 text-sm">DDMAI Official Credential Verification System</span>
         </div>
-        <div class="flex items-center space-x-2">
-          <button onclick="customizeCertificateName()" class="px-3 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-semibold border border-amber-300 transition">
-            <i class="fa-solid fa-pen-to-square mr-1"></i>Edit Name
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="customizeCertificateName()" class="px-2.5 py-1.5 rounded-xl bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-semibold border border-amber-300 transition flex items-center space-x-1">
+            <i class="fa-solid fa-pen-to-square"></i>
+            <span>Edit Name</span>
           </button>
-          <button onclick="window.print()" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold text-xs shadow-lg shadow-amber-500/20 transition flex items-center space-x-1.5">
+          <button onclick="changeCertificateTrack()" class="px-2.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100 text-indigo-800 text-xs font-semibold border border-indigo-200 transition flex items-center space-x-1">
+            <i class="fa-solid fa-sliders"></i>
+            <span>Change Track</span>
+          </button>
+          <button onclick="regenerateCertId()" class="px-2.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold border border-slate-300 transition flex items-center space-x-1">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <span>New ID</span>
+          </button>
+          <button onclick="window.print()" class="px-4 py-1.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-bold text-xs shadow-md shadow-amber-500/20 transition flex items-center space-x-1.5">
             <i class="fa-solid fa-print"></i>
             <span>Print / Save as PDF</span>
           </button>
-          <button onclick="closeCertificateModal()" class="text-slate-500 hover:text-slate-900 p-1 ml-2"><i class="fa-solid fa-xmark text-lg"></i></button>
+          <button onclick="closeCertificateModal()" class="text-slate-500 hover:text-slate-900 p-1 ml-1"><i class="fa-solid fa-xmark text-lg"></i></button>
         </div>
       </div>
 
       <!-- THE PRINTABLE LUXURY CERTIFICATE CONTAINER -->
-      <div id="printable-certificate" class="relative bg-gradient-to-b from-[#fefce8] via-[#fffbeb] to-[#fef3c7] text-[#0f172a] rounded-2xl p-8 sm:p-12 border-8 border-double border-[#b45309] shadow-2xl overflow-hidden font-cert">
+      <div id="printable-certificate" class="relative bg-gradient-to-b from-[#fefce8] via-[#fffbeb] to-[#fef3c7] text-[#0f172a] rounded-2xl p-6 sm:p-12 border-8 border-double border-[#b45309] shadow-2xl overflow-hidden font-cert">
         
         <!-- Corner Ornaments (CSS/SVG) -->
         <div class="absolute top-2 left-2 w-10 h-10 border-t-4 border-l-4 border-amber-700 pointer-events-none"></div>
@@ -1648,7 +1657,7 @@
           <i class="fa-solid fa-award text-[300px] text-amber-900"></i>
         </div>
 
-        <div class="relative text-center space-y-5">
+        <div class="relative text-center space-y-4 sm:space-y-5">
           <!-- Header -->
           <div class="space-y-1">
             <div class="text-xs sm:text-sm font-bold tracking-[0.25em] text-[#92400e] uppercase">DDMAI.VIDEO Global Production Academy</div>
@@ -1658,14 +1667,26 @@
             <div class="w-24 h-0.5 bg-gradient-to-r from-transparent via-[#b45309] to-transparent mx-auto"></div>
           </div>
 
-          <!-- Body -->
+          <!-- Body Certification -->
           <p class="text-xs sm:text-sm text-[#475569] italic">
             This is to proudly certify that
           </p>
 
           <!-- Recipient Name -->
-          <div class="text-2xl sm:text-4xl font-black text-[#1e293b] border-b-2 border-[#b45309] inline-block px-8 pb-1 tracking-normal font-sans" id="cert-display-name">
-            Veteran, PankajBhai Umesh Gupta
+          <div>
+            <div class="text-2xl sm:text-4xl font-black text-[#1e293b] border-b-2 border-[#b45309] inline-block px-8 pb-1 tracking-normal font-sans" id="cert-display-name">
+              Veteran, PankajBhai Umesh Gupta
+            </div>
+          </div>
+
+          <!-- Google Identity Verified Pill on Certificate -->
+          <div class="flex justify-center">
+            <div id="cert-google-pill" class="inline-flex items-center space-x-1.5 px-3 py-1 rounded-full bg-blue-50/90 border border-blue-200 text-blue-900 text-[10px] font-sans font-semibold shadow-xs">
+              <i class="fa-brands fa-google text-blue-600"></i>
+              <span>Verified Google Identity:</span>
+              <span id="cert-google-email" class="font-mono font-bold text-blue-700">pankaj.34700@gmail.com</span>
+              <i class="fa-solid fa-circle-check text-emerald-600 text-[10px]"></i>
+            </div>
           </div>
 
           <!-- Description -->
@@ -1676,30 +1697,40 @@
           </p>
 
           <!-- Specialization Badge -->
-          <div class="inline-block px-4 py-1.5 rounded-full bg-[#fef3c7] border border-[#d97706] text-[#92400e] font-sans font-bold text-xs uppercase tracking-wider">
+          <div class="inline-block px-4 py-1.5 rounded-full bg-[#fef3c7] border border-[#d97706] text-[#92400e] font-sans font-bold text-xs uppercase tracking-wider" id="cert-display-track">
             Specialization: Master AI Film Director &amp; 2D Noir Specialist
           </div>
 
           <!-- Footer: Signatures, Seal & Serial ID -->
-          <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-[#d97706]/40 text-left font-sans">
-            <!-- Left Signature -->
+          <div class="pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6 border-t border-[#d97706]/40 text-left font-sans">
+            <!-- Left Signature: Founder -->
             <div class="text-center sm:text-left">
-              <div class="font-cert italic font-bold text-base text-[#1e293b]">Veteran PankajBhai U. Gupta</div>
-              <div class="text-[10px] text-[#64748b] uppercase tracking-wider border-t border-[#94a3b8] pt-0.5">Head of AI Cinema Studio</div>
+              <div class="font-cert italic font-bold text-base text-[#1e293b]">Veteran, PankajBhai Umesh Gupta</div>
+              <div class="text-[10px] text-[#64748b] uppercase tracking-wider border-t border-[#94a3b8] pt-0.5">Founder &amp; Lead AI Cinema Architect</div>
             </div>
 
             <!-- Center Golden Seal -->
-            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-yellow-500 via-amber-400 to-yellow-600 border-4 border-[#fffbeb] shadow-xl flex flex-col items-center justify-center text-center text-[#78350f] font-cert">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-yellow-500 via-amber-400 to-yellow-600 border-4 border-[#fffbeb] shadow-xl flex flex-col items-center justify-center text-center text-[#78350f] font-cert shrink-0">
               <i class="fa-solid fa-crown text-base text-[#78350f]"></i>
               <span class="text-[7px] font-black uppercase tracking-tighter mt-0.5">DDMAI VERIFIED</span>
               <span class="text-[6px] font-mono">2026</span>
             </div>
 
-            <!-- Right Details -->
-            <div class="text-center sm:text-right text-[10px] text-[#475569] space-y-0.5">
-              <div>Issue Date: <span class="font-bold text-[#0f172a]" id="cert-display-date">October 28, 2026</span></div>
-              <div>Credential ID: <span class="font-mono font-bold text-[#b45309]" id="cert-display-id">DDMAI-CERT-2026-8942A</span></div>
-              <div class="text-[9px] text-[#64748b]">Status: <span class="text-emerald-700 font-bold">100% Accredited</span></div>
+            <!-- Right QR & Credential Verification -->
+            <div class="flex items-center space-x-3 text-center sm:text-right">
+              <div class="hidden sm:flex items-center space-x-2 p-1.5 rounded-xl bg-white/80 border border-amber-300 shadow-xs">
+                <i class="fa-solid fa-qrcode text-2xl text-slate-800"></i>
+                <div class="text-[8px] text-left text-slate-600 leading-tight">
+                  <div class="font-bold text-slate-900">Scan to Verify</div>
+                  <div>vedio-working.web.app</div>
+                  <div class="text-emerald-700 font-bold">100% Tamper-Proof</div>
+                </div>
+              </div>
+              <div class="text-[10px] text-[#475569] space-y-0.5">
+                <div>Issue Date: <span class="font-bold text-[#0f172a]" id="cert-display-date">October 30, 2026</span></div>
+                <div>Credential ID: <span class="font-mono font-bold text-[#b45309]" id="cert-display-id">DDMAI-CERT-2026-8942A</span></div>
+                <div class="text-[9px] text-[#64748b]">Status: <span class="text-emerald-700 font-bold">✔ Accredited Master Director</span></div>
+              </div>
             </div>
           </div>
         </div>
@@ -2560,7 +2591,8 @@
     function openCertificateModal() {
       const name = currentUser ? currentUser.name : "Veteran, PankajBhai Umesh Gupta";
       const id = currentUser && currentUser.certId ? currentUser.certId : "DDMAI-CERT-2026-8942A";
-      viewSpecificCertificate(name, id, "October 28, 2026");
+      const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+      viewSpecificCertificate(name, id, today);
     }
     function closeCertificateModal() { document.getElementById('certificate-modal').classList.add('hidden'); }
 
@@ -2570,23 +2602,66 @@
     }
 
     function viewSpecificCertificate(name, id, date) {
-      document.getElementById('cert-display-name').textContent = name;
-      document.getElementById('cert-display-id').textContent = id;
-      document.getElementById('cert-display-date').textContent = date;
+      const nameEl = document.getElementById('cert-display-name');
+      const idEl = document.getElementById('cert-display-id');
+      const dateEl = document.getElementById('cert-display-date');
+      const gEmailEl = document.getElementById('cert-google-email');
+      const gPillEl = document.getElementById('cert-google-pill');
+
+      if (nameEl) nameEl.textContent = name;
+      if (idEl) idEl.textContent = id;
+      if (dateEl) dateEl.textContent = date || new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+
+      if (gEmailEl && gPillEl) {
+        if (currentUser && currentUser.email) {
+          gEmailEl.textContent = currentUser.email;
+          gPillEl.classList.remove('hidden');
+          gPillEl.classList.add('inline-flex');
+        } else {
+          gEmailEl.textContent = 'director@ddmai.video';
+        }
+      }
+
       document.getElementById('certificate-modal').classList.remove('hidden');
     }
 
     function customizeCertificateName() {
-      const newName = prompt("Enter Certificate Recipient Name:", document.getElementById('cert-display-name').textContent);
-      if (newName) {
-        document.getElementById('cert-display-name').textContent = newName;
+      const current = document.getElementById('cert-display-name').textContent.trim();
+      const newName = prompt("Enter Certificate Recipient Full Name:", current);
+      if (newName && newName.trim()) {
+        const clean = newName.trim();
+        document.getElementById('cert-display-name').textContent = clean;
         if (currentUser) {
-          currentUser.name = newName;
+          currentUser.name = clean;
           localStorage.setItem('ddmai_user_session', JSON.stringify(currentUser));
           renderUserNav();
         }
-        showToast("Certificate recipient name updated!", 'success');
+        showToast("Certificate recipient name updated to: " + clean, 'success');
       }
+    }
+
+    function changeCertificateTrack() {
+      const tracks = [
+        "Specialization: Master AI Film Director & 2D Noir Specialist",
+        "Specialization: Executive Prompt Engineer & Zero-Cost Production Specialist",
+        "Specialization: Commercial AI Video Producer & Social UGC Specialist"
+      ];
+      const trackEl = document.getElementById('cert-display-track');
+      if (!trackEl) return;
+      const current = trackEl.textContent.trim();
+      const nextIdx = (tracks.indexOf(current) + 1) % tracks.length;
+      trackEl.textContent = tracks[nextIdx >= 0 ? nextIdx : 0];
+      showToast("Certificate Track Updated: " + trackEl.textContent, 'info');
+    }
+
+    function regenerateCertId() {
+      const newId = `DDMAI-CERT-2026-${Math.floor(10000 + Math.random() * 90000)}`;
+      document.getElementById('cert-display-id').textContent = newId;
+      if (currentUser) {
+        currentUser.certId = newId;
+        localStorage.setItem('ddmai_user_session', JSON.stringify(currentUser));
+      }
+      showToast("Issued New Verification ID: " + newId, 'success');
     }
 
     // Tools & Options Modals
